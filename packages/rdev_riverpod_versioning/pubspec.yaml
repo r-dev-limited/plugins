@@ -23,14 +23,6 @@ dependencies:
   package_info_plus: 4.1.0
   responsive_framework: 1.1.0
 
-dependency_overrides:
-  rdev_riverpod_firebase:
-    path: ../rdev_riverpod_firebase
-  rdev_errors_logging:
-    path: ../rdev_errors_logging
-  rdev_helpers:
-    path: ../rdev_helpers
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

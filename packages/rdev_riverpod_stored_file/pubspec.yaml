@@ -20,14 +20,6 @@ dependencies:
   hooks_riverpod: 2.3.10
   mime: 1.0.4
 
-dependency_overrides:
-  rdev_errors_logging:
-    path: ../rdev_errors_logging
-  rdev_helpers:
-    path: ../rdev_helpers
-  rdev_riverpod_firebase:
-    path: ../rdev_riverpod_firebase
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
