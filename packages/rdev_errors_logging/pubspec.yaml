@@ -1,0 +1,22 @@
+name: rdev_errors_logging
+description: This package provides a simple way to log errors.
+repository: https://github.com/r-dev-limited/placebo-life
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ### 3rd party
+  googleapis_auth: 1.4.1
+  googleapis: 11.4.0
+  logging: 1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: 5.0.15

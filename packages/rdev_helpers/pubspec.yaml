@@ -1,0 +1,22 @@
+name: rdev_helpers
+description: This package provides different utils.
+repository: https://github.com/r-dev-limited/placebo-life
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ### 3rd party
+  json_annotation: 4.8.1
+  url_launcher: 6.1.14
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: 5.0.15
+  json_serializable: 6.1.1
