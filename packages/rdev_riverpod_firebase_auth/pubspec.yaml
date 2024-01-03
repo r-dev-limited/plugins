@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase:
-  rdev_errors_logging:
+  rdev_riverpod_firebase: ^0.0.1
+  rdev_errors_logging: ^0.0.1
   ### 3rd party
   flutter_facebook_auth: ^6.0.2
   equatable: ^2.0.5

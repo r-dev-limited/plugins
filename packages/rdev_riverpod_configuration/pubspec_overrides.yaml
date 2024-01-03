@@ -5,8 +5,8 @@ dependency_overrides:
   rdev_feature_toggles:
     path: ../rdev_feature_toggles
   rdev_errors_logging:
-    path: ..\\rdev_errors_logging
+    path: ../rdev_errors_logging
   rdev_helpers:
-    path: ..\\rdev_helpers
+    path: ../rdev_helpers
   rdev_riverpod_firebase:
-    path: ..\\rdev_riverpod_firebase
+    path: ../rdev_riverpod_firebase

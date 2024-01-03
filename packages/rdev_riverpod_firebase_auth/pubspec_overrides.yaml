@@ -1,6 +1,6 @@
 # melos_managed_dependency_overrides: rdev_errors_logging,rdev_riverpod_firebase
 dependency_overrides:
   rdev_errors_logging:
-    path: ..\\rdev_errors_logging
+    path: ../rdev_errors_logging
   rdev_riverpod_firebase:
-    path: ..\\rdev_riverpod_firebase
+    path: ../rdev_riverpod_firebase

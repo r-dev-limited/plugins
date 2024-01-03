@@ -10,11 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase:
-  rdev_riverpod_firebase_auth:
-  rdev_riverpod_firebase_user:
-  rdev_errors_logging:
-  rdev_helpers:
+  rdev_riverpod_firebase: ^0.0.1
+  rdev_riverpod_firebase_auth: ^0.0.1
+  rdev_riverpod_firebase_user: ^0.0.1
+  rdev_errors_logging: ^0.0.1
+  rdev_helpers: ^0.0.1
   ### 3rd party
   equatable: ^2.0.5
   flutter_hooks: ^0.18.0

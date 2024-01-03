@@ -1,3 +1,3 @@
-# R-DEV Riverpod Firebase Auth Package
+# R-DEV Riverpod Errors Logging
 
-This package provides a simple way to use Firebase Auth with Riverpod.
+This package provides a simple way log errors.

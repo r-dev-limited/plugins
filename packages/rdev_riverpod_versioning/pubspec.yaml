@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase:
-  rdev_errors_logging:
-  rdev_helpers:
+  rdev_riverpod_firebase: ^0.0.1
+  rdev_errors_logging: ^0.0.1
+  rdev_helpers: ^0.0.1
   ### 3rd party
   device_info_plus: ^9.0.3
   equatable: ^2.0.5

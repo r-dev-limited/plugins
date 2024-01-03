@@ -1,3 +1,3 @@
-# R-DEV Riverpod Firebase Auth Package
+# R-DEV Helpers
 
-This package provides a simple way to use Firebase Auth with Riverpod.
+This package provides a set of helper tools.
