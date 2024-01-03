@@ -76,3 +76,17 @@ class Speed {
 
   static const Duration toast = Duration(milliseconds: 5000);
 }
+
+/// Breakpoints used for page responsivness
+@immutable
+class Breakpoints {
+  static const double mobile = 480;
+//   static const double tablet = 800;
+//   static const double desktop = 1000;
+//   static const double desktop4k = 2560;
+//   static const double desktop8k = 4920; // To be confirmed
+
+  //static const double maxWidth = desktop8k;
+  static const double minWidth = mobile;
+  static const double maxWidthContent = 1440; // Value from Figma
+}
