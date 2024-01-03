@@ -14,11 +14,14 @@ dependencies:
   rdev_errors_logging: ^0.0.1
   rdev_helpers: ^0.0.1
   ### 3rd party
+  cloud_firestore: ^4.9.1
   device_info_plus: ^9.0.3
   equatable: ^2.0.5
+  firebase_core: ^2.15.1
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^2.3.10
   json_annotation: ^4.8.1
+  logging: ^1.2.0
   package_info_plus: ^4.1.0
   responsive_framework: ^1.1.0
 

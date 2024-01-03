@@ -13,11 +13,14 @@ dependencies:
   rdev_riverpod_firebase: ^0.0.1
   rdev_errors_logging: ^0.0.1
   ### 3rd party
-  flutter_facebook_auth: ^6.0.2
+  cloud_functions: ^4.4.0
   equatable: ^2.0.5
+  firebase_auth: ^4.9.0
+  flutter_facebook_auth: ^6.0.2
   flutter_hooks: ^0.18.0
   google_sign_in: ^6.1.4
   hooks_riverpod: ^2.3.10
+  logging: ^1.2.0
 
 dev_dependencies:
   flutter_test:

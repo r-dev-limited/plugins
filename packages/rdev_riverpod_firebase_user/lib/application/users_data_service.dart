@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
+//import 'package:cloud_functions/cloud_functions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
@@ -19,11 +19,11 @@ class UsersDataServiceException extends RdevException {
 
 class UsersDataService {
   final FirebaseFirestore _db;
-  final FirebaseFunctions _functions;
+  // final FirebaseFunctions _functions;
 
   UsersDataService(
     this._db,
-    this._functions,
+    //  this._functions,
   );
 
   Future<List<UserModel>> getUsers({
@@ -88,7 +88,7 @@ class UsersDataService {
       Provider<UsersDataService>((ref) {
     final workspaceService = UsersDataService(
       ref.watch(fbFirestoreProvider),
-      ref.watch(fbFunctionsProvider),
+      //   ref.watch(fbFunctionsProvider),
     );
     return workspaceService;
   });

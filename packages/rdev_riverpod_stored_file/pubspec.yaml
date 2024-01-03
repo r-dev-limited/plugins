@@ -14,9 +14,14 @@ dependencies:
   rdev_riverpod_firebase:
   rdev_helpers:
   ### 3rd party
+  cloud_firestore: ^4.9.1
+  cloud_functions: ^4.4.0
   equatable: ^2.0.5
+  firebase_storage: ^11.2.6
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^2.3.10
+  json_annotation: ^4.8.1
+  logging: ^1.2.0
   mime: ^1.0.4
 
 dev_dependencies:
