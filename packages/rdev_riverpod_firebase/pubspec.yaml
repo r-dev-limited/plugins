@@ -2,7 +2,6 @@ name: rdev_riverpod_firebase
 description: This package provides a simple way to use Firebase with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
 version: 0.0.1
-publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -12,20 +11,20 @@ dependencies:
   flutter:
     sdk: flutter
   ### 3rd party
-  cloud_firestore: 4.9.1
-  cloud_functions: 4.4.0
-  firebase_analytics: 10.4.5
-  firebase_auth: 4.9.0
-  firebase_core: 2.15.1
-  firebase_dynamic_links: 5.3.5
-  firebase_storage: 11.2.6
-  flutter_facebook_auth: 6.0.2
-  flutter_hooks: 0.18.0
-  google_sign_in: 6.1.4
-  hooks_riverpod: 2.3.10
-  logging: 1.2.0
+  cloud_firestore: ^4.9.1
+  cloud_functions: ^4.4.0
+  firebase_analytics: ^10.4.5
+  firebase_auth: ^4.9.0
+  firebase_core: ^2.15.1
+  firebase_dynamic_links: ^5.3.5
+  firebase_storage: ^11.2.6
+  flutter_facebook_auth: ^6.0.2
+  flutter_hooks: ^0.18.0
+  google_sign_in: ^6.1.4
+  hooks_riverpod: ^2.3.10
+  logging: ^1.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: 5.0.15
+  mockito: ^5.4.4

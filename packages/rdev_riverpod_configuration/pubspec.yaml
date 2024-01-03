@@ -17,16 +17,16 @@ dependencies:
   rdev_errors_logging:
   rdev_helpers:
   #equatable: 2.0.5
-  flutter_hooks: 0.18.0
-  hooks_riverpod: 2.3.10
-  responsive_framework: 1.1.0
-  json_annotation: 4.8.1
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.3.10
+  responsive_framework: ^1.1.0
+  json_annotation: ^4.8.1
   shared_preferences: ^2.2.2
-  equatable: 2.0.5
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: 5.0.15
-  json_serializable: 6.1.1
-  build_runner: 2.1.5
+  mockito: ^5.4.4
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.7

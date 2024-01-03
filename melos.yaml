@@ -5,35 +5,33 @@ packages:
 command:
   bootstrap:
     dependencies:
-      cloud_firestore: 4.9.1
-      cloud_functions: 4.4.0
-      device_info_plus: 9.0.3
-      equatable: 2.0.5
-      firebase_analytics: 10.4.5
-      firebase_auth: 4.9.0
-      firebase_core: 2.15.1
-      firebase_dynamic_links: 5.3.5
-      firebase_storage: 11.2.6
-      flutter_facebook_auth: 6.0.2
-      flutter_hooks: 0.18.0
-      google_sign_in: 6.1.4
-      googleapis_auth: 1.4.1
-      googleapis: 11.4.0
-      hooks_riverpod: 2.3.10
-      json_annotation: 4.8.1
-      logging: 1.2.0
-      mime: 1.0.4
-      package_info_plus: 4.1.0
-      responsive_framework: 1.1.0
-      retry: 3.1.2
-      url_launcher: 6.1.14
-      uuid: 3.0.7
+      cloud_firestore: ^4.9.1
+      cloud_functions: ^4.4.0
+      device_info_plus: ^9.0.3
+      equatable: ^2.0.5
+      firebase_analytics: ^10.4.5
+      firebase_auth: ^4.9.0
+      firebase_core: ^2.15.1
+      firebase_dynamic_links: ^5.3.5
+      firebase_storage: ^11.2.6
+      flutter_facebook_auth: ^6.0.2
+      flutter_hooks: ^0.18.0
+      google_sign_in: ^6.1.4
+      googleapis_auth: ^1.4.1
+      googleapis: ^11.4.0
+      hooks_riverpod: ^2.3.10
+      json_annotation: ^4.8.1
+      logging: ^1.2.0
+      mime: ^1.0.4
+      package_info_plus: ^4.1.0
+      responsive_framework: ^1.1.0
+      retry: ^3.1.2
+      url_launcher: ^6.1.14
+      uuid: ^3.0.7
     dev_dependencies:
-      build_runner: 2.1.5
-      json_serializable: 6.1.1
-      mockito: 5.0.15
-    hooks:
-      post: dart pub run build_runner build
+      build_runner: ^2.4.7
+      json_serializable: ^6.7.1
+      mockito: ^5.4.4
 
 scripts:
   analyze:

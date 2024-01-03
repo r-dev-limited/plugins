@@ -2,7 +2,6 @@ name: rdev_riverpod_versioning
 description: This package provides a simple way to use Firebase User with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
 version: 0.0.1
-publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -15,17 +14,17 @@ dependencies:
   rdev_errors_logging:
   rdev_helpers:
   ### 3rd party
-  device_info_plus: 9.0.3
-  equatable: 2.0.5
-  flutter_hooks: 0.18.0
-  hooks_riverpod: 2.3.10
-  json_annotation: 4.8.1
-  package_info_plus: 4.1.0
-  responsive_framework: 1.1.0
+  device_info_plus: ^9.0.3
+  equatable: ^2.0.5
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.3.10
+  json_annotation: ^4.8.1
+  package_info_plus: ^4.1.0
+  responsive_framework: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: 5.0.15
-  json_serializable: 6.1.1
-  build_runner: 2.1.5
+  mockito: ^5.4.4
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.7

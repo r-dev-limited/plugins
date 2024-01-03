@@ -2,7 +2,6 @@ name: rdev_riverpod_firebase_auth
 description: This package provides a simple way to use Firebase Auth with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
 version: 0.0.1
-publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -13,15 +12,15 @@ dependencies:
     sdk: flutter
   rdev_riverpod_firebase:
   rdev_errors_logging:
-  flutter_facebook_auth: 6.0.2
   ### 3rd party
-  equatable: 2.0.5
-  flutter_hooks: 0.18.0
-  google_sign_in: 6.1.4
-  hooks_riverpod: 2.3.10
+  flutter_facebook_auth: ^6.0.2
+  equatable: ^2.0.5
+  flutter_hooks: ^0.18.0
+  google_sign_in: ^6.1.4
+  hooks_riverpod: ^2.3.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: 5.0.15
-  build_runner: 2.1.5
+  mockito: ^5.4.4
+  build_runner: ^2.4.7
