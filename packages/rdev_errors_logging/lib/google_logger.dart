@@ -27,17 +27,18 @@ class GoogleLogger {
   ///
   GoogleLogger({
     required this.projectId,
+    String? serviceAccount,
     AutoRefreshingAuthClient? client,
   }) {
     if (client is AutoRefreshingAuthClient) {
       _httpClient = client;
       _logger = LoggingApi(_httpClient!);
-    } else {
+    } else if (serviceAccount is String) {
       clientViaServiceAccount(
           ServiceAccountCredentials.fromJson(
             utf8.decode(
               base64Decode(
-                const String.fromEnvironment('GCP_SERVICE_ACCOUNT'),
+                serviceAccount,
               ),
             ),
           ),
