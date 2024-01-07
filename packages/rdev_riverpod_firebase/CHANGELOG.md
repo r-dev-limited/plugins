@@ -1,3 +1,7 @@
+# 0.0.3 - Jan 2024
+
+- Update firebase libs
+
 # 0.0.2 - Jan 2024
 
 - Add region for Functions
