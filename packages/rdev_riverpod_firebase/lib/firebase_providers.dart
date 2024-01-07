@@ -10,6 +10,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// Primitive Providers
 final fbAppProvider = Provider<FirebaseApp>((ref) => Firebase.app());
 
+final fbAppRegionProvider = Provider<String>((ref) => 'us-central1');
+
 final fbAuthProvider = Provider<FirebaseAuth>(
     (ref) => FirebaseAuth.instanceFor(app: ref.watch(fbAppProvider)));
 
@@ -19,8 +21,11 @@ final fbStorageProvider = Provider<FirebaseStorage>(
 final fbFirestoreProvider = Provider<FirebaseFirestore>(
     (ref) => FirebaseFirestore.instanceFor(app: ref.watch(fbAppProvider)));
 
-final fbFunctionsProvider = Provider<FirebaseFunctions>(
-    (ref) => FirebaseFunctions.instanceFor(app: ref.watch(fbAppProvider)));
+final fbFunctionsProvider =
+    Provider<FirebaseFunctions>((ref) => FirebaseFunctions.instanceFor(
+          app: ref.watch(fbAppProvider),
+          region: ref.watch(fbAppRegionProvider),
+        ));
 
 final fbAnalyticsProvider = Provider<FirebaseAnalytics>(
     (ref) => FirebaseAnalytics.instanceFor(app: ref.watch(fbAppProvider)));
