@@ -15,13 +15,7 @@ dependencies:
   rdev_helpers: ^0.0.1
   ### 3rd party
   equatable: ^2.0.5
-  #cloud_firestore: ^4.14.0
-  flutter_hooks: ^0.18.0
-  hooks_riverpod: ^2.3.10
   json_annotation: ^4.8.1
-  responsive_framework: ^1.1.0
-  logging: ^1.2.0
-  #cloud_functions: ^4.6.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//import 'package:responsive_spacing/responsive_spacing.dart';
-
 /// Extension to reduce amount of code needed to call context related context.
 extension ContextExtensions on BuildContext {
   /// Extension to access [ Theme ].

@@ -16,10 +16,7 @@ dependencies:
   rdev_feature_toggles:
   rdev_errors_logging:
   rdev_helpers:
-  #equatable: 2.0.5
-  flutter_hooks: ^0.18.0
-  hooks_riverpod: ^2.3.10
-  responsive_framework: ^1.1.0
+  # 3rd party
   json_annotation: ^4.8.1
   shared_preferences: ^2.2.2
   equatable: ^2.0.5

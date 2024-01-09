@@ -17,7 +17,7 @@ command:
       firebase_remote_config: 4.3.3 # https://pub.dev/packages/firebase_remote_config
       collection: ^1.18.0
       device_info_plus: ^9.0.3
-      equatable: ^2.0.5 
+      equatable: ^2.0.5
       flutter_facebook_auth: ^6.0.2
       flutter_hooks: ^0.18.0
       google_sign_in: ^6.1.4
@@ -28,7 +28,6 @@ command:
       logging: ^1.2.0
       mime: ^1.0.4
       package_info_plus: ^4.1.0
-      responsive_framework: ^1.1.0
       retry: ^3.1.2
       url_launcher: ^6.1.14
       uuid: ^3.0.7
