@@ -1,3 +1,9 @@
+## 0.1.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
 # 0.0.2 - Jan 2024
 
 - Add breakpoints

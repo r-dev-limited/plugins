@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-01-09
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rdev_feature_toggles` - `v0.1.0`](#rdev_feature_toggles---v010)
+ - [`rdev_helpers` - `v0.1.0`](#rdev_helpers---v010)
+ - [`rdev_riverpod_firebase_analytics` - `v0.1.0`](#rdev_riverpod_firebase_analytics---v010)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.1.0`](#rdev_riverpod_firebase_auth_user---v010)
+ - [`rdev_riverpod_firebase_user` - `v0.1.0`](#rdev_riverpod_firebase_user---v010)
+ - [`rdev_riverpod_stored_file` - `v0.1.0`](#rdev_riverpod_stored_file---v010)
+ - [`rdev_riverpod_versioning` - `v0.1.0`](#rdev_riverpod_versioning---v010)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_helpers` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_user` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_stored_file` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_versioning` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: dependency improvements.
+
+
 ## 2024-01-07
 
 ### Changes
