@@ -11,7 +11,7 @@ class UserNotificationVO extends Equatable {
   final String? from;
   final ChannelData? channelData;
   final NotificationState? state;
-  final List<NotificationChannelType>? types;
+  final List<NotificationChannelType>? channelTypes;
   final DateTime createdAt;
   final DateTime? updatedAt;
   final DateTime? deliveredAt;
@@ -26,7 +26,7 @@ class UserNotificationVO extends Equatable {
     this.from,
     this.channelData,
     this.state,
-    this.types,
+    this.channelTypes,
     required this.createdAt,
     this.updatedAt,
     this.deliveredAt,
@@ -46,7 +46,7 @@ class UserNotificationVO extends Equatable {
         from,
         channelData,
         state,
-        types,
+        channelTypes,
         metadata,
       ];
 
@@ -58,7 +58,7 @@ class UserNotificationVO extends Equatable {
     String? from,
     ChannelData? channelData,
     NotificationState? state,
-    List<NotificationChannelType>? types,
+    List<NotificationChannelType>? channelTypes,
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? deliveredAt,
@@ -73,7 +73,7 @@ class UserNotificationVO extends Equatable {
       from: from ?? this.from,
       channelData: channelData ?? this.channelData,
       state: state ?? this.state,
-      types: types ?? this.types,
+      channelTypes: channelTypes ?? this.channelTypes,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       deliveredAt: deliveredAt ?? this.deliveredAt,
@@ -91,7 +91,7 @@ class UserNotificationVO extends Equatable {
       from: model.from,
       channelData: model.channelData,
       state: model.state,
-      types: model.types,
+      channelTypes: model.channelTypes,
       createdAt: DateTime.fromMillisecondsSinceEpoch(model.createdAt.toInt()),
       updatedAt: model.updatedAt is double
           ? DateTime.fromMillisecondsSinceEpoch(model.updatedAt!.toInt())
@@ -115,7 +115,7 @@ class UserNotificationVO extends Equatable {
       from: from,
       channelData: channelData,
       state: state,
-      types: types,
+      channelTypes: channelTypes,
       createdAt: createdAt.millisecondsSinceEpoch.toDouble(),
       updatedAt: updatedAt is DateTime
           ? updatedAt!.millisecondsSinceEpoch.toDouble()

@@ -3,7 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 part 'user_notification_model.g.dart';
 
-enum NotificationChannelType { Email, Fcm, Internal }
+enum NotificationChannelType {
+  Email,
+  Fcm,
+  Internal,
+}
 
 enum NotificationState {
   Sent,
@@ -61,7 +65,7 @@ class UserNotificationModel {
   final NotificationState? state;
 
   @JsonKey()
-  final List<NotificationChannelType>? types;
+  final List<NotificationChannelType>? channelTypes;
 
   @JsonKey()
   final double createdAt;
@@ -86,7 +90,7 @@ class UserNotificationModel {
     this.from,
     this.channelData,
     this.state,
-    this.types,
+    this.channelTypes,
     required this.createdAt,
     this.updatedAt,
     this.deliveredAt,
@@ -102,7 +106,7 @@ class UserNotificationModel {
     String? from,
     ChannelData? channelData,
     NotificationState? state,
-    List<NotificationChannelType>? types,
+    List<NotificationChannelType>? channelTypes,
     Map<String, dynamic>? metadata,
     double? deliveredAt,
     double? readAt,
@@ -118,7 +122,7 @@ class UserNotificationModel {
       from: from ?? this.from,
       channelData: channelData ?? this.channelData,
       state: state ?? this.state,
-      types: types ?? this.types,
+      channelTypes: channelTypes ?? this.channelTypes,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       deliveredAt: deliveredAt ?? this.deliveredAt,

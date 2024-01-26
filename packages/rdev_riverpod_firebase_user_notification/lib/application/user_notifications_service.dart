@@ -31,6 +31,8 @@ class UserNotificationsService {
   Future<List<UserNotificationVO>> getNotifications({
     int limit = 50,
     DocumentSnapshot? startAt,
+    String? orderBy,
+    bool descending = false,
     required String userId,
   }) async {
     try {
@@ -38,6 +40,8 @@ class UserNotificationsService {
         limit: limit,
         startAt: startAt,
         userId: userId,
+        orderBy: orderBy,
+        descending: descending,
       );
       final vos = models.map((e) {
         final vo = UserNotificationVO.fromModel(e);

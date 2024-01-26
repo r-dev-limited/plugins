@@ -49,7 +49,11 @@ class UserNotificationsRepository
   Future<UserNotificationsRepositoryState> _fetchNotifications() async {
     try {
       final notificationVOs = await _userNotificationsService.getNotifications(
-          startAt: _lastDocument, userId: _userId!);
+        startAt: _lastDocument,
+        userId: _userId!,
+        orderBy: 'createdAt',
+        descending: true,
+      );
       var isLastPage = false;
       if (_lastDocument != null &&
           _lastDocument!.id == notificationVOs.last.uid) {

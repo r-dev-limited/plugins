@@ -35,7 +35,7 @@ UserNotificationModel _$UserNotificationModelFromJson(
           ? null
           : ChannelData.fromJson(json['channelData'] as Map<String, dynamic>),
       state: $enumDecodeNullable(_$NotificationStateEnumMap, json['state']),
-      types: (json['types'] as List<dynamic>?)
+      channelTypes: (json['channelTypes'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$NotificationChannelTypeEnumMap, e))
           .toList(),
       createdAt: (json['createdAt'] as num).toDouble(),
@@ -61,8 +61,8 @@ Map<String, dynamic> _$UserNotificationModelToJson(
   writeNotNull('channelData', instance.channelData?.toJson());
   writeNotNull('state', _$NotificationStateEnumMap[instance.state]);
   writeNotNull(
-      'types',
-      instance.types
+      'channelTypes',
+      instance.channelTypes
           ?.map((e) => _$NotificationChannelTypeEnumMap[e]!)
           .toList());
   val['createdAt'] = instance.createdAt;

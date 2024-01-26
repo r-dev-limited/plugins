@@ -29,6 +29,8 @@ class UserNotificationsDataService {
   Future<List<UserNotificationModel>> getNotifications({
     int limit = 50,
     DocumentSnapshot? startAt,
+    String? orderBy,
+    bool descending = false,
     required String userId,
   }) async {
     try {
@@ -38,6 +40,9 @@ class UserNotificationsDataService {
       var query = userNotificationsRef.limit(limit);
       if (startAt is DocumentSnapshot) {
         query = query.startAtDocument(startAt);
+      }
+      if (orderBy is String) {
+        query = query.orderBy(orderBy, descending: descending);
       }
       final snapshot = await query.get();
 
