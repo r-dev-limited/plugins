@@ -3,6 +3,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,3 +33,6 @@ final fbAnalyticsProvider = Provider<FirebaseAnalytics>(
 
 final fbDynamicLinksProvider = Provider<FirebaseDynamicLinks>(
     (ref) => FirebaseDynamicLinks.instanceFor(app: ref.watch(fbAppProvider)));
+
+final fbMessagingProvider =
+    Provider<FirebaseMessaging>((ref) => FirebaseMessaging.instance);

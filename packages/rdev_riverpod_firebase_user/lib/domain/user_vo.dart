@@ -12,6 +12,7 @@ class UserVO extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? lastUpdatedClaims;
+  final Map<String, FCMToken>? fcmTokens;
 
   const UserVO({
     this.uid,
@@ -23,6 +24,7 @@ class UserVO extends Equatable {
     this.createdAt,
     this.updatedAt,
     this.lastUpdatedClaims,
+    this.fcmTokens,
   });
 
   @override
@@ -35,6 +37,7 @@ class UserVO extends Equatable {
         createdAt,
         updatedAt,
         lastUpdatedClaims,
+        fcmTokens,
       ];
 
   UserVO copyWith({
@@ -47,6 +50,7 @@ class UserVO extends Equatable {
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? lastUpdatedClaims,
+    Map<String, FCMToken>? fcmTokens,
   }) {
     return UserVO(
       uid: uid ?? this.uid,
@@ -58,6 +62,7 @@ class UserVO extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
+      fcmTokens: fcmTokens ?? this.fcmTokens,
     );
   }
 
@@ -75,6 +80,7 @@ class UserVO extends Equatable {
       lastUpdatedClaims: user.lastUpdatedClaims is double
           ? DateTime.fromMillisecondsSinceEpoch(user.lastUpdatedClaims!.toInt())
           : null,
+      fcmTokens: user.fcmTokens,
     );
   }
 

@@ -11,13 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
   ### 3rd party
-  cloud_firestore: 4.12.2
-  cloud_functions: 4.5.3
-  firebase_analytics: 10.6.3
-  firebase_auth: 4.12.1
-  firebase_core: 2.21.0
-  firebase_dynamic_links: 5.4.3
-  firebase_storage: 11.4.1
+  cloud_firestore: 4.14.0
+  cloud_functions: 4.6.0
+  firebase_analytics: 10.8.0
+  firebase_auth: 4.16.0
+  firebase_core: 2.24.2
+  firebase_dynamic_links: 5.4.8
+  firebase_storage: 11.6.0
+  firebase_messaging: 14.7.10
   flutter_facebook_auth: ^6.0.2
   flutter_hooks: ^0.18.0
   google_sign_in: ^6.1.4

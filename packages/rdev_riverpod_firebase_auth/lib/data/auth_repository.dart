@@ -208,6 +208,7 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     // Set the state to loading
     state = const AsyncValue.loading();
     await _authService.logout();
+    state = const AsyncValue.data(AuthRepositoryState());
   }
 
   static AsyncNotifierProvider<AuthRepository, AuthRepositoryState> provider =

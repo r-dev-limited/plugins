@@ -117,6 +117,99 @@ class UserDataService {
     }
   }
 
+  Future<UserModel> updateUserFCMToken(String userId, FCMToken token) async {
+    final usersRef = _db.collection('Users');
+
+    final userRef = usersRef.doc(userId);
+    final userTokensRef = userRef.collection('Tokens');
+    try {
+      await _db.runTransaction((tx) async {
+        final userSnapshot = await tx.get(userRef);
+
+        if (userSnapshot.exists) {
+          var model = await UserModel.fromDocumentSnapshot(userSnapshot);
+          if (token.id == null) {
+            token = token.copyWith(id: userTokensRef.doc().id); // Virtual ID
+          }
+          final fcmTokens = model.fcmTokens ?? <String, FCMToken>{};
+
+          /// Check if token already exists in fcmTokens.token
+          final sameToken =
+              fcmTokens.values.where((element) => element.token == token.token);
+          if (sameToken.length > 0) {
+            return model;
+          }
+
+          fcmTokens[token.id!] = token;
+          model = model.copyWith(
+            fcmTokens: fcmTokens,
+            updatedAt: DateTime.now().millisecondsSinceEpoch.toDouble(),
+          );
+          tx.set(userRef, model.toJson());
+        } else {
+          throw UserDataServiceException(
+              code: RdevCode.NotFound,
+              message: 'User with id:${userId} was not found');
+        }
+      });
+
+      final snapshot = await userRef.get();
+      final updatedModel = await UserModel.fromDocumentSnapshot(snapshot);
+      return updatedModel;
+    } catch (err) {
+      if (err is UserDataServiceException) {
+        rethrow;
+      }
+      throw UserDataServiceException(message: err.toString());
+    }
+  }
+
+  Future<UserModel> removeUserFCMToken(String userId, String token) async {
+    final usersRef = _db.collection('Users');
+
+    final userRef = usersRef.doc(userId);
+    try {
+      await _db.runTransaction((tx) async {
+        final userSnapshot = await tx.get(userRef);
+
+        if (userSnapshot.exists) {
+          var model = await UserModel.fromDocumentSnapshot(userSnapshot);
+
+          final fcmTokens = <String, FCMToken>{};
+
+          /// Check if token already exists in fcmTokens.token
+          final removedToken =
+              fcmTokens.values.where((element) => element.token != token);
+
+          removedToken.forEach((element) {
+            fcmTokens[element.id!] = element;
+          });
+
+          print(removedToken);
+
+          model = model.copyWith(
+            fcmTokens: fcmTokens,
+            updatedAt: DateTime.now().millisecondsSinceEpoch.toDouble(),
+          );
+          tx.set(userRef, model.toJson());
+        } else {
+          throw UserDataServiceException(
+              code: RdevCode.NotFound,
+              message: 'User with id:${userId} was not found');
+        }
+      });
+
+      final snapshot = await userRef.get();
+      final updatedModel = await UserModel.fromDocumentSnapshot(snapshot);
+      return updatedModel;
+    } catch (err) {
+      if (err is UserDataServiceException) {
+        rethrow;
+      }
+      throw UserDataServiceException(message: err.toString());
+    }
+  }
+
   /// Invites a new user into the workspace and returns [Map<String,dynamic>] if successful
   /// Throws [UsersServiceException] if failed
   Future<Map<String, dynamic>> updateUserClaims(

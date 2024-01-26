@@ -6,9 +6,23 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:rdev_riverpod_firebase/firebase_providers.dart';
 import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 import 'package:rdev_riverpod_firebase_user/data/user_repository.dart';
 import 'package:rdev_riverpod_firebase_user/domain/user_vo.dart';
+
+final fbMessagingTokenRefreshProvider = StreamProvider<String>((ref) {
+  final messagingInstance = ref.watch(fbMessagingProvider);
+
+  return messagingInstance.onTokenRefresh;
+});
+
+final currentFbMessagingTokenProvider = StateProvider<String?>((ref) {
+  final messagingInstance =
+      ref.watch(fbMessagingTokenRefreshProvider.select((value) => value));
+
+  return messagingInstance.value;
+});
 
 // Abstract class representing the state of the CurrentUserRepository
 @immutable
@@ -26,21 +40,51 @@ class CurrentUserRepositoryState extends Equatable {
 class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   final log = Logger('CurrentUserRepository');
   String? _currentUserId;
+
+  late UserRepository _userRepository;
+  late AuthRepository _authRepository;
+
   @override
   FutureOr<CurrentUserRepositoryState> build() async {
     log.info('build()');
     _currentUserId = await ref.watch(
         AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
-    await ref.watch(UserRepository.provider.call(_currentUserId));
-    return _fetch();
-  }
+    _userRepository =
+        ref.watch(UserRepository.provider.call(_currentUserId).notifier);
+    _authRepository = ref.watch(AuthRepository.provider.notifier);
+    if (_currentUserId is String) {
+      await ref.read(fbMessagingProvider).requestPermission(
+          alert: true,
+          badge: true,
+          provisional: true,
+          sound: true,
+          announcement: true);
+      final userVO = await ref.watch(UserRepository.provider
+          .call(_currentUserId)
+          .selectAsync((data) => data.user));
 
-  Future<CurrentUserRepositoryState> _fetch() async {
-    final userVO = await ref.watch(UserRepository.provider
-        .call(_currentUserId)
-        .selectAsync((data) => data.user));
+      /// Monitor Future Changes
 
-    return CurrentUserRepositoryState(user: userVO);
+      ref.listen(currentFbMessagingTokenProvider, (previous, next) {
+        if (next is String && _currentUserId is String) {
+          log.info('Token Changed: ${next}');
+          ref
+              .read(UserRepository.provider.call(_currentUserId).notifier)
+              .updateUserFCMToken(next);
+        }
+      });
+
+      final currentToken = await ref
+          .read(fbMessagingProvider)
+          .getToken(vapidKey: String.fromEnvironment('VapidKey'));
+      log.info('Current Token: $currentToken');
+      if (currentToken is String && _currentUserId is String) {
+        ref.read(currentFbMessagingTokenProvider.notifier).state = currentToken;
+      }
+      return CurrentUserRepositoryState(user: userVO);
+    } else {
+      return const CurrentUserRepositoryState();
+    }
   }
 
   Future<void> updateUser(UserVO vo) async {
@@ -53,10 +97,22 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
             .read(UserRepository.provider.call(_currentUserId).notifier)
             .updateUser(updatedVO);
       } catch (err) {
-        state = await AsyncValue.data(await _fetch());
         throw err;
       }
     }
+  }
+
+  Future<void> logout() async {
+    final lastToken = ref.read(currentFbMessagingTokenProvider);
+    if (lastToken is String) {
+      await ref
+          .read(UserRepository.provider.call(_currentUserId).notifier)
+          .removeUserFCMToken(lastToken);
+    }
+
+    await _authRepository.logout();
+    _currentUserId = null;
+    state = AsyncValue.data(CurrentUserRepositoryState());
   }
 
   // Provider for the CurrentUserRepository class

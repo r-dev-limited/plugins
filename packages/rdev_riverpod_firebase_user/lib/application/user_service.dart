@@ -3,6 +3,7 @@
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:rdev_riverpod_firebase_user/domain/user_model.dart';
 
 import '../domain/user_vo.dart';
 import 'user_data_service.dart';
@@ -59,6 +60,34 @@ class UserService {
       data = data.copyWith(updatedAt: DateTime.now());
       var userModel = data.toUserModel();
       userModel = await _userDataService.updateUser(data: userModel);
+      return UserVO.fromUserModel(userModel);
+    } catch (e) {
+      if (e is RdevException) {
+        UserServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw UserServiceException();
+    }
+  }
+
+  Future<UserVO> updateUserFCMToken(String userId, FCMToken token) async {
+    try {
+      final userModel =
+          await _userDataService.updateUserFCMToken(userId, token);
+      return UserVO.fromUserModel(userModel);
+    } catch (e) {
+      if (e is RdevException) {
+        UserServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw UserServiceException();
+    }
+  }
+
+  Future<UserVO> removeUserFCMToken(String userId, String token) async {
+    try {
+      final userModel =
+          await _userDataService.removeUserFCMToken(userId, token);
       return UserVO.fromUserModel(userModel);
     } catch (e) {
       if (e is RdevException) {

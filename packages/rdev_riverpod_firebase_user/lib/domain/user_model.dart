@@ -8,6 +8,50 @@ enum UserRole {
   User,
 }
 
+enum FCMTokenType {
+  Android,
+  Ios,
+  Web,
+}
+
+@JsonSerializable(ignoreUnannotated: true)
+class FCMToken {
+  @JsonKey()
+  final String? token;
+  @JsonKey()
+  final double? createdAt;
+  @JsonKey()
+  final FCMTokenType? type;
+  @JsonKey()
+  final String? id;
+
+  FCMToken({
+    this.token,
+    this.createdAt,
+    this.type,
+    this.id,
+  });
+
+  copyWith({
+    String? token,
+    double? createdAt,
+    FCMTokenType? type,
+    String? id,
+  }) {
+    return FCMToken(
+      token: token ?? this.token,
+      createdAt: createdAt ?? this.createdAt,
+      type: type ?? this.type,
+      id: id ?? this.id,
+    );
+  }
+
+  factory FCMToken.fromJson(Map<String, dynamic> json) =>
+      _$FCMTokenFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FCMTokenToJson(this);
+}
+
 @JsonSerializable(ignoreUnannotated: true)
 class UserModel {
   String? uid;
@@ -35,6 +79,9 @@ class UserModel {
   @JsonKey()
   final double? lastUpdatedClaims;
 
+  @JsonKey()
+  final Map<String, FCMToken>? fcmTokens;
+
   UserModel({
     this.uid,
     this.snapshot,
@@ -45,7 +92,34 @@ class UserModel {
     required this.createdAt,
     this.updatedAt,
     this.lastUpdatedClaims,
+    this.fcmTokens,
   });
+
+  copyWith({
+    String? uid,
+    DocumentSnapshot? snapshot,
+    String? name,
+    String? email,
+    String? avatarUrl,
+    UserRole? role,
+    double? createdAt,
+    double? updatedAt,
+    double? lastUpdatedClaims,
+    Map<String, FCMToken>? fcmTokens,
+  }) {
+    return UserModel(
+      uid: uid ?? this.uid,
+      snapshot: snapshot ?? this.snapshot,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      role: role ?? this.role,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
+      fcmTokens: fcmTokens ?? this.fcmTokens,
+    );
+  }
 
   /// Connect the generated [_$UserModelFromJson] function to the `fromJson`
   /// factory.
