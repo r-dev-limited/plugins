@@ -53,12 +53,6 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
         ref.watch(UserRepository.provider.call(_currentUserId).notifier);
     _authRepository = ref.watch(AuthRepository.provider.notifier);
     if (_currentUserId is String) {
-      await ref.read(fbMessagingProvider).requestPermission(
-          alert: true,
-          badge: true,
-          provisional: true,
-          sound: true,
-          announcement: true);
       final userVO = await ref.watch(UserRepository.provider
           .call(_currentUserId)
           .selectAsync((data) => data.user));
@@ -74,12 +68,28 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
         }
       });
 
-      final currentToken = await ref
-          .read(fbMessagingProvider)
-          .getToken(vapidKey: String.fromEnvironment('VapidKey'));
-      log.info('Current Token: $currentToken');
-      if (currentToken is String && _currentUserId is String) {
-        ref.read(currentFbMessagingTokenProvider.notifier).state = currentToken;
+      try {
+        final settings = await ref.read(fbMessagingProvider).requestPermission(
+            alert: true,
+            badge: true,
+            provisional: true,
+            sound: true,
+            announcement: true);
+
+        this
+            .log
+            .info('User granted permission: ${settings.authorizationStatus}');
+        const vapidKey = const String.fromEnvironment('VAPID_KEY');
+        final currentToken =
+            await ref.read(fbMessagingProvider).getToken(vapidKey: vapidKey);
+        log.info('Current Token: $currentToken');
+        if (currentToken is String && _currentUserId is String) {
+          ref.read(currentFbMessagingTokenProvider.notifier).state =
+              currentToken;
+        }
+      } catch (err) {
+        /// This might fail, and we should leave it to the user to fix it.
+        this.log.warning(err);
       }
       return CurrentUserRepositoryState(user: userVO);
     } else {
