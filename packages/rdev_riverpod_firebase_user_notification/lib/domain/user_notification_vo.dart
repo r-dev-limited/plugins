@@ -82,7 +82,7 @@ class UserNotificationVO extends Equatable {
     );
   }
 
-  factory UserNotificationVO.fromUserModel(UserNotificationModel model) {
+  factory UserNotificationVO.fromModel(UserNotificationModel model) {
     return UserNotificationVO(
       uid: model.uid!,
       snapshot: model.snapshot,

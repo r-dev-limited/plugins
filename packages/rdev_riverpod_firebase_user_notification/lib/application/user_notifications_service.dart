@@ -5,12 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../domain/user_vo.dart';
-import 'users_data_service.dart';
+import '../domain/user_notification_vo.dart';
+import 'user_notifications_data_service.dart';
 
 // Exception class for UserService
-class UsersServiceException extends RdevException {
-  UsersServiceException({
+class UserNotificationsServiceException extends RdevException {
+  UserNotificationsServiceException({
     String? message,
     RdevCode? code,
     StackTrace? stackTrace,
@@ -22,39 +22,43 @@ class UsersServiceException extends RdevException {
 }
 
 // UserService class for managing user-related operations
-class UsersService {
-  final UsersDataService _usersDataService;
+class UserNotificationsService {
+  final UserNotificationsDataService _userNotificationsDataService;
 
-  UsersService(this._usersDataService);
+  UserNotificationsService(this._userNotificationsDataService);
 
   // Fetches user data based on the provided userId
-  Future<List<UserVO>> getUsers({
+  Future<List<UserNotificationVO>> getNotifications({
     int limit = 50,
     DocumentSnapshot? startAt,
+    required String userId,
   }) async {
     try {
-      final userModels = await _usersDataService.getUsers(
+      final models = await _userNotificationsDataService.getNotifications(
         limit: limit,
         startAt: startAt,
+        userId: userId,
       );
-      final vos = userModels.map((e) {
-        final vo = UserVO.fromUserModel(e);
+      final vos = models.map((e) {
+        final vo = UserNotificationVO.fromModel(e);
         return vo;
       }).toList();
 
       return vos;
     } catch (e) {
       if (e is RdevException) {
-        throw UsersServiceException(
+        throw UserNotificationsServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw UsersServiceException(message: e.toString());
+      throw UserNotificationsServiceException(message: e.toString());
     }
   }
 
-  // Provider for the UsersService class
-  static Provider<UsersService> provider = Provider<UsersService>((ref) {
-    final userService = UsersService(ref.watch(UsersDataService.provider));
+  // Provider for the UserNotificationsService class
+  static Provider<UserNotificationsService> provider =
+      Provider<UserNotificationsService>((ref) {
+    final userService = UserNotificationsService(
+        ref.watch(UserNotificationsDataService.provider));
     return userService;
   });
 }

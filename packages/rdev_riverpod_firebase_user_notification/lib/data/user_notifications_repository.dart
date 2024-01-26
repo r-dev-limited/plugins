@@ -7,51 +7,57 @@ import '../application/user_notifications_service.dart';
 import '../domain/user_notification_vo.dart';
 
 @immutable
-class UsersRepositoryState {
-  final List<UserVO> users;
+class UserNotificationsRepositoryState {
+  final List<UserNotificationVO> notifications;
   final bool isLastPage;
 
   ///
-  const UsersRepositoryState({
-    this.users = const [],
+  const UserNotificationsRepositoryState({
+    this.notifications = const [],
     this.isLastPage = false,
   });
 
-  UsersRepositoryState copyWith({
-    List<UserVO>? users,
+  UserNotificationsRepositoryState copyWith({
+    List<UserNotificationVO>? notifications,
     bool? isLastPage,
   }) {
-    return UsersRepositoryState(
-      users: users ?? this.users,
+    return UserNotificationsRepositoryState(
+      notifications: notifications ?? this.notifications,
       isLastPage: isLastPage ?? this.isLastPage,
     );
   }
 }
 
-class UsersRepository extends AsyncNotifier<UsersRepositoryState> {
-  late UsersService _usersService;
+class UserNotificationsRepository
+    extends FamilyAsyncNotifier<UserNotificationsRepositoryState, String> {
+  late UserNotificationsService _userNotificationsService;
   DocumentSnapshot<Object?>? _lastDocument;
+  String? _userId;
 
   /// Build (Init)
   @override
-  FutureOr<UsersRepositoryState> build() async {
-    _usersService = ref.watch(UsersService.provider);
+  FutureOr<UserNotificationsRepositoryState> build(arg) async {
+    _userId = arg;
+    _userNotificationsService = ref.watch(UserNotificationsService.provider);
     _lastDocument = null;
-    final tmpState = await _fetchUsers();
+    final tmpState = await _fetchNotifications();
 
     return tmpState;
   }
 
   /// Get Users
-  Future<UsersRepositoryState> _fetchUsers() async {
+  Future<UserNotificationsRepositoryState> _fetchNotifications() async {
     try {
-      final userVOs = await _usersService.getUsers(startAt: _lastDocument);
+      final notificationVOs = await _userNotificationsService.getNotifications(
+          startAt: _lastDocument, userId: _userId!);
       var isLastPage = false;
-      if (_lastDocument != null && _lastDocument!.id == userVOs.last.uid) {
+      if (_lastDocument != null &&
+          _lastDocument!.id == notificationVOs.last.uid) {
         isLastPage = true;
       }
-      _lastDocument = userVOs.lastOrNull?.snapshot;
-      return UsersRepositoryState(isLastPage: isLastPage, users: userVOs);
+      _lastDocument = notificationVOs.lastOrNull?.snapshot;
+      return UserNotificationsRepositoryState(
+          isLastPage: isLastPage, notifications: notificationVOs);
     } catch (err) {
       rethrow;
     }
@@ -63,12 +69,14 @@ class UsersRepository extends AsyncNotifier<UsersRepositoryState> {
       if (shouldReload) {
         _lastDocument = null;
       }
-      return _fetchUsers();
+      return _fetchNotifications();
     });
   }
 
-  static AsyncNotifierProvider<UsersRepository, UsersRepositoryState> provider =
-      AsyncNotifierProvider<UsersRepository, UsersRepositoryState>(() {
-    return UsersRepository();
+  static AsyncNotifierProviderFamily<UserNotificationsRepository,
+          UserNotificationsRepositoryState, String> provider =
+      AsyncNotifierProvider.family<UserNotificationsRepository,
+          UserNotificationsRepositoryState, String>(() {
+    return UserNotificationsRepository();
   });
 }

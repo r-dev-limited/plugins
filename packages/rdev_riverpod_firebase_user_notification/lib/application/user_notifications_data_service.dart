@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
-import 'package:rdev_riverpod_firebase_user/domain/user_model.dart';
+import 'package:rdev_riverpod_firebase_user_notification/domain/user_notification_model.dart';
 
-class UsersDataServiceException extends RdevException {
-  UsersDataServiceException({
+class UserNotificationsDataServiceException extends RdevException {
+  UserNotificationsDataServiceException({
     String? message,
     RdevCode? code,
     StackTrace? stackTrace,
@@ -17,22 +17,25 @@ class UsersDataServiceException extends RdevException {
         );
 }
 
-class UsersDataService {
+class UserNotificationsDataService {
   final FirebaseFirestore _db;
   // final FirebaseFunctions _functions;
 
-  UsersDataService(
+  UserNotificationsDataService(
     this._db,
     //  this._functions,
   );
 
-  Future<List<UserModel>> getUsers({
+  Future<List<UserNotificationModel>> getNotifications({
     int limit = 50,
     DocumentSnapshot? startAt,
+    required String userId,
   }) async {
     try {
       final usersRef = _db.collection('Users');
-      var query = usersRef.limit(limit);
+      final userDocRef = usersRef.doc(userId);
+      final userNotificationsRef = userDocRef.collection('UserNotifications');
+      var query = userNotificationsRef.limit(limit);
       if (startAt is DocumentSnapshot) {
         query = query.startAtDocument(startAt);
       }
@@ -42,7 +45,7 @@ class UsersDataService {
         return [];
       }
       final toParse = snapshot.docs.map((e) async {
-        final user = await UserModel.fromDocumentSnapshot(e);
+        final user = await UserNotificationModel.fromDocumentSnapshot(e);
 
         return user;
       }).toList();
@@ -51,42 +54,19 @@ class UsersDataService {
       return parsed;
     } catch (err) {
       if (err is FirebaseException) {
-        throw UsersDataServiceException(
+        throw UserNotificationsDataServiceException(
           message: err.message,
           code: RdevCode.Internal,
           stackTrace: err.stackTrace,
         );
       }
-      throw UsersDataServiceException(message: err.toString());
+      throw UserNotificationsDataServiceException(message: err.toString());
     }
   }
 
-  /// Creates a new admin user and
-  /// assign a typesense key to that user's claims
-  // Future<void> createAdminUser(CreateAdminVO admin) {
-  //   try {
-  //     final callable = _functions.httpsCallable('callables-createAdminUser');
-  //     return callable.call(admin.toJson());
-  //   } on FirebaseFunctionsException catch (e) {
-  //     // Handling FirebaseFunctionsException
-  //     throw UsersServiceException(
-  //       model: CarvError()
-  //         ..message = e.message ?? ''
-  //         ..details = e.stackTrace?.toString() ?? ''
-  //         ..code = CarvError_CarvCode.Internal,
-  //     );
-  //   } catch (e) {
-  //     throw UsersServiceException(
-  //       model: CarvError()
-  //         ..message = e.toString()
-  //         ..code = CarvError_CarvCode.Internal,
-  //     );
-  //   }
-  // }
-
-  static Provider<UsersDataService> provider =
-      Provider<UsersDataService>((ref) {
-    final workspaceService = UsersDataService(
+  static Provider<UserNotificationsDataService> provider =
+      Provider<UserNotificationsDataService>((ref) {
+    final workspaceService = UserNotificationsDataService(
       ref.watch(fbFirestoreProvider),
       //   ref.watch(fbFunctionsProvider),
     );
