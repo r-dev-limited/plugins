@@ -273,6 +273,24 @@ class UserDataService {
     }
   }
 
+  Future<void> onboardingFinished(
+      String userId, Map<String, dynamic> payload) async {
+    try {
+      final callable = _functions.httpsCallable('callables-onboardingFinished');
+      payload['userId'] = userId;
+      await callable.call(payload);
+    } on FirebaseFunctionsException catch (e) {
+      // Handling FirebaseFunctionsException
+      throw UserDataServiceException(
+        message: e.message ?? '',
+        stackTrace: e.stackTrace,
+        code: RdevCode.Internal,
+      );
+    } catch (e) {
+      throw UserDataServiceException(message: e.toString());
+    }
+  }
+
   // Provider for the UserDataService class
   static Provider<UserDataService> provider = Provider<UserDataService>((ref) {
     final userService = UserDataService(

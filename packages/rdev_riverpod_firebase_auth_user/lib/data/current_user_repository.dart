@@ -103,9 +103,17 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
       final updatedVO = vo.copyWith(uid: _currentUserId);
       state = AsyncValue.loading();
       try {
-        await ref
-            .read(UserRepository.provider.call(_currentUserId).notifier)
-            .updateUser(updatedVO);
+        await _userRepository.updateUser(updatedVO);
+      } catch (err) {
+        throw err;
+      }
+    }
+  }
+
+  Future<void> onboardingFinished(Map<String, dynamic> payload) async {
+    if (_currentUserId is String) {
+      try {
+        await _userRepository.onboardingFinished(payload);
       } catch (err) {
         throw err;
       }
@@ -115,9 +123,7 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   Future<void> logout() async {
     final lastToken = ref.read(currentFbMessagingTokenProvider);
     if (lastToken is String) {
-      await ref
-          .read(UserRepository.provider.call(_currentUserId).notifier)
-          .removeUserFCMToken(lastToken);
+      await _userRepository.removeUserFCMToken(lastToken);
     }
 
     await _authRepository.logout();

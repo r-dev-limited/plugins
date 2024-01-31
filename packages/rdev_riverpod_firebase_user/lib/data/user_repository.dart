@@ -124,6 +124,17 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
     }
   }
 
+  Future<void> onboardingFinished(Map<String, dynamic> payload) async {
+    if (_userId is String) {
+      state = AsyncValue.loading();
+      try {
+        await _userService.onboardingFinished(_userId!, payload);
+      } catch (err) {
+        state = AsyncValue.error(err, StackTrace.current);
+      }
+    }
+  }
+
   // Provider for the CurrentUserRepository class
   static AsyncNotifierProviderFamily<UserRepository, UserRepositoryState,
           String?> provider =

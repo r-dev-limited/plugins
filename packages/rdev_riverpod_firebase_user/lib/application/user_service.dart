@@ -98,6 +98,19 @@ class UserService {
     }
   }
 
+  Future<void> onboardingFinished(
+      String userId, Map<String, dynamic> payload) async {
+    try {
+      await _userDataService.onboardingFinished(userId, payload);
+    } catch (e) {
+      if (e is RdevException) {
+        UserServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw UserServiceException();
+    }
+  }
+
   // Provider for the UserService class
   static Provider<UserService> provider = Provider<UserService>((ref) {
     final userService = UserService(ref.watch(UserDataService.provider));
