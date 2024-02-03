@@ -18,6 +18,9 @@ dependencies:
   ### 3rd party
   equatable: ^2.0.5
   json_annotation: ^4.8.1
+  hooks_riverpod: ^2.3.10
+  logging: ^1.2.0
+  
 
 dev_dependencies:
   flutter_test:
