@@ -24,6 +24,15 @@ class GoogleLogger {
   AutoRefreshingAuthClient? _httpClient;
   LoggingApi? _logger;
 
+  bool isBase64(String str) {
+    try {
+      base64.decode(str);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   ///
   GoogleLogger({
     required this.projectId,
@@ -34,22 +43,28 @@ class GoogleLogger {
       _httpClient = client;
       _logger = LoggingApi(_httpClient!);
     } else if (serviceAccount is String) {
-      clientViaServiceAccount(
-          ServiceAccountCredentials.fromJson(
-            utf8.decode(
-              base64Decode(
-                serviceAccount,
-              ),
-            ),
-          ),
-          [
-            LoggingApi.loggingWriteScope,
-          ]).then((value) {
-        _httpClient = value;
-        _logger = LoggingApi(_httpClient!);
-      }).catchError((err) {
+      try {
+        String base64String = serviceAccount;
+        if (isBase64(serviceAccount)) {
+          final base64List = base64Decode(
+            serviceAccount,
+          );
+          base64String = utf8.decode(
+            base64List,
+          );
+        }
+        clientViaServiceAccount(
+            ServiceAccountCredentials.fromJson(base64String), [
+          LoggingApi.loggingWriteScope,
+        ]).then((value) {
+          _httpClient = value;
+          _logger = LoggingApi(_httpClient!);
+        }).catchError((err) {
+          debugPrint(err.toString());
+        });
+      } catch (err) {
         debugPrint(err.toString());
-      });
+      }
     }
   }
 

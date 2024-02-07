@@ -1,3 +1,7 @@
+# 0.0.3 - Jan 2024
+
+- Fix string/base64 service account
+
 # 0.0.2 - Jan 2024
 
 - Optional ServiceAccount for GCP logging.
