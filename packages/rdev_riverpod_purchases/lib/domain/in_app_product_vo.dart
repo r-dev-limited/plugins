@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'in_app_product_model.dart';
 
@@ -13,9 +14,20 @@ class InAppProductVO extends Equatable {
   final InAppProductType type;
   final String? productIdentifier;
   final double? referencePrice;
+  final double? pDollars;
   final String? name;
   final String? description;
   final Map<String, dynamic> metaData;
+
+  final ProductDetails? productDetails;
+
+  /// get price
+  String get price {
+    return productDetails?.price ??
+        (referencePrice is String
+            ? '\$${referencePrice!.toStringAsFixed(2)}'
+            : 'Free');
+  }
 
   InAppProductVO({
     this.uid,
@@ -25,9 +37,11 @@ class InAppProductVO extends Equatable {
     required this.type,
     required this.productIdentifier,
     required this.referencePrice,
+    required this.pDollars,
     required this.name,
     required this.description,
     required this.metaData,
+    this.productDetails,
   });
 
   @override
@@ -38,9 +52,11 @@ class InAppProductVO extends Equatable {
         type,
         productIdentifier,
         referencePrice,
+        pDollars,
         name,
         description,
         metaData,
+        productDetails,
       ];
 
   InAppProductVO copyWith({
@@ -51,9 +67,11 @@ class InAppProductVO extends Equatable {
     InAppProductType? type,
     String? productIdentifier,
     double? referencePrice,
+    double? pDollars,
     String? name,
     String? description,
     Map<String, dynamic>? metaData,
+    ProductDetails? productDetails,
   }) {
     return InAppProductVO(
       uid: uid ?? this.uid,
@@ -63,9 +81,11 @@ class InAppProductVO extends Equatable {
       type: type ?? this.type,
       productIdentifier: productIdentifier ?? this.productIdentifier,
       referencePrice: referencePrice ?? this.referencePrice,
+      pDollars: pDollars ?? this.pDollars,
       name: name ?? this.name,
       description: description ?? this.description,
       metaData: metaData ?? this.metaData,
+      productDetails: productDetails ?? this.productDetails,
     );
   }
 
@@ -80,6 +100,7 @@ class InAppProductVO extends Equatable {
       type: model.type,
       productIdentifier: model.productIdentifier,
       referencePrice: model.referencePrice,
+      pDollars: model.pDollars,
       name: model.name,
       description: model.description,
       metaData: model.metaData,
@@ -97,6 +118,7 @@ class InAppProductVO extends Equatable {
       type: type,
       productIdentifier: productIdentifier,
       referencePrice: referencePrice,
+      pDollars: pDollars,
       name: name,
       description: description,
       metaData: metaData,

@@ -31,6 +31,9 @@ class InAppProductModel {
   final double? referencePrice;
 
   @JsonKey()
+  final double? pDollars;
+
+  @JsonKey()
   final String? name;
 
   @JsonKey()
@@ -47,6 +50,7 @@ class InAppProductModel {
     required this.type,
     required this.productIdentifier,
     required this.referencePrice,
+    required this.pDollars,
     required this.name,
     required this.description,
     required this.metaData,

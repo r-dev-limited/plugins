@@ -13,6 +13,7 @@ InAppProductModel _$InAppProductModelFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$InAppProductTypeEnumMap, json['type']),
       productIdentifier: json['productIdentifier'] as String?,
       referencePrice: (json['referencePrice'] as num?)?.toDouble(),
+      pDollars: (json['pDollars'] as num?)?.toDouble(),
       name: json['name'] as String?,
       description: json['description'] as String?,
       metaData: json['metaData'] as Map<String, dynamic>,
@@ -33,6 +34,7 @@ Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) {
   val['type'] = _$InAppProductTypeEnumMap[instance.type]!;
   writeNotNull('productIdentifier', instance.productIdentifier);
   writeNotNull('referencePrice', instance.referencePrice);
+  writeNotNull('pDollars', instance.pDollars);
   writeNotNull('name', instance.name);
   writeNotNull('description', instance.description);
   val['metaData'] = instance.metaData;
