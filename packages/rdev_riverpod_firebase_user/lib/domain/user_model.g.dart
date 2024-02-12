@@ -46,6 +46,8 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       fcmTokens: (json['fcmTokens'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, FCMToken.fromJson(e as Map<String, dynamic>)),
       ),
+      onboardingFinished: json['onboardingFinished'] as bool?,
+      userAffinity: (json['userAffinity'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) {
@@ -66,6 +68,8 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
   writeNotNull('lastUpdatedClaims', instance.lastUpdatedClaims);
   writeNotNull(
       'fcmTokens', instance.fcmTokens?.map((k, e) => MapEntry(k, e.toJson())));
+  writeNotNull('onboardingFinished', instance.onboardingFinished);
+  writeNotNull('userAffinity', instance.userAffinity);
   return val;
 }
 

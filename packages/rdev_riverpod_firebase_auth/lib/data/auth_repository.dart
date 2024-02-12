@@ -29,14 +29,6 @@ class AuthRepositoryState extends Equatable {
     return 'User';
   }
 
-  bool get isOnboarded {
-    if (tokenResult?.claims != null) {
-      return tokenResult?.claims?['ob'] == 1;
-    }
-
-    return false;
-  }
-
   bool get hasVerifiedEmail {
     return authUser?.isEmailVerified ?? false;
   }

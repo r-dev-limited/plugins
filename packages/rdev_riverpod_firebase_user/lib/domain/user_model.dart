@@ -82,6 +82,12 @@ class UserModel {
   @JsonKey()
   final Map<String, FCMToken>? fcmTokens;
 
+  @JsonKey()
+  final bool? onboardingFinished;
+
+  @JsonKey()
+  final double? userAffinity;
+
   UserModel({
     this.uid,
     this.snapshot,
@@ -93,6 +99,8 @@ class UserModel {
     this.updatedAt,
     this.lastUpdatedClaims,
     this.fcmTokens,
+    this.onboardingFinished,
+    this.userAffinity,
   });
 
   copyWith({
@@ -106,6 +114,8 @@ class UserModel {
     double? updatedAt,
     double? lastUpdatedClaims,
     Map<String, FCMToken>? fcmTokens,
+    bool? onboardingFinished,
+    double? userAffinity,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -118,6 +128,8 @@ class UserModel {
       updatedAt: updatedAt ?? this.updatedAt,
       lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
       fcmTokens: fcmTokens ?? this.fcmTokens,
+      onboardingFinished: onboardingFinished ?? this.onboardingFinished,
+      userAffinity: userAffinity ?? this.userAffinity,
     );
   }
 

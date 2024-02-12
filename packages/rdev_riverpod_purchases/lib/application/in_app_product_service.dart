@@ -1,5 +1,5 @@
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logging/logging.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -52,7 +52,7 @@ class InAppProductService {
         /// Try to find product detail for VO
         try {
           final productDetail = productDetails.firstWhere((element) {
-            return element.id == vo.productIdentifier;
+            return element.productId == vo.productIdentifier;
           });
 
           return vo.copyWith(
@@ -74,13 +74,13 @@ class InAppProductService {
     }
   }
 
-  Future<bool> purchaseProduct(
-    ProductDetails productDetails,
+  Future<void> purchaseInAppProduct(
+    IAPItem item,
     String userId,
   ) async {
     try {
-      return _InAppProductDataService.purchaseProduct(
-        productDetails,
+      return _InAppProductDataService.purchaseInAppProduct(
+        item,
         userId,
       );
     } catch (e) {
@@ -92,36 +92,15 @@ class InAppProductService {
     }
   }
 
-  Stream<List<PurchaseDetails>> purchaseUpdatedStream() {
-    try {
-      return _InAppProductDataService.purchaseUpdatedStream();
-    } catch (e) {
-      if (e is RdevException) {
-        throw InAppProductServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
-      }
-      throw InAppProductServiceException(message: e.toString());
-    }
-  }
+  Stream<PurchasedItem?> get purchaseUpdatedStream =>
+      _InAppProductDataService.purchaseUpdatedStream;
 
-  Future<void> verifyExistingPurchase(String productId, String userId) async {
-    try {
-      return _InAppProductDataService.verifyExistingPurchase(
-        productId,
-        userId,
-      );
-    } catch (e) {
-      if (e is RdevException) {
-        throw InAppProductServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
-      }
-      throw InAppProductServiceException(message: e.toString());
-    }
-  }
+  Stream<PurchaseResult?> get purchaseErrorStream =>
+      _InAppProductDataService.purchaseErrorStream;
 
-  Future<void> verifyPurchase(PurchaseDetails details) async {
+  Future<void> verifyPurchase(PurchasedItem purchasedItem, IAPItem item) async {
     try {
-      return _InAppProductDataService.verifyPurchase(details);
+      return _InAppProductDataService.verifyPurchase(purchasedItem, item);
     } catch (e) {
       if (e is RdevException) {
         throw InAppProductServiceException(

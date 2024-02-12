@@ -28,11 +28,18 @@ final currentFbMessagingTokenProvider = StateProvider<String?>((ref) {
 @immutable
 class CurrentUserRepositoryState extends Equatable {
   final UserVO? user;
-  const CurrentUserRepositoryState({this.user});
+  final AuthRepositoryState authRepositoryState;
+
+  ///
+  const CurrentUserRepositoryState({
+    this.user,
+    required this.authRepositoryState,
+  });
 
   @override
   List<Object?> get props => [
         user,
+        authRepositoryState,
       ];
 }
 
@@ -47,11 +54,13 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   @override
   FutureOr<CurrentUserRepositoryState> build() async {
     log.info('build()');
-    _currentUserId = await ref.watch(
-        AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
+    _authRepository = ref.watch(AuthRepository.provider.notifier);
+
+    final authState = await ref.watch(AuthRepository.provider.future);
+    _currentUserId = authState.authUser?.uid;
     _userRepository =
         ref.watch(UserRepository.provider.call(_currentUserId).notifier);
-    _authRepository = ref.watch(AuthRepository.provider.notifier);
+
     if (_currentUserId is String) {
       final userVO = await ref.watch(UserRepository.provider
           .call(_currentUserId)
@@ -91,9 +100,12 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
         /// This might fail, and we should leave it to the user to fix it.
         this.log.warning(err);
       }
-      return CurrentUserRepositoryState(user: userVO);
+      return CurrentUserRepositoryState(
+        user: userVO,
+        authRepositoryState: authState,
+      );
     } else {
-      return const CurrentUserRepositoryState();
+      return CurrentUserRepositoryState(authRepositoryState: authState);
     }
   }
 
@@ -128,7 +140,6 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
 
     await _authRepository.logout();
     _currentUserId = null;
-    state = AsyncValue.data(CurrentUserRepositoryState());
   }
 
   // Provider for the CurrentUserRepository class

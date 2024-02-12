@@ -13,6 +13,8 @@ class UserVO extends Equatable {
   final DateTime? updatedAt;
   final DateTime? lastUpdatedClaims;
   final Map<String, FCMToken>? fcmTokens;
+  final bool? onboardingFinished;
+  final double? userAffinity;
 
   const UserVO({
     this.uid,
@@ -25,6 +27,8 @@ class UserVO extends Equatable {
     this.updatedAt,
     this.lastUpdatedClaims,
     this.fcmTokens,
+    this.onboardingFinished,
+    this.userAffinity,
   });
 
   @override
@@ -38,6 +42,8 @@ class UserVO extends Equatable {
         updatedAt,
         lastUpdatedClaims,
         fcmTokens,
+        onboardingFinished,
+        userAffinity,
       ];
 
   UserVO copyWith({
@@ -51,6 +57,8 @@ class UserVO extends Equatable {
     DateTime? updatedAt,
     DateTime? lastUpdatedClaims,
     Map<String, FCMToken>? fcmTokens,
+    bool? onboardingFinished,
+    double? userAffinity,
   }) {
     return UserVO(
       uid: uid ?? this.uid,
@@ -63,25 +71,29 @@ class UserVO extends Equatable {
       updatedAt: updatedAt ?? this.updatedAt,
       lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
       fcmTokens: fcmTokens ?? this.fcmTokens,
+      onboardingFinished: onboardingFinished ?? this.onboardingFinished,
+      userAffinity: userAffinity ?? this.userAffinity,
     );
   }
 
   factory UserVO.fromUserModel(UserModel user) {
     return UserVO(
-      uid: user.uid!,
-      snapshot: user.snapshot,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(user.createdAt.toInt()),
-      updatedAt: user.updatedAt is double
-          ? DateTime.fromMillisecondsSinceEpoch(user.updatedAt!.toInt())
-          : null,
-      lastUpdatedClaims: user.lastUpdatedClaims is double
-          ? DateTime.fromMillisecondsSinceEpoch(user.lastUpdatedClaims!.toInt())
-          : null,
-      fcmTokens: user.fcmTokens,
-    );
+        uid: user.uid!,
+        snapshot: user.snapshot,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        createdAt: DateTime.fromMillisecondsSinceEpoch(user.createdAt.toInt()),
+        updatedAt: user.updatedAt is double
+            ? DateTime.fromMillisecondsSinceEpoch(user.updatedAt!.toInt())
+            : null,
+        lastUpdatedClaims: user.lastUpdatedClaims is double
+            ? DateTime.fromMillisecondsSinceEpoch(
+                user.lastUpdatedClaims!.toInt())
+            : null,
+        fcmTokens: user.fcmTokens,
+        onboardingFinished: user.onboardingFinished,
+        userAffinity: user.userAffinity);
   }
 
   UserModel toUserModel() {
@@ -98,6 +110,10 @@ class UserVO extends Equatable {
       lastUpdatedClaims: lastUpdatedClaims is DateTime
           ? lastUpdatedClaims!.millisecondsSinceEpoch.toDouble()
           : null,
+      fcmTokens: fcmTokens is Map<String, FCMToken> ? fcmTokens : null,
+      onboardingFinished:
+          onboardingFinished is bool ? onboardingFinished : null,
+      userAffinity: userAffinity is double ? userAffinity : null,
     );
 
     return userModel;

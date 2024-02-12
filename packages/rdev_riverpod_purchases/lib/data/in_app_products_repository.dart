@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:rdev_riverpod_purchases/application/in_app_product_service.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_model.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_vo.dart';
@@ -37,6 +35,7 @@ class InAppProductsRepository
   late InAppProductService _inAppProductService;
   DocumentSnapshot<Object?>? _lastDocument;
   StreamSubscription? _streamSubscription;
+  IAPItem? puchaseItem;
 
   /// Build (Init)
   @override
@@ -44,28 +43,14 @@ class InAppProductsRepository
     _inAppProductService = ref.watch(InAppProductService.provider);
     await _streamSubscription?.cancel();
     _streamSubscription =
-        _inAppProductService.purchaseUpdatedStream().listen((event) async {
-      final errors = <Object>[];
-
-      for (final element in event) {
-        debugPrint(element.toString());
-        if (element.pendingCompletePurchase &&
-                element.status == PurchaseStatus.purchased ||
-            element.status == PurchaseStatus.restored) {
-          try {
-            await _inAppProductService.verifyPurchase(element);
-          } catch (err) {
-            debugPrint(err.toString());
-            errors.add(err);
-          }
-        }
-      }
-      ;
-      if (errors.isNotEmpty) {
-        // state = AsyncError(errors.first, StackTrace.current);
+        _inAppProductService.purchaseUpdatedStream.listen((event) async {
+      if (event is PurchasedItem && puchaseItem is IAPItem) {
+        await _inAppProductService.verifyPurchase(event, puchaseItem!);
       } else {
-        state = AsyncValue.data(await _fetchStoredFiles());
+        /// Reset ?
       }
+
+      state = AsyncValue.data(await _fetchStoredFiles());
     });
     final tmpState = await _fetchStoredFiles();
 
@@ -114,32 +99,18 @@ class InAppProductsRepository
   }
 
   Future<void> purchaseProduct(
-    ProductDetails productDetails,
+    IAPItem productDetails,
     String userId,
   ) async {
     try {
       state = const AsyncValue.loading();
-      await _inAppProductService.purchaseProduct(
+      puchaseItem = productDetails;
+      await _inAppProductService.purchaseInAppProduct(
         productDetails,
         userId,
       );
     } catch (err) {
-      if (err is PlatformException) {
-        if (err.code == 'storekit_duplicate_product_object' &&
-            err.details is Map) {
-          try {
-            await _inAppProductService.verifyExistingPurchase(
-              err.details["productIdentifier"],
-              userId,
-            );
-            state = AsyncData(await _fetchStoredFiles());
-          } catch (err) {
-            state = AsyncError(err, StackTrace.current);
-          }
-
-          return;
-        }
-      }
+      print(err);
       state = AsyncError(err, StackTrace.current);
     }
   }

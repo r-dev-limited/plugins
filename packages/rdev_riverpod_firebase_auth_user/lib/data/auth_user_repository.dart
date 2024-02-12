@@ -71,7 +71,7 @@ class AuthUserRepository extends AsyncNotifier<AuthUserRepositoryState> {
         (value) => value.user?.lastUpdatedClaims,
       ),
       (prev, next) async {
-        var nextLastUpdatedClaims = await next as DateTime?;
+        var nextLastUpdatedClaims = await next;
         if (state.value != null && state.value?.lastUpdatedClaims == null) {
           state = AsyncValue.data(
             (state.value ?? const AuthUserRepositoryState())

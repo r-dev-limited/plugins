@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 import 'in_app_product_model.dart';
 
@@ -19,7 +19,7 @@ class InAppProductVO extends Equatable {
   final String? description;
   final Map<String, dynamic> metaData;
 
-  final ProductDetails? productDetails;
+  final IAPItem? productDetails;
 
   /// get price
   String get price {
@@ -71,7 +71,7 @@ class InAppProductVO extends Equatable {
     String? name,
     String? description,
     Map<String, dynamic>? metaData,
-    ProductDetails? productDetails,
+    IAPItem? productDetails,
   }) {
     return InAppProductVO(
       uid: uid ?? this.uid,
