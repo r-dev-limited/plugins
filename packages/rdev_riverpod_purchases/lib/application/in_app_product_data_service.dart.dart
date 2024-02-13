@@ -127,7 +127,9 @@ class InAppProductDataService {
       final bool available = await _inAppPurchase.isReady();
       if (available) {
         if (item.productId is String) {
-          await _inAppPurchase.requestPurchase(item.productId!);
+          await _inAppPurchase.requestPurchase(
+            item.productId!,
+          );
         } else {
           throw InAppProductDataServicexception(
             message: 'Product id is not available',
@@ -160,7 +162,9 @@ class InAppProductDataService {
         final result = await verifyPurchaseCallable.call({
           'productId': purchasedItem.productId,
           'verificationData': purchasedItem.transactionReceipt,
-          'source': 'app_store',
+          'source': purchasedItem.purchaseStateAndroid != null
+              ? 'play_store'
+              : 'app_store',
           'purchaseId': purchasedItem.transactionId,
           'price': 1,
         });
