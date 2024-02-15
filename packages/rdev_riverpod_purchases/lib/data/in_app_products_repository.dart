@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_purchases/application/in_app_product_service.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_model.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_vo.dart';
@@ -35,26 +36,49 @@ class InAppProductsRepository
   late InAppProductService _inAppProductService;
   DocumentSnapshot<Object?>? _lastDocument;
   StreamSubscription? _streamSubscription;
+  StreamSubscription? _errorStreamSubscription;
   IAPItem? puchaseItem;
+  Completer<PurchasedItem>? completer;
 
   /// Build (Init)
   @override
   FutureOr<InAppProductsRepositoryState> build() async {
     _inAppProductService = ref.watch(InAppProductService.provider);
     await _streamSubscription?.cancel();
+    unawaited(_restorePurchases());
+    final tmpState = await _fetchStoredFiles();
     _streamSubscription =
         _inAppProductService.purchaseUpdatedStream.listen((event) async {
+      print(event);
       if (event is PurchasedItem && puchaseItem is IAPItem) {
-        await _inAppProductService.verifyPurchase(event, puchaseItem!);
-      } else {
-        /// Reset ?
+        try {
+          await _inAppProductService.verifyPurchase(event, puchaseItem!);
+          completer?.complete(event);
+        } catch (err) {
+          print(err);
+        }
       }
-
-      state = AsyncValue.data(await _fetchStoredFiles());
     });
-    final tmpState = await _fetchStoredFiles();
 
+    _errorStreamSubscription =
+        _inAppProductService.purchaseErrorStream.listen((event) {
+      print(event);
+      completer?.completeError(RdevException(
+        message:
+            event?.message ?? event?.debugMessage ?? event?.code ?? 'unknown',
+        code: RdevCode.Internal,
+      ));
+    });
     return tmpState;
+  }
+
+  Future<void> _restorePurchases() async {
+    try {
+      await _inAppProductService.restorePurchases();
+    } catch (err) {
+      /// swallow error
+      print(err);
+    }
   }
 
   Future<InAppProductsRepositoryState> _fetchStoredFiles() async {
@@ -102,16 +126,30 @@ class InAppProductsRepository
     IAPItem productDetails,
     String userId,
   ) async {
-    try {
-      state = const AsyncValue.loading();
-      puchaseItem = productDetails;
-      await _inAppProductService.purchaseInAppProduct(
-        productDetails,
-        userId,
+    final getOriginalState = state.value!;
+    state = const AsyncLoading();
+    if (completer != null && !completer!.isCompleted) {
+      completer!.completeError(
+        Exception('Another purchase is in progress'),
       );
+    }
+    puchaseItem = productDetails;
+    completer = Completer<PurchasedItem>();
+    var future =
+        completer!.future.timeout(Duration(seconds: 60), onTimeout: () {
+      throw TimeoutException('Operation timed out');
+    });
+    _inAppProductService.purchaseInAppProduct(
+      productDetails,
+      userId,
+    );
+
+    try {
+      await future;
+      state = AsyncValue.data(getOriginalState);
     } catch (err) {
-      print(err);
       state = AsyncError(err, StackTrace.current);
+      throw err;
     }
   }
 

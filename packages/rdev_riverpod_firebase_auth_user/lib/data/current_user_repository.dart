@@ -135,10 +135,18 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   Future<void> logout() async {
     final lastToken = ref.read(currentFbMessagingTokenProvider);
     if (lastToken is String) {
-      await _userRepository.removeUserFCMToken(lastToken);
+      try {
+        await _userRepository.removeUserFCMToken(lastToken);
+      } catch (err) {
+        log.warning(err);
+      }
+    }
+    try {
+      await _authRepository.logout();
+    } catch (err) {
+      log.warning(err);
     }
 
-    await _authRepository.logout();
     _currentUserId = null;
   }
 

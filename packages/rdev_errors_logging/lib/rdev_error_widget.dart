@@ -4,8 +4,15 @@ import 'package:rdev_errors_logging/rdev_exception.dart';
 class RdevErrorWidget extends StatelessWidget {
   final Object error;
   final StackTrace? stackTrace;
-  const RdevErrorWidget({Key? key, required this.error, this.stackTrace})
-      : super(key: key);
+  final Function()? onRetry;
+
+  ///
+  const RdevErrorWidget({
+    Key? key,
+    required this.error,
+    this.stackTrace,
+    this.onRetry,
+  }) : super(key: key);
 
   Icon _getIcon(RdevCode? code) {
     switch (code) {
@@ -59,11 +66,30 @@ class RdevErrorWidget extends StatelessWidget {
               Text(error.runtimeType.toString())
             ],
           ),
-          Text((error as RdevException).message ?? 'Unknown Error')
+          Text((error as RdevException).message ?? 'Unknown Error'),
+          if (onRetry != null)
+            ElevatedButton(
+              onPressed: onRetry,
+              child: Text('Retry'),
+            ),
         ],
       );
     } else {
-      return Text(error.toString());
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            error.toString(),
+          ),
+          if (onRetry != null)
+            ElevatedButton(
+              onPressed: onRetry,
+              child: Text('Retry'),
+            ),
+        ],
+      );
     }
   }
 }

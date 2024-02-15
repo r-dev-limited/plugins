@@ -79,7 +79,7 @@ class InAppProductService {
     String userId,
   ) async {
     try {
-      return _InAppProductDataService.purchaseInAppProduct(
+      await _InAppProductDataService.purchaseInAppProduct(
         item,
         userId,
       );
@@ -97,6 +97,18 @@ class InAppProductService {
 
   Stream<PurchaseResult?> get purchaseErrorStream =>
       _InAppProductDataService.purchaseErrorStream;
+
+  Future<void> restorePurchases() async {
+    try {
+      return _InAppProductDataService.restorePurchases();
+    } catch (e) {
+      if (e is RdevException) {
+        throw InAppProductServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw InAppProductServiceException(message: e.toString());
+    }
+  }
 
   Future<void> verifyPurchase(PurchasedItem purchasedItem, IAPItem item) async {
     try {

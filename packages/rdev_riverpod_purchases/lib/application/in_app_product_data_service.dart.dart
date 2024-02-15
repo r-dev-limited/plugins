@@ -127,9 +127,10 @@ class InAppProductDataService {
       final bool available = await _inAppPurchase.isReady();
       if (available) {
         if (item.productId is String) {
-          await _inAppPurchase.requestPurchase(
+          final res = await _inAppPurchase.requestPurchase(
             item.productId!,
           );
+          print(res);
         } else {
           throw InAppProductDataServicexception(
             message: 'Product id is not available',
@@ -153,10 +154,21 @@ class InAppProductDataService {
     }
   }
 
+  Future<void> restorePurchases() async {
+    try {
+      await _inAppPurchase.getAvailablePurchases();
+      await _inAppPurchase.clearTransactionIOS();
+      await _inAppPurchase.consumeAll();
+    } catch (err) {
+      print(err);
+    }
+  }
+
   Future<void> verifyPurchase(PurchasedItem purchasedItem, IAPItem item) async {
     try {
       if (purchasedItem.transactionStateIOS == TransactionState.purchased ||
-          purchasedItem.transactionStateIOS == TransactionState.restored) {
+          purchasedItem.transactionStateIOS == TransactionState.restored ||
+          purchasedItem.purchaseStateAndroid == PurchaseState.purchased) {
         final verifyPurchaseCallable =
             _functions.httpsCallable('callables-verifyPurchase');
         final result = await verifyPurchaseCallable.call({

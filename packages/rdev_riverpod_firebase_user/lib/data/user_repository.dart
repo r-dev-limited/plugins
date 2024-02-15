@@ -86,7 +86,9 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
       try {
         await this._userService.updateUser(vo);
       } catch (err) {
-        state = AsyncValue.error(err, StackTrace.current);
+        /// Restore data
+        state = AsyncValue.data(await _fetchUserData());
+        throw err;
       }
     }
   }
@@ -104,7 +106,9 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
         );
         await this._userService.updateUserFCMToken(_userId!, fcmToken);
       } catch (err) {
-        state = AsyncValue.error(err, StackTrace.current);
+        /// Restore data
+        state = AsyncValue.data(await _fetchUserData());
+        throw err;
       }
     } else {
       log.warning('updateUserFCMToken() - _userId is not a String');
@@ -117,7 +121,9 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
       try {
         await this._userService.removeUserFCMToken(_userId!, token);
       } catch (err) {
-        state = AsyncValue.error(err, StackTrace.current);
+        /// Restore data
+        state = AsyncValue.data(await _fetchUserData());
+        throw err;
       }
     } else {
       log.warning('removeUserFCMToken() - _userId is not a String');
@@ -130,7 +136,9 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
       try {
         await _userService.onboardingFinished(_userId!, payload);
       } catch (err) {
-        state = AsyncValue.error(err, StackTrace.current);
+        /// Restore data
+        state = AsyncValue.data(await _fetchUserData());
+        throw err;
       }
     }
   }
