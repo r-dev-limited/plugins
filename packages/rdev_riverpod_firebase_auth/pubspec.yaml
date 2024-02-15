@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   rdev_riverpod_firebase: any
-  rdev_errors_logging: ^0.1.0
+  rdev_errors_logging: any
   ### 3rd party
   cloud_functions: ^4.6.0
   equatable: ^2.0.5
