@@ -1,3 +1,10 @@
+## 0.1.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FIX**: logging service account.
+
 # 0.0.4 - Feb 2024
 
 - add retry method to RdevErrorWidget

@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rdev_errors_logging` - `v0.1.0`](#rdev_errors_logging---v010)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.4.0`](#rdev_riverpod_firebase_auth_user---v040)
+ - [`rdev_riverpod_firebase_user` - `v0.4.0`](#rdev_riverpod_firebase_user---v040)
+ - [`rdev_riverpod_purchases` - `v0.1.0`](#rdev_riverpod_purchases---v010)
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase_auth` - `v0.0.3+1`](#rdev_riverpod_firebase_auth---v0031)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.0+1`](#rdev_riverpod_firebase_analytics---v0201)
+ - [`rdev_feature_toggles` - `v0.1.0+1`](#rdev_feature_toggles---v0101)
+ - [`rdev_riverpod_stored_file` - `v0.2.0+1`](#rdev_riverpod_stored_file---v0201)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.0+1`](#rdev_riverpod_firebase_user_notification---v0201)
+ - [`rdev_riverpod_versioning` - `v0.2.0+1`](#rdev_riverpod_versioning---v0201)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_auth` - `v0.0.3+1`
+ - `rdev_riverpod_firebase_analytics` - `v0.2.0+1`
+ - `rdev_feature_toggles` - `v0.1.0+1`
+ - `rdev_riverpod_stored_file` - `v0.2.0+1`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.0+1`
+ - `rdev_riverpod_versioning` - `v0.2.0+1`
+
+---
+
+#### `rdev_errors_logging` - `v0.1.0`
+
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FIX**: logging service account.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.4.0`
+
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.0`
+
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+
+#### `rdev_riverpod_purchases` - `v0.1.0`
+
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+
+
 ## 2024-01-09
 
 ### Changes
