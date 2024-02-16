@@ -113,10 +113,12 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
     if (_currentUserId is String &&
         (vo.uid is String && vo.uid == _currentUserId || vo.uid == null)) {
       final updatedVO = vo.copyWith(uid: _currentUserId);
+      final oldState = state.value;
       state = AsyncValue.loading();
       try {
         await _userRepository.updateUser(updatedVO);
       } catch (err) {
+        state = AsyncValue.data(oldState!);
         throw err;
       }
     }
