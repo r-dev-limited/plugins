@@ -11,6 +11,27 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 Packages with breaking changes:
 
+ - [`rdev_riverpod_firebase_auth_user` - `v0.5.0`](#rdev_riverpod_firebase_auth_user---v050)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.5.0`
+
+ - **BREAKING** **FEAT**: error handling in current user.
+
+
+## 2024-02-16
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
  - [`rdev_errors_logging` - `v0.1.0`](#rdev_errors_logging---v010)
  - [`rdev_riverpod_firebase_auth_user` - `v0.4.0`](#rdev_riverpod_firebase_auth_user---v040)
  - [`rdev_riverpod_firebase_user` - `v0.4.0`](#rdev_riverpod_firebase_user---v040)
