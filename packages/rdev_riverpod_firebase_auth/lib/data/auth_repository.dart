@@ -83,7 +83,6 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
   FutureOr<AuthRepositoryState> build() async {
     log.info('build()');
     _authService = ref.watch(AuthService.provider);
-    //_userService = ref.watch(UserService.provider);
 
     var result = const AuthRepositoryState();
 
@@ -107,9 +106,11 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     /// Stream Changes
     _authStateChangesSubscription = _authService.authStateChanges().listen(
       (user) async {
-        log.info('build authStateChanges()', user);
-        final tmpState = await _fetchUserData(user);
-        state = AsyncValue.data(tmpState);
+        if (user?.uid != result.authUser?.uid) {
+          log.info('build authStateChanges()', user);
+          final tmpState = await _fetchUserData(user);
+          state = AsyncValue.data(tmpState);
+        }
       },
     );
 
@@ -207,8 +208,12 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     log.info('logout()');
     // Set the state to loading
     state = const AsyncValue.loading();
-    await _authService.logout();
-    state = const AsyncValue.data(AuthRepositoryState());
+    try {
+      await _authService.logout();
+    } catch (err) {
+      state = const AsyncValue.data(AuthRepositoryState());
+      throw err;
+    }
   }
 
   static AsyncNotifierProvider<AuthRepository, AuthRepositoryState> provider =

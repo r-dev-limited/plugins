@@ -56,15 +56,16 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
     log.info('build()');
     _authRepository = ref.watch(AuthRepository.provider.notifier);
 
-    final authState = await ref.watch(AuthRepository.provider.future);
-    _currentUserId = authState.authUser?.uid;
+    final authState =
+        ref.watch(AuthRepository.provider.select((value) => value.value));
+    _currentUserId = authState?.authUser?.uid;
     _userRepository =
         ref.watch(UserRepository.provider.call(_currentUserId).notifier);
 
     if (_currentUserId is String) {
-      final userVO = await ref.watch(UserRepository.provider
+      final userVO = ref.watch(UserRepository.provider
           .call(_currentUserId)
-          .selectAsync((data) => data.user));
+          .select((data) => data.value?.user));
 
       /// Monitor Future Changes
 
@@ -102,10 +103,11 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
       }
       return CurrentUserRepositoryState(
         user: userVO,
-        authRepositoryState: authState,
+        authRepositoryState: authState ?? AuthRepositoryState(),
       );
     } else {
-      return CurrentUserRepositoryState(authRepositoryState: authState);
+      return CurrentUserRepositoryState(
+          authRepositoryState: authState ?? AuthRepositoryState());
     }
   }
 
