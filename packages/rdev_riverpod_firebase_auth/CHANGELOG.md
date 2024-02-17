@@ -1,3 +1,9 @@
+## 0.1.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: improve async loading.
+
 ## 0.0.3+1
 
  - Update a dependency to the latest release.

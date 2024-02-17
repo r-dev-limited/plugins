@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rdev_riverpod_firebase_auth` - `v0.1.0`](#rdev_riverpod_firebase_auth---v010)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.0`](#rdev_riverpod_firebase_auth_user---v060)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.0`
+
+ - **BREAKING** **FEAT**: improve async loading.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.0`
+
+ - **BREAKING** **FEAT**: improve async loading.
+
+
 ## 2024-02-16
 
 ### Changes

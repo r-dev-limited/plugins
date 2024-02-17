@@ -1,3 +1,9 @@
+## 0.6.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: improve async loading.
+
 ## 0.5.0
 
 > Note: This release has breaking changes.
