@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-25
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase_auth` - `v0.1.1`](#rdev_riverpod_firebase_auth---v011)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.1`](#rdev_riverpod_firebase_auth_user---v061)
+ - [`rdev_riverpod_firebase_user` - `v0.4.1`](#rdev_riverpod_firebase_user---v041)
+
+---
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.1`
+
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.1`
+
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.1`
+
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+
+
 ## 2024-02-17
 
 ### Changes

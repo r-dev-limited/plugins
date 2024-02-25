@@ -1,3 +1,7 @@
+## 0.1.1
+
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+
 ## 0.1.0
 
 > Note: This release has breaking changes.
