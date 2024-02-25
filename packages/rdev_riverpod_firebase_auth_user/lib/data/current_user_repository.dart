@@ -28,39 +28,32 @@ final currentFbMessagingTokenProvider = StateProvider<String?>((ref) {
 @immutable
 class CurrentUserRepositoryState extends Equatable {
   final UserVO? user;
-  final AuthRepositoryState authRepositoryState;
 
   ///
   const CurrentUserRepositoryState({
     this.user,
-    required this.authRepositoryState,
   });
 
   @override
   List<Object?> get props => [
         user,
-        authRepositoryState,
       ];
 }
 
 // CurrentUserRepository class responsible for managing the current user state
-class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
+class CurrentUserRepository
+    extends FamilyAsyncNotifier<CurrentUserRepositoryState, String?> {
   final log = Logger('CurrentUserRepository');
   String? _currentUserId;
 
   late UserRepository _userRepository;
-  late AuthRepository _authRepository;
 
   @override
-  FutureOr<CurrentUserRepositoryState> build() async {
+  FutureOr<CurrentUserRepositoryState> build(arg) async {
     log.info('build()');
-    _authRepository = ref.watch(AuthRepository.provider.notifier);
-
-    final authState =
-        ref.watch(AuthRepository.provider.select((value) => value.value));
-    _currentUserId = authState?.authUser?.uid;
+    _currentUserId = arg;
     _userRepository =
-        ref.watch(UserRepository.provider.call(_currentUserId).notifier);
+        ref.read(UserRepository.provider.call(_currentUserId).notifier);
 
     if (_currentUserId is String) {
       final userVO = ref.watch(UserRepository.provider
@@ -71,7 +64,6 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
 
       ref.listen(currentFbMessagingTokenProvider, (previous, next) {
         if (next is String && _currentUserId is String) {
-          log.info('Token Changed: ${next}');
           ref
               .read(UserRepository.provider.call(_currentUserId).notifier)
               .updateUserFCMToken(next);
@@ -92,7 +84,7 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
         const vapidKey = const String.fromEnvironment('VAPID_KEY');
         final currentToken =
             await ref.read(fbMessagingProvider).getToken(vapidKey: vapidKey);
-        log.info('Current Token: $currentToken');
+
         if (currentToken is String && _currentUserId is String) {
           ref.read(currentFbMessagingTokenProvider.notifier).state =
               currentToken;
@@ -103,11 +95,9 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
       }
       return CurrentUserRepositoryState(
         user: userVO,
-        authRepositoryState: authState ?? AuthRepositoryState(),
       );
     } else {
-      return CurrentUserRepositoryState(
-          authRepositoryState: authState ?? AuthRepositoryState());
+      return CurrentUserRepositoryState();
     }
   }
 
@@ -146,7 +136,7 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
       }
     }
     try {
-      await _authRepository.logout();
+      await ref.read(AuthRepository.provider.notifier).logout();
     } catch (err) {
       log.warning(err);
     }
@@ -155,10 +145,10 @@ class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   }
 
   // Provider for the CurrentUserRepository class
-  static AsyncNotifierProvider<CurrentUserRepository,
-          CurrentUserRepositoryState> provider =
-      AsyncNotifierProvider<CurrentUserRepository, CurrentUserRepositoryState>(
-          () {
+  static AsyncNotifierProviderFamily<CurrentUserRepository,
+          CurrentUserRepositoryState, String?> provider =
+      AsyncNotifierProvider.family<CurrentUserRepository,
+          CurrentUserRepositoryState, String?>(() {
     return CurrentUserRepository();
   });
 }

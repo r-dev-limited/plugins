@@ -84,7 +84,7 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     log.info('build()');
     _authService = ref.watch(AuthService.provider);
 
-    var result = const AuthRepositoryState();
+    var resultCompleter = Completer<AuthRepositoryState>();
 
     /// Cancel all subscriptions
     await _authStateChangesSubscription?.cancel();
@@ -96,25 +96,28 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     final currentUser = _authService.currentUser;
     if (currentUser is AuthUserVO) {
       try {
-        result = await _fetchUserData(currentUser);
+        resultCompleter.complete(await _fetchUserData(currentUser));
       } catch (err) {
         log.severe('build() _fetchUserData()', err);
         await _authService.logout();
+        resultCompleter.complete(const AuthRepositoryState());
       }
     }
 
     /// Stream Changes
     _authStateChangesSubscription = _authService.authStateChanges().listen(
       (user) async {
-        if (user?.uid != result.authUser?.uid) {
-          log.info('build authStateChanges()', user);
-          final tmpState = await _fetchUserData(user);
+        log.info('build authStateChanges()', user);
+        final tmpState = await _fetchUserData(user);
+        if (!resultCompleter.isCompleted) {
+          resultCompleter.complete(tmpState);
+        } else {
           state = AsyncValue.data(tmpState);
         }
       },
     );
 
-    return result;
+    return resultCompleter.future;
   }
 
   Future<AuthRepositoryState> _fetchUserData(AuthUserVO? user) async {

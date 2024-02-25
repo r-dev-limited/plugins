@@ -97,6 +97,14 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
     if (_userId is String) {
       state = AsyncValue.loading();
       try {
+        /// Check for same token
+        final tokens =
+            state.value?.user?.fcmTokens?.values.map((e) => e.token).toList() ??
+                [];
+        if (tokens.contains(token)) {
+          return;
+        }
+
         final fcmToken = FCMToken(
           token: token,
 
