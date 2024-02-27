@@ -1,3 +1,7 @@
+## 0.1.1
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
 ## 0.1.0+1
 
  - Update a dependency to the latest release.

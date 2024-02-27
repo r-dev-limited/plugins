@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_feature_toggles` - `v0.1.1`](#rdev_feature_toggles---v011)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.2`](#rdev_riverpod_firebase_auth---v012)
+ - [`rdev_riverpod_firebase_user` - `v0.4.2`](#rdev_riverpod_firebase_user---v042)
+ - [`rdev_riverpod_messaging` - `v0.0.2`](#rdev_riverpod_messaging---v002)
+ - [`rdev_riverpod_stored_file` - `v0.2.1`](#rdev_riverpod_stored_file---v021)
+ - [`rdev_riverpod_versioning` - `v0.2.1`](#rdev_riverpod_versioning---v021)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.1+1`](#rdev_riverpod_firebase_auth_user---v0611)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.1+1`
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.1`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.2`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.2`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+#### `rdev_riverpod_messaging` - `v0.0.2`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+#### `rdev_riverpod_stored_file` - `v0.2.1`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+#### `rdev_riverpod_versioning` - `v0.2.1`
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+
 ## 2024-02-25
 
 ### Changes

@@ -1,3 +1,7 @@
+## 0.1.2
+
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
 ## 0.1.1
 
  - **FEAT**: remove authstate from current repo, use completer in authRepo.
