@@ -10,45 +10,40 @@ import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 import 'package:rdev_riverpod_firebase_user/data/user_repository.dart';
 import 'package:rdev_riverpod_firebase_user/domain/user_vo.dart';
 
-// Abstract class representing the state of the CurrentUserRepository
 @immutable
 class CurrentUserRepositoryState extends Equatable {
-  final UserVO? user;
+  final UserVO? userVO;
 
-  ///
   const CurrentUserRepositoryState({
-    this.user,
+    this.userVO,
   });
 
   @override
   List<Object?> get props => [
-        user,
+        userVO,
       ];
 }
 
 // CurrentUserRepository class responsible for managing the current user state
-class CurrentUserRepository
-    extends FamilyAsyncNotifier<CurrentUserRepositoryState, String?> {
+class CurrentUserRepository extends AsyncNotifier<CurrentUserRepositoryState> {
   final log = Logger('CurrentUserRepository');
   String? _currentUserId;
 
   late UserRepository _userRepository;
 
+  /// This method is called when user switches (or logout)
+  /// then obtain userVO from UserRepo and then updates
+  /// when user changes (firestore stream)
   @override
-  FutureOr<CurrentUserRepositoryState> build(arg) async {
+  FutureOr<CurrentUserRepositoryState> build() async {
     log.info('build()');
-    _currentUserId = arg;
-    _userRepository =
-        ref.read(UserRepository.provider.call(_currentUserId).notifier);
-
+    _currentUserId = await ref.watch(
+        AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
     if (_currentUserId is String) {
-      final userVO = ref.watch(UserRepository.provider
+      final userVO = await ref.watch(UserRepository.provider
           .call(_currentUserId)
-          .select((data) => data.value?.user));
-
-      return CurrentUserRepositoryState(
-        user: userVO,
-      );
+          .selectAsync((data) => data.user));
+      return CurrentUserRepositoryState(userVO: userVO);
     } else {
       return CurrentUserRepositoryState();
     }
@@ -79,21 +74,11 @@ class CurrentUserRepository
     }
   }
 
-  Future<void> logout() async {
-    try {
-      await ref.read(AuthRepository.provider.notifier).logout();
-    } catch (err) {
-      log.warning(err);
-    }
-
-    _currentUserId = null;
-  }
-
   // Provider for the CurrentUserRepository class
-  static AsyncNotifierProviderFamily<CurrentUserRepository,
-          CurrentUserRepositoryState, String?> provider =
-      AsyncNotifierProvider.family<CurrentUserRepository,
-          CurrentUserRepositoryState, String?>(() {
+  static AsyncNotifierProvider<CurrentUserRepository,
+          CurrentUserRepositoryState> provider =
+      AsyncNotifierProvider<CurrentUserRepository, CurrentUserRepositoryState>(
+          () {
     return CurrentUserRepository();
   });
 }

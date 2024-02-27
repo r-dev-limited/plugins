@@ -1,6 +1,3 @@
-// This file contains the implementation of the UserMessagingService class
-// which is responsible for interacting with user data.
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_messaging/application/user_messaging_data_service.dart';
@@ -69,12 +66,9 @@ class UserMessagingService {
     }
   }
 
-  Future<UserMessagingVO> removeUserFCMToken(
-      String userId, String token) async {
+  Future<void> removeUserFCMToken(String userId, String token) async {
     try {
-      final userModel =
-          await _userMessagingDataService.removeUserFCMToken(userId, token);
-      return UserMessagingVO.fromModel(userModel);
+      await _userMessagingDataService.removeUserFCMToken(userId, token);
     } catch (e) {
       if (e is RdevException) {
         UserMessagingServiceException(

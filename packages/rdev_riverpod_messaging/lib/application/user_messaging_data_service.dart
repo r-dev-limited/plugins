@@ -139,46 +139,11 @@ class UserMessagingDataService {
     }
   }
 
-  Future<UserMessagingModel> removeUserFCMToken(
-      String userId, String token) async {
-    final usersRef = _db.collection('Users');
-    final userRef = usersRef.doc(userId).collection('Private').doc('messaging');
+  Future<void> removeUserFCMToken(String userId, String fcmToken) async {
     try {
-      await _db.runTransaction((tx) async {
-        final userSnapshot = await tx.get(userRef);
-
-        if (userSnapshot.exists) {
-          var model =
-              await UserMessagingModel.fromDocumentSnapshot(userSnapshot);
-
-          final fcmTokens = <String, FCMToken>{};
-
-          /// Check if token already exists in fcmTokens.token
-          final removedToken =
-              fcmTokens.values.where((element) => element.token != token);
-
-          removedToken.forEach((element) {
-            fcmTokens[element.id!] = element;
-          });
-
-          print(removedToken);
-
-          model = model.copyWith(
-            fcmTokens: fcmTokens,
-            updatedAt: DateTime.now().millisecondsSinceEpoch.toDouble(),
-          );
-          tx.set(userRef, model.toJson());
-        } else {
-          throw UserMessagingDataServiceException(
-              code: RdevCode.NotFound,
-              message: 'User with id:${userId} was not found');
-        }
-      });
-
-      final snapshot = await userRef.get();
-      final updatedModel =
-          await UserMessagingModel.fromDocumentSnapshot(snapshot);
-      return updatedModel;
+      await _functions
+          .httpsCallable('callables-removeFCMToken')
+          .call({'userId': userId, 'fcmToken': fcmToken});
     } catch (err) {
       if (err is UserMessagingDataServiceException) {
         rethrow;
