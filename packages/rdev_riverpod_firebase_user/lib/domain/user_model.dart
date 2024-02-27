@@ -8,50 +8,6 @@ enum UserRole {
   User,
 }
 
-enum FCMTokenType {
-  Android,
-  Ios,
-  Web,
-}
-
-@JsonSerializable(ignoreUnannotated: true)
-class FCMToken {
-  @JsonKey()
-  final String? token;
-  @JsonKey()
-  final double? createdAt;
-  @JsonKey()
-  final FCMTokenType? type;
-  @JsonKey()
-  final String? id;
-
-  FCMToken({
-    this.token,
-    this.createdAt,
-    this.type,
-    this.id,
-  });
-
-  copyWith({
-    String? token,
-    double? createdAt,
-    FCMTokenType? type,
-    String? id,
-  }) {
-    return FCMToken(
-      token: token ?? this.token,
-      createdAt: createdAt ?? this.createdAt,
-      type: type ?? this.type,
-      id: id ?? this.id,
-    );
-  }
-
-  factory FCMToken.fromJson(Map<String, dynamic> json) =>
-      _$FCMTokenFromJson(json);
-
-  Map<String, dynamic> toJson() => _$FCMTokenToJson(this);
-}
-
 @JsonSerializable(ignoreUnannotated: true)
 class UserModel {
   String? uid;
@@ -80,9 +36,6 @@ class UserModel {
   final double? lastUpdatedClaims;
 
   @JsonKey()
-  final Map<String, FCMToken>? fcmTokens;
-
-  @JsonKey()
   final bool? onboardingFinished;
 
   @JsonKey()
@@ -98,7 +51,6 @@ class UserModel {
     required this.createdAt,
     this.updatedAt,
     this.lastUpdatedClaims,
-    this.fcmTokens,
     this.onboardingFinished,
     this.userAffinity,
   });
@@ -113,7 +65,6 @@ class UserModel {
     double? createdAt,
     double? updatedAt,
     double? lastUpdatedClaims,
-    Map<String, FCMToken>? fcmTokens,
     bool? onboardingFinished,
     double? userAffinity,
   }) {
@@ -127,7 +78,6 @@ class UserModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
-      fcmTokens: fcmTokens ?? this.fcmTokens,
       onboardingFinished: onboardingFinished ?? this.onboardingFinished,
       userAffinity: userAffinity ?? this.userAffinity,
     );

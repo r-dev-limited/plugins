@@ -6,7 +6,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
-import 'package:rdev_riverpod_firebase_user/domain/user_model.dart';
 
 import '../application/user_service.dart';
 import '../domain/user_vo.dart';
@@ -90,51 +89,6 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
         state = AsyncValue.data(await _fetchUserData());
         throw err;
       }
-    }
-  }
-
-  Future<void> updateUserFCMToken(String token) async {
-    if (_userId is String) {
-      state = AsyncValue.loading();
-      try {
-        /// Check for same token
-        final tokens =
-            state.value?.user?.fcmTokens?.values.map((e) => e.token).toList() ??
-                [];
-        if (tokens.contains(token)) {
-          return;
-        }
-
-        final fcmToken = FCMToken(
-          token: token,
-
-          /// Add platform check
-          type: FCMTokenType.Ios,
-          createdAt: DateTime.now().millisecondsSinceEpoch.toDouble(),
-        );
-        await this._userService.updateUserFCMToken(_userId!, fcmToken);
-      } catch (err) {
-        /// Restore data
-        state = AsyncValue.data(await _fetchUserData());
-        throw err;
-      }
-    } else {
-      log.warning('updateUserFCMToken() - _userId is not a String');
-    }
-  }
-
-  Future<void> removeUserFCMToken(String token) async {
-    if (_userId is String) {
-      state = AsyncValue.loading();
-      try {
-        await this._userService.removeUserFCMToken(_userId!, token);
-      } catch (err) {
-        /// Restore data
-        state = AsyncValue.data(await _fetchUserData());
-        throw err;
-      }
-    } else {
-      log.warning('removeUserFCMToken() - _userId is not a String');
     }
   }
 

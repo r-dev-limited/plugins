@@ -6,23 +6,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
-import 'package:rdev_riverpod_firebase/firebase_providers.dart';
 import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 import 'package:rdev_riverpod_firebase_user/data/user_repository.dart';
 import 'package:rdev_riverpod_firebase_user/domain/user_vo.dart';
-
-final fbMessagingTokenRefreshProvider = StreamProvider<String>((ref) {
-  final messagingInstance = ref.watch(fbMessagingProvider);
-
-  return messagingInstance.onTokenRefresh;
-});
-
-final currentFbMessagingTokenProvider = StateProvider<String?>((ref) {
-  final messagingInstance =
-      ref.watch(fbMessagingTokenRefreshProvider.select((value) => value));
-
-  return messagingInstance.value;
-});
 
 // Abstract class representing the state of the CurrentUserRepository
 @immutable
@@ -60,39 +46,6 @@ class CurrentUserRepository
           .call(_currentUserId)
           .select((data) => data.value?.user));
 
-      /// Monitor Future Changes
-
-      ref.listen(currentFbMessagingTokenProvider, (previous, next) {
-        if (next is String && _currentUserId is String) {
-          ref
-              .read(UserRepository.provider.call(_currentUserId).notifier)
-              .updateUserFCMToken(next);
-        }
-      });
-
-      try {
-        final settings = await ref.read(fbMessagingProvider).requestPermission(
-            alert: true,
-            badge: true,
-            provisional: true,
-            sound: true,
-            announcement: true);
-
-        this
-            .log
-            .info('User granted permission: ${settings.authorizationStatus}');
-        const vapidKey = const String.fromEnvironment('VAPID_KEY');
-        final currentToken =
-            await ref.read(fbMessagingProvider).getToken(vapidKey: vapidKey);
-
-        if (currentToken is String && _currentUserId is String) {
-          ref.read(currentFbMessagingTokenProvider.notifier).state =
-              currentToken;
-        }
-      } catch (err) {
-        /// This might fail, and we should leave it to the user to fix it.
-        this.log.warning(err);
-      }
       return CurrentUserRepositoryState(
         user: userVO,
       );
@@ -127,14 +80,6 @@ class CurrentUserRepository
   }
 
   Future<void> logout() async {
-    final lastToken = ref.read(currentFbMessagingTokenProvider);
-    if (lastToken is String) {
-      try {
-        await _userRepository.removeUserFCMToken(lastToken);
-      } catch (err) {
-        log.warning(err);
-      }
-    }
     try {
       await ref.read(AuthRepository.provider.notifier).logout();
     } catch (err) {

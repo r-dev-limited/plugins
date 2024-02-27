@@ -12,7 +12,6 @@ class UserVO extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? lastUpdatedClaims;
-  final Map<String, FCMToken>? fcmTokens;
   final bool? onboardingFinished;
   final double? userAffinity;
 
@@ -26,7 +25,6 @@ class UserVO extends Equatable {
     this.createdAt,
     this.updatedAt,
     this.lastUpdatedClaims,
-    this.fcmTokens,
     this.onboardingFinished,
     this.userAffinity,
   });
@@ -41,7 +39,6 @@ class UserVO extends Equatable {
         createdAt,
         updatedAt,
         lastUpdatedClaims,
-        fcmTokens,
         onboardingFinished,
         userAffinity,
       ];
@@ -56,7 +53,6 @@ class UserVO extends Equatable {
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? lastUpdatedClaims,
-    Map<String, FCMToken>? fcmTokens,
     bool? onboardingFinished,
     double? userAffinity,
   }) {
@@ -70,7 +66,6 @@ class UserVO extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       lastUpdatedClaims: lastUpdatedClaims ?? this.lastUpdatedClaims,
-      fcmTokens: fcmTokens ?? this.fcmTokens,
       onboardingFinished: onboardingFinished ?? this.onboardingFinished,
       userAffinity: userAffinity ?? this.userAffinity,
     );
@@ -91,7 +86,6 @@ class UserVO extends Equatable {
             ? DateTime.fromMillisecondsSinceEpoch(
                 user.lastUpdatedClaims!.toInt())
             : null,
-        fcmTokens: user.fcmTokens,
         onboardingFinished: user.onboardingFinished,
         userAffinity: user.userAffinity);
   }
@@ -110,7 +104,6 @@ class UserVO extends Equatable {
       lastUpdatedClaims: lastUpdatedClaims is DateTime
           ? lastUpdatedClaims!.millisecondsSinceEpoch.toDouble()
           : null,
-      fcmTokens: fcmTokens is Map<String, FCMToken> ? fcmTokens : null,
       onboardingFinished:
           onboardingFinished is bool ? onboardingFinished : null,
       userAffinity: userAffinity is double ? userAffinity : null,
