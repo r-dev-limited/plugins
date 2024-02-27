@@ -1,6 +1,3 @@
-// This file contains the implementation of the UserMessagingDataService class
-// which is responsible for interacting with user data in Firestore.
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

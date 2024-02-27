@@ -56,7 +56,6 @@ class UserMessagingRepositoryState extends Equatable {
       ];
 }
 
-/// The [AuthUserRepository] class extends the [AsyncNotifier] class and manages the authentication state and user data.
 class UserMessagingRepository
     extends AsyncNotifier<UserMessagingRepositoryState> {
   final log = Logger('UserMessagingRepository');
@@ -68,6 +67,8 @@ class UserMessagingRepository
     _userMessagingService = ref.watch(UserMessagingService.provider);
     _currentUserId = await ref.watch(
         AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
+
+    ///
     Map<String, FCMToken>? fcmTokens;
     if (_currentUserId is String) {
       final messagingModel =

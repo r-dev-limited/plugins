@@ -15,6 +15,7 @@ command:
       rdev_riverpod_stored_file: any
       rdev_riverpod_versioning: any
       rdev_riverpod_purchases: any
+      rdev_riverpod_messaging: any
       # 3rd party
       cloud_firestore: ^4.14.0 # https://pub.dev/packages/cloud_firestore
       cloud_functions: ^4.6.0 # https://pub.dev/packages/cloud_functionsomzomx
@@ -49,8 +50,11 @@ command:
       json_serializable: ^6.7.1
       mockito: ^5.4.4
     hooks:
-      post: dart run build_runner build
+      post: melos build
 
 scripts:
   analyze:
     exec: dart analyze .
+  build:
+    run: melos exec --depends-on=build_runner -- "dart run build_runner build -d"
+    description: Build all generated files for Dart & Flutter packages in this project.

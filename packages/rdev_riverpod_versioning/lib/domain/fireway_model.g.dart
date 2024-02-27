@@ -16,13 +16,21 @@ FirewayModel _$FirewayModelFromJson(Map<String, dynamic> json) => FirewayModel(
       executionTime: json['executionTime'] as int,
     );
 
-Map<String, dynamic> _$FirewayModelToJson(FirewayModel instance) =>
-    <String, dynamic>{
-      'uid': instance.uid,
-      'description': instance.description,
-      'version': instance.version,
-      'success': instance.success,
-      'script': instance.script,
-      'installedOn': instance.installedOn.toIso8601String(),
-      'executionTime': instance.executionTime,
-    };
+Map<String, dynamic> _$FirewayModelToJson(FirewayModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('uid', instance.uid);
+  val['description'] = instance.description;
+  val['version'] = instance.version;
+  val['success'] = instance.success;
+  val['script'] = instance.script;
+  val['installedOn'] = instance.installedOn.toIso8601String();
+  val['executionTime'] = instance.executionTime;
+  return val;
+}
