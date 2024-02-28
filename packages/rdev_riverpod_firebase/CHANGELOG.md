@@ -1,3 +1,7 @@
+## 0.3.1
+
+ - **FEAT**: update deps, fix current user again.
+
 ## 0.2.0
 
 > Note: This release has breaking changes.

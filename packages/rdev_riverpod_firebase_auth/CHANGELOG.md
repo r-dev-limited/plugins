@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - **FEAT**: update deps, fix current user again.
+
 ## 0.1.2
 
  - **FEAT**: update structure around current user providers, adding messaging in place.

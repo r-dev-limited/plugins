@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_feature_toggles` - `v0.1.2`](#rdev_feature_toggles---v012)
+ - [`rdev_riverpod_firebase` - `v0.3.1`](#rdev_riverpod_firebase---v031)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.1`](#rdev_riverpod_firebase_analytics---v021)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.3`](#rdev_riverpod_firebase_auth---v013)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.2`](#rdev_riverpod_firebase_auth_user---v062)
+ - [`rdev_riverpod_firebase_user` - `v0.4.3`](#rdev_riverpod_firebase_user---v043)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.1`](#rdev_riverpod_firebase_user_notification---v021)
+ - [`rdev_riverpod_messaging` - `v0.0.3`](#rdev_riverpod_messaging---v003)
+ - [`rdev_riverpod_purchases` - `v0.1.1`](#rdev_riverpod_purchases---v011)
+ - [`rdev_riverpod_stored_file` - `v0.2.2`](#rdev_riverpod_stored_file---v022)
+ - [`rdev_riverpod_versioning` - `v0.2.2`](#rdev_riverpod_versioning---v022)
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.2`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase` - `v0.3.1`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.2.1`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.3`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.2`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.3`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.1`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_messaging` - `v0.0.3`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_purchases` - `v0.1.1`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_stored_file` - `v0.2.2`
+
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_versioning` - `v0.2.2`
+
+ - **FEAT**: update deps, fix current user again.
+
+
 ## 2024-02-27
 
 ### Changes
