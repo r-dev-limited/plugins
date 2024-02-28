@@ -325,14 +325,7 @@ class AuthDataService {
 
   Future<IdTokenResult?> refreshCurrentUserToken({bool force = false}) async {
     try {
-      if (_auth.currentUser is User) {
-        return _auth.currentUser!.getIdTokenResult(force);
-      } else {
-        throw AuthDataServiceException(
-          message: 'No current user',
-          code: RdevCode.NotFound,
-        );
-      }
+      return _auth.currentUser?.getIdTokenResult(force);
     } catch (err) {
       if (err is AuthDataServiceException) {
         rethrow;

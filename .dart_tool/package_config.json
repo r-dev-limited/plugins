@@ -81,7 +81,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/built_value-8.9.0",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/built_value-8.9.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -177,9 +177,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/http-1.2.0",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/http-1.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "http_multi_server",
@@ -201,7 +201,7 @@
     },
     {
       "name": "js",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/js-0.7.0",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/js-0.7.1",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -237,7 +237,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/meta-1.11.0",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/meta-1.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -411,15 +411,15 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/web-0.4.2",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/web-0.5.0",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.3",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.4",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "yaml",
@@ -429,7 +429,7 @@
     },
     {
       "name": "yaml_edit",
-      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/yaml_edit-2.1.1",
+      "rootUri": "file:///Users/tomasradvansky/.pub-cache/hosted/pub.dev/yaml_edit-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -440,7 +440,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2024-02-27T09:10:23.014145Z",
+  "generated": "2024-02-27T10:53:53.566197Z",
   "generator": "pub",
-  "generatorVersion": "3.2.6"
+  "generatorVersion": "3.3.0"
 }

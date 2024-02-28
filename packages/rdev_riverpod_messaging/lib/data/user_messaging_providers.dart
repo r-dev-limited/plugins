@@ -71,9 +71,13 @@ class UserMessagingRepository
     ///
     Map<String, FCMToken>? fcmTokens;
     if (_currentUserId is String) {
-      final messagingModel =
-          await _userMessagingService.getMessaging(_currentUserId!);
-      fcmTokens = messagingModel.fcmTokens;
+      try {
+        final messagingModel =
+            await _userMessagingService.getMessaging(_currentUserId!);
+        fcmTokens = messagingModel.fcmTokens;
+      } catch (err) {
+        log.warning(err);
+      }
     }
 
     ref.listen(currentFbMessagingTokenProvider, (previous, next) async {
