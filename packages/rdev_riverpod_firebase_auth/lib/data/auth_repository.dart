@@ -45,7 +45,7 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
   @override
   FutureOr<AuthRepositoryState> build() async {
     log.info('build()');
-    _authService = ref.watch(AuthService.provider);
+    _authService = ref.read(AuthService.provider);
 
     var resultCompleter = Completer<AuthRepositoryState>();
 
