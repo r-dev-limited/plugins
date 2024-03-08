@@ -1,3 +1,7 @@
+## 0.6.2+1
+
+ - Update a dependency to the latest release.
+
 ## 0.6.2
 
  - **FEAT**: update deps, fix current user again.

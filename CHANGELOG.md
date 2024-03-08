@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-08
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase_auth` - `v0.1.4`](#rdev_riverpod_firebase_auth---v014)
+ - [`rdev_riverpod_stored_file` - `v0.2.3`](#rdev_riverpod_stored_file---v023)
+ - [`rdev_riverpod_messaging` - `v0.0.3+1`](#rdev_riverpod_messaging---v0031)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.2+1`](#rdev_riverpod_firebase_auth_user---v0621)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_messaging` - `v0.0.3+1`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.2+1`
+
+---
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.4`
+
+ - **FEAT**: storage work, async improve.
+
+#### `rdev_riverpod_stored_file` - `v0.2.3`
+
+ - **FEAT**: storage work, async improve.
+
+
 ## 2024-02-28
 
 ### Changes

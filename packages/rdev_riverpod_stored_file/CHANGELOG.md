@@ -1,3 +1,7 @@
+## 0.2.3
+
+ - **FEAT**: storage work, async improve.
+
 ## 0.2.2
 
  - **FEAT**: update deps, fix current user again.
