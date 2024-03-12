@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase` - `v0.3.2`](#rdev_riverpod_firebase---v032)
+ - [`rdev_riverpod_firebase_user` - `v0.4.3+1`](#rdev_riverpod_firebase_user---v0431)
+ - [`rdev_riverpod_stored_file` - `v0.2.3+1`](#rdev_riverpod_stored_file---v0231)
+ - [`rdev_riverpod_messaging` - `v0.0.3+2`](#rdev_riverpod_messaging---v0032)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.1+1`](#rdev_riverpod_firebase_user_notification---v0211)
+ - [`rdev_riverpod_versioning` - `v0.2.2+1`](#rdev_riverpod_versioning---v0221)
+ - [`rdev_riverpod_purchases` - `v0.1.1+1`](#rdev_riverpod_purchases---v0111)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.4+1`](#rdev_riverpod_firebase_auth---v0141)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.1+1`](#rdev_riverpod_firebase_analytics---v0211)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.2+2`](#rdev_riverpod_firebase_auth_user---v0622)
+ - [`rdev_feature_toggles` - `v0.1.2+1`](#rdev_feature_toggles---v0121)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_user` - `v0.4.3+1`
+ - `rdev_riverpod_stored_file` - `v0.2.3+1`
+ - `rdev_riverpod_messaging` - `v0.0.3+2`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.1+1`
+ - `rdev_riverpod_versioning` - `v0.2.2+1`
+ - `rdev_riverpod_purchases` - `v0.1.1+1`
+ - `rdev_riverpod_firebase_auth` - `v0.1.4+1`
+ - `rdev_riverpod_firebase_analytics` - `v0.2.1+1`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.2+2`
+ - `rdev_feature_toggles` - `v0.1.2+1`
+
+---
+
+#### `rdev_riverpod_firebase` - `v0.3.2`
+
+ - **FEAT**: remove dynamic links.
+
+
 ## 2024-03-08
 
 ### Changes
