@@ -103,4 +103,27 @@ class Utils {
     final seconds = duration.inSeconds - (minutes * 60);
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
+
+  static showAlert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    String? buttonTitle,
+  }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(buttonTitle ?? "Ok"),
+          ),
+        ],
+      ),
+    );
+  }
 }
