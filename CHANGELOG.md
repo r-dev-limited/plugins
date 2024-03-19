@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_helpers` - `v0.1.1`](#rdev_helpers---v011)
+ - [`rdev_riverpod_firebase_user` - `v0.4.3+2`](#rdev_riverpod_firebase_user---v0432)
+ - [`rdev_riverpod_stored_file` - `v0.2.3+2`](#rdev_riverpod_stored_file---v0232)
+ - [`rdev_feature_toggles` - `v0.1.2+2`](#rdev_feature_toggles---v0122)
+ - [`rdev_riverpod_messaging` - `v0.0.3+3`](#rdev_riverpod_messaging---v0033)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.1+2`](#rdev_riverpod_firebase_analytics---v0212)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.1+2`](#rdev_riverpod_firebase_user_notification---v0212)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.2+3`](#rdev_riverpod_firebase_auth_user---v0623)
+ - [`rdev_riverpod_purchases` - `v0.1.1+2`](#rdev_riverpod_purchases---v0112)
+ - [`rdev_riverpod_versioning` - `v0.2.2+2`](#rdev_riverpod_versioning---v0222)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_user` - `v0.4.3+2`
+ - `rdev_riverpod_stored_file` - `v0.2.3+2`
+ - `rdev_feature_toggles` - `v0.1.2+2`
+ - `rdev_riverpod_messaging` - `v0.0.3+3`
+ - `rdev_riverpod_firebase_analytics` - `v0.2.1+2`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.1+2`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.2+3`
+ - `rdev_riverpod_purchases` - `v0.1.1+2`
+ - `rdev_riverpod_versioning` - `v0.2.2+2`
+
+---
+
+#### `rdev_helpers` - `v0.1.1`
+
+ - **FEAT**: Add alert dialog to utils.
+
+
 ## 2024-03-13
 
 ### Changes
