@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_riverpod_versioning` - `v0.2.3`](#rdev_riverpod_versioning---v023)
+
+---
+
+#### `rdev_riverpod_versioning` - `v0.2.3`
+
+ - **FEAT**: add emulators check.
+
+
 ## 2024-03-19
 
 ### Changes
