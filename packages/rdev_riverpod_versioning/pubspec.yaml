@@ -22,6 +22,7 @@ dependencies:
   logging: ^1.2.0
   cloud_firestore: ^4.15.5
   firebase_core: ^2.25.4
+  universal_platform: any
 
 dev_dependencies:
   flutter_test:
