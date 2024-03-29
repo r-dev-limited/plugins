@@ -12,7 +12,8 @@ FirewayModel _$FirewayModelFromJson(Map<String, dynamic> json) => FirewayModel(
       version: json['version'] as String,
       success: json['success'] as bool,
       script: json['script'] as String,
-      installedOn: DateTime.parse(json['installedOn'] as String),
+      installedOn:
+          const TimestampConverter().fromJson(json['installedOn'] as Timestamp),
       executionTime: json['executionTime'] as int,
     );
 
@@ -30,7 +31,7 @@ Map<String, dynamic> _$FirewayModelToJson(FirewayModel instance) {
   val['version'] = instance.version;
   val['success'] = instance.success;
   val['script'] = instance.script;
-  val['installedOn'] = instance.installedOn.toIso8601String();
+  val['installedOn'] = const TimestampConverter().toJson(instance.installedOn);
   val['executionTime'] = instance.executionTime;
   return val;
 }

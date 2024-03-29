@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
 part 'fireway_model.g.dart';
 
 @JsonSerializable()
@@ -12,7 +14,7 @@ class FirewayModel {
   final bool success;
   @JsonKey()
   final String script;
-  @JsonKey()
+  @TimestampConverter()
   final DateTime installedOn;
   @JsonKey()
   final int executionTime;
