@@ -1,3 +1,7 @@
+## 0.6.3
+
+ - **FEAT**: add different names.
+
 ## 0.6.2+4
 
  - Update a dependency to the latest release.

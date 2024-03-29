@@ -15,6 +15,67 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_feature_toggles` - `v0.1.3`](#rdev_feature_toggles---v013)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.2`](#rdev_riverpod_firebase_analytics---v022)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.5`](#rdev_riverpod_firebase_auth---v015)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.3`](#rdev_riverpod_firebase_auth_user---v063)
+ - [`rdev_riverpod_firebase_user` - `v0.4.4`](#rdev_riverpod_firebase_user---v044)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.2`](#rdev_riverpod_firebase_user_notification---v022)
+ - [`rdev_riverpod_messaging` - `v0.0.4`](#rdev_riverpod_messaging---v004)
+ - [`rdev_riverpod_purchases` - `v0.1.2`](#rdev_riverpod_purchases---v012)
+ - [`rdev_riverpod_versioning` - `v0.2.5`](#rdev_riverpod_versioning---v025)
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.3`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.2.2`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.5`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.3`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.4`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.2`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_messaging` - `v0.0.4`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_purchases` - `v0.1.2`
+
+ - **FEAT**: add different names.
+
+#### `rdev_riverpod_versioning` - `v0.2.5`
+
+ - **FEAT**: add different names.
+
+
+## 2024-03-29
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_helpers` - `v0.1.2`](#rdev_helpers---v012)
  - [`rdev_riverpod_firebase` - `v0.3.3`](#rdev_riverpod_firebase---v033)
  - [`rdev_riverpod_versioning` - `v0.2.4`](#rdev_riverpod_versioning---v024)

@@ -1,3 +1,7 @@
+## 0.2.5
+
+ - **FEAT**: add different names.
+
 ## 0.2.4
 
  - **FEAT**: update fireway json.
