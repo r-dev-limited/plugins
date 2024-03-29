@@ -6,17 +6,24 @@ part 'fireway_model.g.dart';
 @JsonSerializable()
 class FirewayModel {
   String? uid;
+
   @JsonKey()
   final String description;
+
   @JsonKey()
   final String version;
+
   @JsonKey()
   final bool success;
+
   @JsonKey()
   final String script;
+
+  @JsonKey(name: 'installed_on')
   @TimestampConverter()
   final DateTime installedOn;
-  @JsonKey()
+
+  @JsonKey(name: 'execution_time')
   final int executionTime;
 
   FirewayModel({

@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: ^0.3.3
+  rdev_riverpod_firebase: any
   rdev_errors_logging: any
   ### 3rd party
   cloud_functions: ^4.6.5
