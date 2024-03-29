@@ -1,3 +1,7 @@
+## 0.3.3
+
+ - **FEAT**: update fireway json.
+
 ## 0.3.2
 
  - **FEAT**: remove dynamic links.

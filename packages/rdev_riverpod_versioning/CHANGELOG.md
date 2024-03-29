@@ -1,3 +1,7 @@
+## 0.2.4
+
+ - **FEAT**: update fireway json.
+
 ## 0.2.3
 
  - **FEAT**: add emulators check.

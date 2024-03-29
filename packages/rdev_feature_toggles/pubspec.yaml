@@ -1,7 +1,7 @@
 name: rdev_feature_toggles
 description: This package provides a simple way use feature togges in Firestore
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.1.2+2
+version: 0.1.2+3
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: any
+  rdev_riverpod_firebase: ^0.3.3
   rdev_errors_logging: any
-  rdev_helpers: any
+  rdev_helpers: ^0.1.2
   ### 3rd party
   cloud_firestore: ^4.15.5
   equatable: ^2.0.5
