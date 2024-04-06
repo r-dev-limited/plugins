@@ -49,10 +49,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -64,10 +65,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -79,10 +81,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -96,10 +99,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -111,10 +115,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -126,10 +131,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -149,10 +155,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -162,10 +169,11 @@ class AuthService {
       await _authDataService.logout();
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -175,10 +183,11 @@ class AuthService {
       await _authDataService.resendEmailVerification(email);
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -188,10 +197,11 @@ class AuthService {
       return await _authDataService.fetchSignInMethodsForEmail(email);
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -201,10 +211,11 @@ class AuthService {
       await _authDataService.sendPasswordResetEmail(email);
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -219,10 +230,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
@@ -233,10 +245,11 @@ class AuthService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        AuthServiceException(
+        throw AuthServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
-      throw AuthServiceException();
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
     }
   }
 
