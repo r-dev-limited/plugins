@@ -1,3 +1,7 @@
+## 0.1.6
+
+ - **FEAT**: fix auth exceptions.
+
 ## 0.1.5
 
  - **FEAT**: add different names.
