@@ -31,7 +31,7 @@ class UserMessagingService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        UserMessagingServiceException(
+        throw UserMessagingServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserMessagingServiceException();
@@ -59,7 +59,7 @@ class UserMessagingService {
       return UserMessagingVO.fromModel(userModel);
     } catch (e) {
       if (e is RdevException) {
-        UserMessagingServiceException(
+        throw UserMessagingServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserMessagingServiceException();
@@ -71,7 +71,7 @@ class UserMessagingService {
       await _userMessagingDataService.removeUserFCMToken(userId, token);
     } catch (e) {
       if (e is RdevException) {
-        UserMessagingServiceException(
+        throw UserMessagingServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserMessagingServiceException();

@@ -34,7 +34,7 @@ class UserService {
       return vo;
     } catch (e) {
       if (e is RdevException) {
-        UserServiceException(
+        throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserServiceException();
@@ -62,7 +62,7 @@ class UserService {
       return UserVO.fromUserModel(userModel);
     } catch (e) {
       if (e is RdevException) {
-        UserServiceException(
+        throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserServiceException();
@@ -75,7 +75,7 @@ class UserService {
       await _userDataService.onboardingFinished(userId, payload);
     } catch (e) {
       if (e is RdevException) {
-        UserServiceException(
+        throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
       throw UserServiceException();
