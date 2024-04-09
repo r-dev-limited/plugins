@@ -1,3 +1,7 @@
+## 0.4.5
+
+ - **FEAT**: missing throws.
+
 ## 0.4.4
 
  - **FEAT**: add different names.

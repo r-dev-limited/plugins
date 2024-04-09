@@ -1,3 +1,7 @@
+## 0.0.5
+
+ - **FEAT**: missing throws.
+
 ## 0.0.4+1
 
  - Update a dependency to the latest release.
