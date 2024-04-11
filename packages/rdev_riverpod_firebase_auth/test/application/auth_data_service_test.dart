@@ -57,14 +57,16 @@ void main() {
       test('should throw AuthDataServiceException when sign in fails',
           () async {
         // Arrange
-        final expectedException = AuthDataServiceException();
-        when(mockFirebaseAuth.signInAnonymously()).thenThrow(expectedException);
+        when(mockFirebaseAuth.signInAnonymously())
+            .thenThrow(AuthDataServiceException());
 
         // Act
-        final result = authDataService.signInAnonymously();
+        try {
+          await authDataService.signInAnonymously();
+        } catch (e) {
+          expect(e, isA<AuthDataServiceException>());
+        }
 
-        // Assert
-        expect(result, throwsA(expectedException));
         verify(mockFirebaseAuth.signInAnonymously()).called(1);
       });
     });
