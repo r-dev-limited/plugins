@@ -33,7 +33,7 @@ class UserService {
       final vo = UserVO.fromUserModel(userModel);
       return vo;
     } catch (e) {
-      if (e is RdevException) {
+      if (e is UserDataServiceException) {
         throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
@@ -61,7 +61,7 @@ class UserService {
       userModel = await _userDataService.updateUser(data: userModel);
       return UserVO.fromUserModel(userModel);
     } catch (e) {
-      if (e is RdevException) {
+      if (e is UserDataServiceException) {
         throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }
@@ -74,7 +74,19 @@ class UserService {
     try {
       await _userDataService.onboardingFinished(userId, payload);
     } catch (e) {
-      if (e is RdevException) {
+      if (e is UserDataServiceException) {
+        throw UserServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw UserServiceException();
+    }
+  }
+
+  Future<void> deleteAccount(String userId) async {
+    try {
+      await _userDataService.deleteAccount(userId);
+    } catch (e) {
+      if (e is UserDataServiceException) {
         throw UserServiceException(
             code: e.code, message: e.message, stackTrace: e.stackTrace);
       }

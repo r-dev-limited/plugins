@@ -105,6 +105,19 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
     }
   }
 
+  Future<void> deleteAccount() async {
+    if (_userId is String) {
+      state = AsyncValue.loading();
+      try {
+        await _userService.deleteAccount(_userId!);
+      } catch (err) {
+        /// Restore data
+        state = AsyncValue.data(await _fetchUserData());
+        throw err;
+      }
+    }
+  }
+
   // Provider for the CurrentUserRepository class
   static AsyncNotifierProviderFamily<UserRepository, UserRepositoryState,
           String?> provider =

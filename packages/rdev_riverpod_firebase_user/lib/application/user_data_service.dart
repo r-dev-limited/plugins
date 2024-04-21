@@ -198,6 +198,24 @@ class UserDataService {
     }
   }
 
+  Future<void> deleteAccount(
+    String userId,
+  ) async {
+    try {
+      final callable = _functions.httpsCallable('callables-deleteAccount');
+      await callable.call({"userId": userId});
+    } on FirebaseFunctionsException catch (e) {
+      // Handling FirebaseFunctionsException
+      throw UserDataServiceException(
+        message: e.message ?? '',
+        stackTrace: e.stackTrace,
+        code: RdevCode.Internal,
+      );
+    } catch (e) {
+      throw UserDataServiceException(message: e.toString());
+    }
+  }
+
   // Provider for the UserDataService class
   static Provider<UserDataService> provider = Provider<UserDataService>((ref) {
     final userService = UserDataService(

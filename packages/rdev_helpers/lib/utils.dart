@@ -110,7 +110,7 @@ class Utils {
     required String message,
     String? buttonTitle,
   }) {
-    showDialog(
+    return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(title),
