@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - **FEAT**: pin versions.
+
 ## 0.1.2
 
  - **FEAT**: update fireway json.

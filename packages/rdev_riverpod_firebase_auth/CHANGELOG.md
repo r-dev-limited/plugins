@@ -1,3 +1,7 @@
+## 0.1.7
+
+ - **FEAT**: pin versions.
+
 ## 0.1.6
 
  - **FEAT**: fix auth exceptions.

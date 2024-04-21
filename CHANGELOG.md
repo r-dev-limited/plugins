@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-04-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_feature_toggles` - `v0.1.4`](#rdev_feature_toggles---v014)
+ - [`rdev_helpers` - `v0.1.3`](#rdev_helpers---v013)
+ - [`rdev_riverpod_firebase` - `v0.3.4`](#rdev_riverpod_firebase---v034)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.3`](#rdev_riverpod_firebase_analytics---v023)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.7`](#rdev_riverpod_firebase_auth---v017)
+ - [`rdev_riverpod_firebase_user` - `v0.4.6`](#rdev_riverpod_firebase_user---v046)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.3`](#rdev_riverpod_firebase_user_notification---v023)
+ - [`rdev_riverpod_messaging` - `v0.0.6`](#rdev_riverpod_messaging---v006)
+ - [`rdev_riverpod_purchases` - `v0.1.3`](#rdev_riverpod_purchases---v013)
+ - [`rdev_riverpod_stored_file` - `v0.2.4`](#rdev_riverpod_stored_file---v024)
+ - [`rdev_riverpod_versioning` - `v0.2.6`](#rdev_riverpod_versioning---v026)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.3+3`](#rdev_riverpod_firebase_auth_user---v0633)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.3+3`
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.4`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_helpers` - `v0.1.3`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_firebase` - `v0.3.4`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.2.3`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.7`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.6`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.3`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_messaging` - `v0.0.6`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_purchases` - `v0.1.3`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_stored_file` - `v0.2.4`
+
+ - **FEAT**: pin versions.
+
+#### `rdev_riverpod_versioning` - `v0.2.6`
+
+ - **FEAT**: pin versions.
+
+
 ## 2024-04-09
 
 ### Changes

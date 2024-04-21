@@ -1,3 +1,7 @@
+## 0.2.4
+
+ - **FEAT**: pin versions.
+
 ## 0.2.3+3
 
  - Update a dependency to the latest release.

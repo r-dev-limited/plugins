@@ -1,3 +1,7 @@
+## 0.2.6
+
+ - **FEAT**: pin versions.
+
 ## 0.2.5
 
  - **FEAT**: add different names.

@@ -1,3 +1,7 @@
+## 0.4.6
+
+ - **FEAT**: pin versions.
+
 ## 0.4.5
 
  - **FEAT**: missing throws.
