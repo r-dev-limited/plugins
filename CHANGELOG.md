@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-04-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_errors_logging` - `v0.1.1`](#rdev_errors_logging---v011)
+ - [`rdev_feature_toggles` - `v0.1.5`](#rdev_feature_toggles---v015)
+ - [`rdev_riverpod_firebase` - `v0.3.5`](#rdev_riverpod_firebase---v035)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.4`](#rdev_riverpod_firebase_analytics---v024)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.8`](#rdev_riverpod_firebase_auth---v018)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.4`](#rdev_riverpod_firebase_auth_user---v064)
+ - [`rdev_riverpod_firebase_user` - `v0.4.7`](#rdev_riverpod_firebase_user---v047)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.4`](#rdev_riverpod_firebase_user_notification---v024)
+ - [`rdev_riverpod_messaging` - `v0.0.7`](#rdev_riverpod_messaging---v007)
+ - [`rdev_riverpod_purchases` - `v0.1.4`](#rdev_riverpod_purchases---v014)
+ - [`rdev_riverpod_stored_file` - `v0.2.5`](#rdev_riverpod_stored_file---v025)
+ - [`rdev_riverpod_versioning` - `v0.2.7`](#rdev_riverpod_versioning---v027)
+
+---
+
+#### `rdev_errors_logging` - `v0.1.1`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_feature_toggles` - `v0.1.5`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase` - `v0.3.5`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.2.4`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.8`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.4`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.7`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.4`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_messaging` - `v0.0.7`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_purchases` - `v0.1.4`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_stored_file` - `v0.2.5`
+
+ - **FEAT**: improving loggers.
+
+#### `rdev_riverpod_versioning` - `v0.2.7`
+
+ - **FEAT**: improving loggers.
+
+
 ## 2024-04-21
 
 ### Changes

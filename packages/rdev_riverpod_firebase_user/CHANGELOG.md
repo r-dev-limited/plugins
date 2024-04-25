@@ -1,3 +1,7 @@
+## 0.4.7
+
+ - **FEAT**: improving loggers.
+
 ## 0.4.6
 
  - **FEAT**: pin versions.

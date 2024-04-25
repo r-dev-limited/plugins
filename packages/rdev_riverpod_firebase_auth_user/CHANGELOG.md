@@ -1,3 +1,7 @@
+## 0.6.4
+
+ - **FEAT**: improving loggers.
+
 ## 0.6.3+3
 
  - Update a dependency to the latest release.
