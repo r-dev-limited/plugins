@@ -3,11 +3,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:talker/talker.dart';
 
 import '../domain/stored_file_model.dart';
+
+class StoredFileDataServiceLog extends TalkerLog {
+  StoredFileDataServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'StoredFileDataService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 class StoredFileDataServiceException extends RdevException {
   StoredFileDataServiceException({
@@ -26,12 +48,13 @@ class StoredFileDataService {
   final FirebaseFunctions _functions;
   final FirebaseStorage _storage;
 
-  final _log = Logger('StoredFileDataService');
+  final Talker _log;
 
   StoredFileDataService(
     this._db,
     this._functions,
     this._storage,
+    this._log,
   );
 
   Future<Uint8List> getFileData(String gcsPath) async {
@@ -42,14 +65,16 @@ class StoredFileDataService {
       if (res != null) {
         return res;
       }
-      _log.warning('getFileData', 'File $gcsPath was not found');
+      _log.logTyped(StoredFileDataServiceLog(
+          'getFileData', 'File $gcsPath was not found'));
 
       throw StoredFileDataServiceException(
         message: 'File $gcsPath was not found',
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.severe('getFileData', err);
+      _log.logTyped(
+          StoredFileDataServiceLog('getFileData', err, StackTrace.current));
       if (err is StoredFileDataServiceException) {
         rethrow;
       }
@@ -110,15 +135,16 @@ class StoredFileDataService {
         model.uid = snapshot.id;
         return model;
       }
-      _log.severe(
-          'getStoredFile', 'StoredFile with id:$storedFileId was not found');
+      _log.logTyped(StoredFileDataServiceLog(
+          'getStoredFile', 'StoredFile with id:$storedFileId was not found'));
 
       throw StoredFileDataServiceException(
         message: 'StoredFile $storedFileId was not found',
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.severe('getStoredFile', err);
+      _log.logTyped(
+          StoredFileDataServiceLog('getStoredFile', err, StackTrace.current));
       if (err is StoredFileDataServiceException) {
         rethrow;
       }
@@ -170,7 +196,8 @@ class StoredFileDataService {
       model.uid = storedFileRef.id;
       return model;
     } catch (err) {
-      _log.severe('createStoredFile', err);
+      _log.logTyped(StoredFileDataServiceLog(
+          'createStoredFile', err, StackTrace.current));
       throw StoredFileDataServiceException(
         message: err.toString(),
       );
@@ -187,11 +214,12 @@ class StoredFileDataService {
       if (res.data is String) {
         return res.data;
       }
-      _log.severe(
-          'getPublicVideoUrl', 'Invalid response from getPublicVideoUrl');
+      _log.logTyped(StoredFileDataServiceLog(
+          'getPublicVideoUrl', 'Invalid response from getPublicVideoUrl'));
       throw Exception('Invalid response from getPublicVideoUrl');
     } catch (err) {
-      _log.severe('getPublicVideoUrl', err);
+      _log.logTyped(StoredFileDataServiceLog(
+          'getPublicVideoUrl', err, StackTrace.current));
       throw StoredFileDataServiceException(
         message: err.toString(),
       );
@@ -205,6 +233,7 @@ class StoredFileDataService {
       ref.watch(fbFirestoreProvider),
       ref.watch(fbFunctionsProvider),
       ref.watch(fbStorageProvider),
+      ref.watch(appTalkerProvider),
     );
     return stored_fileService;
   });

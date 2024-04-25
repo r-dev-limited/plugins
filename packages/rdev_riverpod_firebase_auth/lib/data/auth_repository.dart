@@ -2,10 +2,31 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
+import 'package:talker/talker.dart';
 
 import '../application/auth_service.dart';
 import '../domain/auth_user_vo.dart';
+
+class AuthRepositoryLog extends TalkerLog {
+  AuthRepositoryLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'AuthRepository';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 @immutable
 class AuthRepositoryState extends Equatable {
@@ -35,7 +56,7 @@ class AuthRepositoryState extends Equatable {
 }
 
 class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
-  final log = Logger('AuthRepository');
+  late Talker _log;
   late AuthService _authService;
 
   ///
@@ -44,7 +65,9 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
   /// Build (Init)
   @override
   FutureOr<AuthRepositoryState> build() async {
-    log.info('build()');
+    _log = ref.watch(appTalkerProvider);
+    _log.logTyped(AuthRepositoryLog('build()'));
+
     _authService = ref.read(AuthService.provider);
 
     var resultCompleter = Completer<AuthRepositoryState>();
@@ -61,7 +84,8 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
       try {
         resultCompleter.complete(AuthRepositoryState(authUser: currentUser));
       } catch (err) {
-        log.severe('build() _fetchUserData()', err);
+        _log.logTyped(AuthRepositoryLog(
+            'build() _fetchUserData()', err, StackTrace.current));
         await _authService.logout();
         resultCompleter.complete(const AuthRepositoryState());
       }
@@ -70,7 +94,7 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     /// Stream Changes
     _authStateChangesSubscription = _authService.authStateChanges().listen(
       (user) async {
-        log.info('build authStateChanges()', user);
+        _log.logTyped(AuthRepositoryLog('build authStateChanges()', user));
         final tmpState = AuthRepositoryState(authUser: user);
         if (!resultCompleter.isCompleted) {
           resultCompleter.complete(tmpState);
@@ -84,22 +108,20 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
   }
 
   Future<void> signInAnonymously() async {
-    log.info('signInAnonymously()');
+    _log.logTyped(AuthRepositoryLog('signInAnonymously()'));
     try {
       await _authService.signInAnonymously();
     } catch (err) {
       if (err is AuthServiceException) {
-        log.severe(
-          'signInAnonymously() - failed',
-          err.message,
-        );
+        _log.logTyped(AuthRepositoryLog(
+            'signInAnonymously() - failed', err.message, StackTrace.current));
         rethrow;
       }
     }
   }
 
   Future<void> logout() async {
-    log.info('logout()');
+    _log.logTyped(AuthRepositoryLog('logout()'));
     // Set the state to loading
     state = const AsyncValue.loading();
     try {

@@ -2,11 +2,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
-import 'package:logging/logging.dart';
+
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:talker/talker.dart';
 
 import '../domain/in_app_product_model.dart';
+
+class InAppProductDataServiceLog extends TalkerLog {
+  InAppProductDataServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'InAppProductDataService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 class InAppProductDataServicexception extends RdevException {
   InAppProductDataServicexception({
@@ -27,7 +49,7 @@ class InAppProductDataService {
   final Stream<PurchasedItem?> _purchaseUpdatedStream;
   final Stream<PurchaseResult?> _purchaseErrorStream;
 
-  final _log = Logger('InAppProductDataService');
+  final Talker _log;
 
   InAppProductDataService(
     this._db,
@@ -35,6 +57,7 @@ class InAppProductDataService {
     this._inAppPurchase,
     this._purchaseUpdatedStream,
     this._purchaseErrorStream,
+    this._log,
   );
 
   /// Stream getters
@@ -92,15 +115,16 @@ class InAppProductDataService {
         model.uid = snapshot.id;
         return model;
       }
-      _log.severe(
-          'getProduct', 'InAppProduct with id:$inAppProductId was not found');
+      _log.logTyped(InAppProductDataServiceLog(
+          'getProduct', 'InAppProduct with id:$inAppProductId was not found'));
 
       throw InAppProductDataServicexception(
         message: 'InAppProduct $inAppProductId was not found',
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.severe('getProduct', err);
+      _log.logTyped(
+          InAppProductDataServiceLog('getProduct', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;
       }
@@ -144,7 +168,8 @@ class InAppProductDataService {
         );
       }
     } catch (err) {
-      _log.severe('purchaseInAppProduct', err);
+      _log.logTyped(InAppProductDataServiceLog(
+          'purchaseInAppProduct', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;
       }
@@ -191,7 +216,8 @@ class InAppProductDataService {
         }
       }
     } catch (err) {
-      _log.severe('verifyPurchase', err);
+      _log.logTyped(InAppProductDataServiceLog(
+          'verifyPurchase', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;
       }
@@ -207,11 +233,13 @@ class InAppProductDataService {
     final instance = FlutterInappPurchase.instance;
     instance.initialize();
     final stored_fileService = InAppProductDataService(
-        ref.watch(fbFirestoreProvider),
-        ref.watch(fbFunctionsProvider),
-        instance,
-        FlutterInappPurchase.purchaseUpdated,
-        FlutterInappPurchase.purchaseError);
+      ref.watch(fbFirestoreProvider),
+      ref.watch(fbFunctionsProvider),
+      instance,
+      FlutterInappPurchase.purchaseUpdated,
+      FlutterInappPurchase.purchaseError,
+      ref.watch(appTalkerProvider),
+    );
     return stored_fileService;
   });
 }

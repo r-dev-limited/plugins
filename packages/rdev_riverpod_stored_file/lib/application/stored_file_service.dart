@@ -1,14 +1,35 @@
 import 'dart:typed_data';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:mime/mime.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_stored_file/domain/stored_file_model.dart';
 import 'package:rdev_riverpod_stored_file/domain/stored_file_vo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:talker/talker.dart';
 
 import 'stored_file_data_service.dart';
 import '../domain/uploding_file_vo.dart';
+
+class StoredFileServiceLog extends TalkerLog {
+  StoredFileServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'StoredFileService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 class StoredFileServiceException extends RdevException {
   StoredFileServiceException({
@@ -24,9 +45,12 @@ class StoredFileServiceException extends RdevException {
 
 class StoredFileService {
   final StoredFileDataService _storedFileDataService;
-  final _log = Logger('StoredFileDataService');
+  final Talker _log;
 
-  StoredFileService(this._storedFileDataService);
+  StoredFileService(
+    this._storedFileDataService,
+    this._log,
+  );
 
   Future<List<StoredFileVO>> getStoredFiles({
     int limit = 50,
@@ -83,7 +107,8 @@ class StoredFileService {
         );
       }
     } catch (err) {
-      _log.severe('uploadFile', err);
+      _log.logTyped(
+          StoredFileServiceLog('uploadFile', err, StackTrace.current));
       if (err is StoredFileServiceException) {
         rethrow;
       }
@@ -96,8 +121,10 @@ class StoredFileService {
   // Provider for the StoredFileService class
   static Provider<StoredFileService> provider =
       Provider<StoredFileService>((ref) {
-    final stored_fileService =
-        StoredFileService(ref.watch(StoredFileDataService.provider));
+    final stored_fileService = StoredFileService(
+      ref.watch(StoredFileDataService.provider),
+      ref.watch(appTalkerProvider),
+    );
     return stored_fileService;
   });
 }

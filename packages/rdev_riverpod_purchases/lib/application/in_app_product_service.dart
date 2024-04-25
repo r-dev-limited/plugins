@@ -1,12 +1,34 @@
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_model.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_vo.dart';
+import 'package:talker/talker.dart';
 
-import 'in_app_product_data_service.dart.dart';
+import 'in_app_product_data_service.dart';
+
+class InAppProductServiceLog extends TalkerLog {
+  InAppProductServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'InAppProductService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 class InAppProductServiceException extends RdevException {
   InAppProductServiceException({
@@ -22,9 +44,12 @@ class InAppProductServiceException extends RdevException {
 
 class InAppProductService {
   final InAppProductDataService _InAppProductDataService;
-  final _log = Logger('InAppProductService');
+  final Talker _log;
 
-  InAppProductService(this._InAppProductDataService);
+  InAppProductService(
+    this._InAppProductDataService,
+    this._log,
+  );
 
   Future<List<InAppProductVO>> getInAppProducts({
     int limit = 50,
@@ -125,8 +150,10 @@ class InAppProductService {
   // Provider for the InAppProductService class
   static Provider<InAppProductService> provider =
       Provider<InAppProductService>((ref) {
-    final stored_fileService =
-        InAppProductService(ref.watch(InAppProductDataService.provider));
+    final stored_fileService = InAppProductService(
+      ref.watch(InAppProductDataService.provider),
+      ref.watch(appTalkerProvider),
+    );
     return stored_fileService;
   });
 }

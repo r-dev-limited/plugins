@@ -3,10 +3,31 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase_auth/application/auth_service.dart';
 import 'package:rdev_riverpod_firebase_auth/domain/auth_idtoken_result_vo.dart';
 import 'package:rdev_riverpod_firebase_user/data/user_repository.dart';
+import 'package:talker/talker.dart';
+
+class AuthTokenRepositoryLog extends TalkerLog {
+  AuthTokenRepositoryLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'AuthTokenRepository';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 @immutable
 class AuthTokenRepositoryState extends Equatable {
@@ -57,7 +78,7 @@ class AuthTokenRepositoryState extends Equatable {
 
 class AuthTokenRepository
     extends FamilyAsyncNotifier<AuthTokenRepositoryState, String?> {
-  final log = Logger('AuthRepository');
+  late Talker _log;
   late AuthService _authService;
   String? _currentUserId;
 
@@ -66,6 +87,8 @@ class AuthTokenRepository
   /// Which will hapen on actual claim change OR user switch OR user init
   @override
   FutureOr<AuthTokenRepositoryState> build(arg) async {
+    _log = ref.watch(appTalkerProvider);
+    _log.logTyped(AuthTokenRepositoryLog('build()'));
     _authService = ref.read(AuthService.provider);
     _currentUserId = arg;
 
@@ -88,7 +111,7 @@ class AuthTokenRepository
       await Future.delayed(Duration(seconds: 1));
       final tokenResult =
           await _authService.refreshCurrentUserToken(force: claims != null);
-      log.fine(tokenResult?.claims);
+      _log.logTyped(AuthTokenRepositoryLog('claims', tokenResult?.claims));
       return AuthTokenRepositoryState(
         tokenResult: tokenResult,
       );
@@ -107,7 +130,8 @@ class AuthTokenRepository
       result = AuthTokenRepositoryState(tokenResult: tokenResult);
       state = AsyncData(result);
     } catch (e) {
-      log.warning(e);
+      _log.logTyped(AuthTokenRepositoryLog(
+          'refreshCurrentUserToken', e, StackTrace.current));
       state = oldState;
     }
     return result;

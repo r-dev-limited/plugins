@@ -3,12 +3,33 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:talker/talker.dart';
 
 import '../application/user_messaging_service.dart';
 import '../domain/user_messaging_model.dart';
+
+class UserMessagingRepositoryLog extends TalkerLog {
+  UserMessagingRepositoryLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'UserMessagingRepository';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 final fbMessagingTokenRefreshProvider = StreamProvider<String>((ref) {
   final messagingInstance = ref.watch(fbMessagingProvider);
@@ -58,12 +79,14 @@ class UserMessagingRepositoryState extends Equatable {
 
 class UserMessagingRepository
     extends AsyncNotifier<UserMessagingRepositoryState> {
-  final log = Logger('UserMessagingRepository');
+  late Talker _log;
   late UserMessagingService _userMessagingService;
 
   String? _currentUserId;
   @override
   FutureOr<UserMessagingRepositoryState> build() async {
+    _log = ref.watch(appTalkerProvider);
+    _log.logTyped(UserMessagingRepositoryLog('build()'));
     _userMessagingService = ref.watch(UserMessagingService.provider);
     _currentUserId = await ref.watch(
         AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
@@ -76,7 +99,8 @@ class UserMessagingRepository
             await _userMessagingService.getMessaging(_currentUserId!);
         fcmTokens = messagingModel.fcmTokens;
       } catch (err) {
-        log.warning(err);
+        _log.logTyped(UserMessagingRepositoryLog(
+            'getMessaging', err, StackTrace.current));
       }
     }
 
@@ -147,7 +171,8 @@ class UserMessagingRepository
         throw err;
       }
     } else {
-      log.warning('updateUserFCMToken() - _currentUserId is not a String');
+      _log.logTyped(UserMessagingRepositoryLog(
+          'updateUserFCMToken() - _currentUserId is not a String'));
     }
   }
 
@@ -162,7 +187,8 @@ class UserMessagingRepository
         throw err;
       }
     } else {
-      log.warning('removeUserFCMToken() - _currentUserId is not a String');
+      _log.logTyped(UserMessagingRepositoryLog(
+          'removeUserFCMToken() - _currentUserId is not a String'));
     }
   }
 
@@ -172,7 +198,8 @@ class UserMessagingRepository
       try {
         await removeUserFCMToken(lastToken);
       } catch (err) {
-        log.warning(err);
+        _log.logTyped(UserMessagingRepositoryLog(
+            'removeUserFCMToken', err, StackTrace.current));
       }
     }
   }

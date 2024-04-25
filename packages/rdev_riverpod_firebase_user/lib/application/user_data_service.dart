@@ -4,11 +4,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:talker/talker.dart';
 
 import '../domain/user_model.dart';
+
+class UserDataServiceLog extends TalkerLog {
+  UserDataServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'UserDataService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 // Exception class for UserDataService
 class UserDataServiceException extends RdevException {
@@ -27,11 +48,12 @@ class UserDataServiceException extends RdevException {
 class UserDataService {
   final FirebaseFirestore _db;
   final FirebaseFunctions _functions;
-  final _log = Logger('UserDataService');
+  final Talker _log;
 
   UserDataService(
     this._db,
     this._functions,
+    this._log,
   );
 
   // Fetches user data based on the provided userId
@@ -75,7 +97,8 @@ class UserDataService {
 
         return user;
       } catch (err) {
-        _log.severe('streamUserChanges failed', err);
+        _log.logTyped(UserDataServiceLog(
+            'streamUserChanges failed', err, StackTrace.current));
         return null;
       }
     });
@@ -221,6 +244,7 @@ class UserDataService {
     final userService = UserDataService(
       ref.watch(fbFirestoreProvider),
       ref.watch(fbFunctionsProvider),
+      ref.watch(appTalkerProvider),
     );
     return userService;
   });

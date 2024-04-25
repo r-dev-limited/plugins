@@ -5,10 +5,31 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logging/logging.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
+import 'package:talker/talker.dart';
 
 import '../application/user_service.dart';
 import '../domain/user_vo.dart';
+
+class UserRepositoryLog extends TalkerLog {
+  UserRepositoryLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'UserRepository';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 // Abstract class representing the state of the CurrentUserRepository
 @immutable
@@ -24,7 +45,7 @@ class UserRepositoryState extends Equatable {
 
 // CurrentUserRepository class responsible for managing the current user state
 class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
-  final log = Logger('UserRepository');
+  late Talker _log;
   late UserService _userService;
 
   ///
@@ -34,7 +55,8 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
   @override
   FutureOr<UserRepositoryState> build(arg) async {
-    log.info('build()');
+    _log = ref.watch(appTalkerProvider);
+    _log.logTyped(UserRepositoryLog('build()'));
     _userId = arg;
     // Get the UserService instance from the provider
     _userService = ref.read(UserService.provider);
@@ -48,14 +70,15 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
   // Fetch user data based on the current user ID
   Future<UserRepositoryState> _fetchUserData() async {
-    log.info('_fetchUserData()');
+    _log.logTyped(UserRepositoryLog('_fetchUserData()'));
 
     if (_userId is String) {
       try {
         _lastUser = await _userService.getUser(_userId!);
         return UserRepositoryState(user: _lastUser!);
       } catch (err) {
-        log.warning('_fetchUserData() - getUser failed', err);
+        _log.logTyped(UserRepositoryLog(
+            '_fetchUserData() - getUser failed', err, StackTrace.current));
       }
     }
 

@@ -1,8 +1,28 @@
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:logging/logging.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
+import 'package:talker/talker.dart';
+
+class StorageServiceLog extends TalkerLog {
+  StorageServiceLog(
+    String message, [
+    dynamic args,
+    StackTrace? stackTrace,
+  ]) : super(
+          message,
+          exception: args,
+          stackTrace: stackTrace,
+        );
+
+  /// Your custom log title
+  @override
+  String get title => 'StorageService';
+
+  /// Your custom log color
+  @override
+  AnsiPen get pen => AnsiPen()..cyan();
+}
 
 class StorageServiceException extends RdevException {
   StorageServiceException({
@@ -19,9 +39,12 @@ class StorageServiceException extends RdevException {
 class StorageService {
   final FirebaseStorage _storage;
 
-  final log = Logger('StorageService');
+  final Talker _log;
 
-  StorageService(this._storage);
+  StorageService(
+    this._storage,
+    this._log,
+  );
 
   Future<Uint8List> getFileData(String gcsPath) async {
     try {
@@ -31,14 +54,15 @@ class StorageService {
       if (res != null) {
         return res;
       }
-      log.warning('getFileData', 'File $gcsPath was not found');
+      _log.logTyped(
+          StorageServiceLog('getFileData', 'File $gcsPath was not found'));
 
       throw StorageServiceException(
         message: 'File $gcsPath was not found',
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      log.severe('getFileData', err);
+      _log.logTyped(StorageServiceLog('getFileData', err, StackTrace.current));
       if (err is StorageServiceException) {
         rethrow;
       }

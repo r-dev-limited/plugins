@@ -1,11 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
 import 'package:rdev_riverpod_stored_file/application/storage_service.dart';
 
 final storageServiceProvider = Provider<StorageService>(
-  (ref) => StorageService(ref.watch(fbStorageProvider)),
+  (ref) => StorageService(
+    ref.watch(fbStorageProvider),
+    ref.watch(appTalkerProvider),
+  ),
 );
 
 final fileDataProvider = FutureProvider.family<Uint8List, String>(
