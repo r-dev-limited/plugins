@@ -1,3 +1,7 @@
+## 0.4.8
+
+ - **FEAT**: update deps.
+
 ## 0.4.7
 
  - **FEAT**: improving loggers.
