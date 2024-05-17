@@ -1,3 +1,7 @@
+## 0.1.2
+
+ - **FEAT**: add toString from rdev exception.
+
 ## 0.1.1
 
  - **FEAT**: improving loggers.

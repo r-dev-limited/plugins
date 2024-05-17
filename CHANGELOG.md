@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-05-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_errors_logging` - `v0.1.2`](#rdev_errors_logging---v012)
+ - [`rdev_riverpod_versioning` - `v0.2.8+1`](#rdev_riverpod_versioning---v0281)
+ - [`rdev_riverpod_stored_file` - `v0.2.6+1`](#rdev_riverpod_stored_file---v0261)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.9+1`](#rdev_riverpod_firebase_auth---v0191)
+ - [`rdev_riverpod_firebase_user` - `v0.4.8+1`](#rdev_riverpod_firebase_user---v0481)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.5+1`](#rdev_riverpod_firebase_analytics---v0251)
+ - [`rdev_riverpod_messaging` - `v0.0.8+1`](#rdev_riverpod_messaging---v0081)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.4+2`](#rdev_riverpod_firebase_auth_user---v0642)
+ - [`rdev_feature_toggles` - `v0.1.6+1`](#rdev_feature_toggles---v0161)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.5+1`](#rdev_riverpod_firebase_user_notification---v0251)
+ - [`rdev_riverpod_purchases` - `v0.1.5+1`](#rdev_riverpod_purchases---v0151)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_versioning` - `v0.2.8+1`
+ - `rdev_riverpod_stored_file` - `v0.2.6+1`
+ - `rdev_riverpod_firebase_auth` - `v0.1.9+1`
+ - `rdev_riverpod_firebase_user` - `v0.4.8+1`
+ - `rdev_riverpod_firebase_analytics` - `v0.2.5+1`
+ - `rdev_riverpod_messaging` - `v0.0.8+1`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.4+2`
+ - `rdev_feature_toggles` - `v0.1.6+1`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.5+1`
+ - `rdev_riverpod_purchases` - `v0.1.5+1`
+
+---
+
+#### `rdev_errors_logging` - `v0.1.2`
+
+ - **FEAT**: add toString from rdev exception.
+
+
 ## 2024-05-02
 
 ### Changes

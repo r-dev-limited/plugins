@@ -1,7 +1,7 @@
 name: rdev_riverpod_stored_file
 description: Manage files
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.2.6
+version: 0.2.6+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
