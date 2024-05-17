@@ -32,4 +32,9 @@ class RdevException implements Error {
 
   @override
   StackTrace? get stackTrace => _stackTrace;
+
+  @override
+  String toString() {
+    return 'RdevException: ${message ?? 'unknown error = $code'}';
+  }
 }
