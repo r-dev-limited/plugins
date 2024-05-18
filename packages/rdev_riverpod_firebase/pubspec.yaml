@@ -1,7 +1,7 @@
 name: rdev_riverpod_firebase
 description: This package provides a simple way to use Firebase with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.3.6
+version: 0.3.7
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_errors_logging: ^0.1.2
+  rdev_errors_logging: ^0.1.3
   ### 3rd party
   cloud_firestore: 4.17.2
   cloud_functions: 4.7.3

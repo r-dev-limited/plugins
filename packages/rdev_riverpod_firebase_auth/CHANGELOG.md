@@ -1,3 +1,7 @@
+## 0.1.10
+
+ - **FEAT**: add custom handling of firebase exceptions.
+
 ## 0.1.9+1
 
  - Update a dependency to the latest release.

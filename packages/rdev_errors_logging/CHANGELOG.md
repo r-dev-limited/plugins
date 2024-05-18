@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - **FEAT**: add custom handling of firebase exceptions.
+
 ## 0.1.2
 
  - **FEAT**: add toString from rdev exception.
