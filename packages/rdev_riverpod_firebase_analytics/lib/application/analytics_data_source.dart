@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 
@@ -17,6 +18,14 @@ class AnalyticsDataSourceException extends RdevException {
           message: message,
           code: code,
           stackTrace: stackTrace,
+        );
+
+  AnalyticsDataSourceException.fromRdevException(
+    RdevException rdevException,
+  ) : super(
+          message: rdevException.message,
+          code: rdevException.code,
+          stackTrace: rdevException.stackTrace,
         );
 }
 
@@ -52,6 +61,10 @@ class AnalyticsDataSource implements EventLogger {
       return await _instance.analytics.setUserId(id: userId);
     } catch (error) {
       logging.severe('setAnalyticsUserId()', error);
+      if (error is PlatformException) {
+        throw AnalyticsDataSourceException.fromRdevException(
+            error.toRdevException());
+      }
       throw AnalyticsDataSourceException();
     }
   }
@@ -68,6 +81,10 @@ class AnalyticsDataSource implements EventLogger {
           .setUserProperty(name: name, value: value);
     } catch (error) {
       logging.severe('setUserProperty()', error);
+      if (error is PlatformException) {
+        throw AnalyticsDataSourceException.fromRdevException(
+            error.toRdevException());
+      }
       throw AnalyticsDataSourceException();
     }
   }
@@ -80,6 +97,7 @@ class AnalyticsDataSource implements EventLogger {
     if (name.length > 40) {
       logging.severe(
           'Event names must be a maximum of 40 characters. name: $name');
+
       throw AnalyticsDataSourceException();
     }
 

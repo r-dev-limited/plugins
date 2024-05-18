@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
 
 /// Exception class for AuthService.
 class AuthDataServiceException extends RdevException {
@@ -17,6 +18,14 @@ class AuthDataServiceException extends RdevException {
           message: message,
           code: code,
           stackTrace: stackTrace,
+        );
+
+  AuthDataServiceException.fromRdevException(
+    RdevException rdevException,
+  ) : super(
+          message: rdevException.message,
+          code: rdevException.code,
+          stackTrace: rdevException.stackTrace,
         );
 }
 
@@ -58,11 +67,7 @@ class AuthDataService {
       return await _auth.signInAnonymously();
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-          stackTrace: err.stackTrace,
-          message: err.message,
-          code: RdevCode.Internal,
-        );
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       } else {
         throw AuthDataServiceException(
           message: err.toString(),
@@ -94,11 +99,7 @@ class AuthDataService {
       }
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-          stackTrace: err.stackTrace,
-          message: err.message,
-          code: RdevCode.Internal,
-        );
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       if (err is AuthDataServiceException) {
         rethrow;
@@ -150,10 +151,7 @@ class AuthDataService {
       }
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -174,10 +172,7 @@ class AuthDataService {
       }
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -196,10 +191,7 @@ class AuthDataService {
       }
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -218,10 +210,7 @@ class AuthDataService {
       return credential;
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -244,10 +233,7 @@ class AuthDataService {
       return credential;
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -295,10 +281,7 @@ class AuthDataService {
         if (err.code == 'null-error') {
           return [];
         }
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),
@@ -312,10 +295,7 @@ class AuthDataService {
       await _auth.sendPasswordResetEmail(email: email);
     } catch (err) {
       if (err is FirebaseAuthException) {
-        throw AuthDataServiceException(
-            message: err.message,
-            code: RdevCode.Internal,
-            stackTrace: err.stackTrace);
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
       }
       throw AuthDataServiceException(
         message: err.toString(),

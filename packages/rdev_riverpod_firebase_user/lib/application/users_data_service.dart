@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
 import 'package:rdev_riverpod_firebase_user/domain/user_model.dart';
 
 class UsersDataServiceException extends RdevException {
@@ -14,6 +15,13 @@ class UsersDataServiceException extends RdevException {
           message: message,
           code: code,
           stackTrace: stackTrace,
+        );
+  UsersDataServiceException.fromRdevException(
+    RdevException rdevException,
+  ) : super(
+          message: rdevException.message,
+          code: rdevException.code,
+          stackTrace: rdevException.stackTrace,
         );
 }
 
@@ -51,11 +59,8 @@ class UsersDataService {
       return parsed;
     } catch (err) {
       if (err is FirebaseException) {
-        throw UsersDataServiceException(
-          message: err.message,
-          code: RdevCode.Internal,
-          stackTrace: err.stackTrace,
-        );
+        throw UsersDataServiceException.fromRdevException(
+            err.toRdevException());
       }
       throw UsersDataServiceException(message: err.toString());
     }

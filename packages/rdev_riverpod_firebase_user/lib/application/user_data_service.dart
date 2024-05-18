@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
+import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
 import 'package:talker/talker.dart';
 
 import '../domain/user_model.dart';
@@ -42,6 +43,14 @@ class UserDataServiceException extends RdevException {
           code: code,
           stackTrace: stackTrace,
         );
+
+  UserDataServiceException.fromRdevException(
+    RdevException rdevException,
+  ) : super(
+          message: rdevException.message,
+          code: rdevException.code,
+          stackTrace: rdevException.stackTrace,
+        );
 }
 
 // UserDataService class for managing user data in Firestore
@@ -76,7 +85,7 @@ class UserDataService {
       }
 
       if (err is FirebaseException) {
-        throw UserDataServiceException(message: err.toString());
+        throw UserDataServiceException.fromRdevException(err.toRdevException());
       }
 
       throw UserDataServiceException(message: err.toString());
@@ -151,11 +160,7 @@ class UserDataService {
       return updatedClaims;
     } on FirebaseFunctionsException catch (e) {
       // Handle FirebaseFunctionsException
-      throw UserDataServiceException(
-        message: e.message ?? '',
-        stackTrace: e.stackTrace,
-        code: RdevCode.Internal,
-      );
+      throw UserDataServiceException.fromRdevException(e.toRdevException());
     } on Exception catch (e) {
       // Handle other exceptions
       throw UserDataServiceException(message: e.toString());
@@ -173,11 +178,7 @@ class UserDataService {
       return claims;
     } on FirebaseFunctionsException catch (e) {
       // Handling FirebaseFunctionsException
-      throw UserDataServiceException(
-        message: e.message ?? '',
-        stackTrace: e.stackTrace,
-        code: RdevCode.Internal,
-      );
+      throw UserDataServiceException.fromRdevException(e.toRdevException());
     } on Exception catch (e) {
       // Handling other exceptions
       throw UserDataServiceException(message: e.toString());
@@ -193,11 +194,7 @@ class UserDataService {
       });
     } on FirebaseFunctionsException catch (e) {
       // Handling FirebaseFunctionsException
-      throw UserDataServiceException(
-        message: e.message ?? '',
-        stackTrace: e.stackTrace,
-        code: RdevCode.Internal,
-      );
+      throw UserDataServiceException.fromRdevException(e.toRdevException());
     } catch (e) {
       throw UserDataServiceException(message: e.toString());
     }
@@ -211,11 +208,7 @@ class UserDataService {
       await callable.call(payload);
     } on FirebaseFunctionsException catch (e) {
       // Handling FirebaseFunctionsException
-      throw UserDataServiceException(
-        message: e.message ?? '',
-        stackTrace: e.stackTrace,
-        code: RdevCode.Internal,
-      );
+      throw UserDataServiceException.fromRdevException(e.toRdevException());
     } catch (e) {
       throw UserDataServiceException(message: e.toString());
     }
@@ -229,11 +222,7 @@ class UserDataService {
       await callable.call({"userId": userId});
     } on FirebaseFunctionsException catch (e) {
       // Handling FirebaseFunctionsException
-      throw UserDataServiceException(
-        message: e.message ?? '',
-        stackTrace: e.stackTrace,
-        code: RdevCode.Internal,
-      );
+      throw UserDataServiceException.fromRdevException(e.toRdevException());
     } catch (e) {
       throw UserDataServiceException(message: e.toString());
     }
