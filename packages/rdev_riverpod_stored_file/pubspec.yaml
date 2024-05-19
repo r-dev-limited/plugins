@@ -21,7 +21,7 @@ dependencies:
   json_annotation: ^4.8.1
   mime: ^1.0.4
   talker: ^4.1.3
-  hooks_riverpod: ^2.3.10
+  hooks_riverpod: ^2.5.1
 
 dev_dependencies:
   flutter_test:

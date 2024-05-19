@@ -31,11 +31,11 @@ command:
       device_info_plus: ^10.1.0
       equatable: ^2.0.5
       flutter_facebook_auth: ^6.0.2
-      flutter_hooks: ^0.18.0
+      flutter_hooks: ^0.20.5
       google_sign_in: ^6.1.4
       googleapis_auth: ^1.4.1
       googleapis: ^11.4.0
-      hooks_riverpod: ^2.3.10
+      hooks_riverpod: ^2.5.1
       json_annotation: ^4.8.1
       logging: ^1.2.0
       mime: ^1.0.4

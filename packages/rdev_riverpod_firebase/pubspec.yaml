@@ -21,9 +21,9 @@ dependencies:
   firebase_storage: 11.7.4
   firebase_messaging: 14.9.1
   flutter_facebook_auth: ^6.0.2
-  flutter_hooks: ^0.18.0
+  flutter_hooks: ^0.20.5
   google_sign_in: ^6.1.4
-  hooks_riverpod: ^2.3.10
+  hooks_riverpod: ^2.5.1
   json_annotation: ^4.8.1
 
 dev_dependencies:
