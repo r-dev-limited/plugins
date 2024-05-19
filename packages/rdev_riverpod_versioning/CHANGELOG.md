@@ -1,3 +1,7 @@
+## 0.2.9
+
+ - **FEAT**: update libs to flutter 3.22.0.
+
 ## 0.2.8+2
 
  - Update a dependency to the latest release.
