@@ -78,7 +78,9 @@ class UserVO extends Equatable {
         name: user.name,
         email: user.email,
         role: user.role,
-        createdAt: DateTime.fromMillisecondsSinceEpoch(user.createdAt.toInt()),
+        createdAt: user.createdAt is double
+            ? DateTime.fromMillisecondsSinceEpoch(user.createdAt!.toInt())
+            : null,
         updatedAt: user.updatedAt is double
             ? DateTime.fromMillisecondsSinceEpoch(user.updatedAt!.toInt())
             : null,
@@ -94,7 +96,7 @@ class UserVO extends Equatable {
     final userModel = UserModel(
       uid: uid,
       snapshot: snapshot,
-      createdAt: createdAt!.millisecondsSinceEpoch.toDouble(),
+      createdAt: createdAt?.millisecondsSinceEpoch.toDouble(),
       name: name is String ? name : null,
       email: email is String ? email : null,
       role: role is UserRole ? role : null,

@@ -53,10 +53,10 @@ class UserMessagingModel {
   DocumentSnapshot? snapshot;
 
   @JsonKey()
-  final String userId;
+  final String? userId;
 
   @JsonKey()
-  final double createdAt;
+  final double? createdAt;
 
   @JsonKey()
   final double? updatedAt;
@@ -67,8 +67,8 @@ class UserMessagingModel {
   UserMessagingModel({
     this.uid,
     this.snapshot,
-    required this.userId,
-    required this.createdAt,
+    this.userId,
+    this.createdAt,
     this.updatedAt,
     this.fcmTokens,
   });

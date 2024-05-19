@@ -11,7 +11,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       email: json['email'] as String?,
       avatarUrl: json['avatarUrl'] as String?,
       role: $enumDecodeNullable(_$UserRoleEnumMap, json['role']),
-      createdAt: (json['createdAt'] as num).toDouble(),
+      createdAt: (json['createdAt'] as num?)?.toDouble(),
       updatedAt: (json['updatedAt'] as num?)?.toDouble(),
       lastUpdatedClaims: (json['lastUpdatedClaims'] as num?)?.toDouble(),
       onboardingFinished: json['onboardingFinished'] as bool?,
@@ -31,7 +31,7 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
   writeNotNull('email', instance.email);
   writeNotNull('avatarUrl', instance.avatarUrl);
   writeNotNull('role', _$UserRoleEnumMap[instance.role]);
-  val['createdAt'] = instance.createdAt;
+  writeNotNull('createdAt', instance.createdAt);
   writeNotNull('updatedAt', instance.updatedAt);
   writeNotNull('lastUpdatedClaims', instance.lastUpdatedClaims);
   writeNotNull('onboardingFinished', instance.onboardingFinished);

@@ -93,7 +93,9 @@ class InAppProductVO extends Equatable {
     return InAppProductVO(
       uid: model.uid!,
       snapshot: model.snapshot,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(model.createdAt.toInt()),
+      createdAt: model.createdAt is double
+          ? DateTime.fromMillisecondsSinceEpoch(model.createdAt!.toInt())
+          : null,
       updatedAt: model.updatedAt is double
           ? DateTime.fromMillisecondsSinceEpoch(model.updatedAt!.toInt())
           : null,
@@ -111,7 +113,7 @@ class InAppProductVO extends Equatable {
     final model = InAppProductModel(
       uid: uid,
       snapshot: snapshot,
-      createdAt: createdAt!.millisecondsSinceEpoch.toDouble(),
+      createdAt: createdAt?.millisecondsSinceEpoch.toDouble(),
       updatedAt: updatedAt is DateTime
           ? updatedAt!.millisecondsSinceEpoch.toDouble()
           : null,

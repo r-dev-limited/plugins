@@ -38,19 +38,19 @@ class StoredFileModel {
   DocumentSnapshot? snapshot;
 
   @JsonKey()
-  final double createdAt;
+  final double? createdAt;
 
   @JsonKey()
   final double? updatedAt;
 
   @JsonKey()
-  final StoredFile_StoredFileState state;
+  final StoredFile_StoredFileState? state;
 
   @JsonKey()
-  final String ownerPath;
+  final String? ownerPath;
 
   @JsonKey()
-  final Map<String, StoredFileSubscriber> stateSubscribers;
+  final Map<String, StoredFileSubscriber>? stateSubscribers;
 
   @JsonKey()
   final String? filePath;
@@ -62,14 +62,14 @@ class StoredFileModel {
   final String? contentType;
 
   @JsonKey()
-  final Map<String, dynamic> metaData;
+  final Map<String, dynamic>? metaData;
 
   StoredFileModel({
-    required this.createdAt,
-    required this.state,
-    required this.ownerPath,
-    required this.stateSubscribers,
-    required this.metaData,
+    this.createdAt,
+    this.state,
+    this.ownerPath,
+    this.stateSubscribers,
+    this.metaData,
     this.uid,
     this.snapshot,
     this.updatedAt,

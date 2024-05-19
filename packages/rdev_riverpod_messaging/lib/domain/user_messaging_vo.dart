@@ -53,7 +53,9 @@ class UserMessagingVO extends Equatable {
       snapshot: model.snapshot,
       fcmTokens: model.fcmTokens,
       userId: model.userId,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(model.createdAt.toInt()),
+      createdAt: model.createdAt is double
+          ? DateTime.fromMillisecondsSinceEpoch(model.createdAt!.toInt())
+          : null,
       updatedAt: model.updatedAt is double
           ? DateTime.fromMillisecondsSinceEpoch(model.updatedAt!.toInt())
           : null,
@@ -64,7 +66,7 @@ class UserMessagingVO extends Equatable {
     final model = UserMessagingModel(
       uid: uid,
       snapshot: snapshot,
-      createdAt: createdAt!.millisecondsSinceEpoch.toDouble(),
+      createdAt: createdAt?.millisecondsSinceEpoch.toDouble(),
       userId: userId!,
       fcmTokens: fcmTokens,
       updatedAt: updatedAt is DateTime

@@ -37,8 +37,8 @@ const _$FCMTokenTypeEnumMap = {
 
 UserMessagingModel _$UserMessagingModelFromJson(Map<String, dynamic> json) =>
     UserMessagingModel(
-      userId: json['userId'] as String,
-      createdAt: (json['createdAt'] as num).toDouble(),
+      userId: json['userId'] as String?,
+      createdAt: (json['createdAt'] as num?)?.toDouble(),
       updatedAt: (json['updatedAt'] as num?)?.toDouble(),
       fcmTokens: (json['fcmTokens'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, FCMToken.fromJson(e as Map<String, dynamic>)),
@@ -46,10 +46,7 @@ UserMessagingModel _$UserMessagingModelFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$UserMessagingModelToJson(UserMessagingModel instance) {
-  final val = <String, dynamic>{
-    'userId': instance.userId,
-    'createdAt': instance.createdAt,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -57,6 +54,8 @@ Map<String, dynamic> _$UserMessagingModelToJson(UserMessagingModel instance) {
     }
   }
 
+  writeNotNull('userId', instance.userId);
+  writeNotNull('createdAt', instance.createdAt);
   writeNotNull('updatedAt', instance.updatedAt);
   writeNotNull(
       'fcmTokens', instance.fcmTokens?.map((k, e) => MapEntry(k, e.toJson())));

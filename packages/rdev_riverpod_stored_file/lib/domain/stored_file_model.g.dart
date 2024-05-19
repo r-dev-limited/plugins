@@ -31,14 +31,16 @@ Map<String, dynamic> _$StoredFileSubscriberToJson(
 
 StoredFileModel _$StoredFileModelFromJson(Map<String, dynamic> json) =>
     StoredFileModel(
-      createdAt: (json['createdAt'] as num).toDouble(),
-      state: $enumDecode(_$StoredFile_StoredFileStateEnumMap, json['state']),
-      ownerPath: json['ownerPath'] as String,
-      stateSubscribers: (json['stateSubscribers'] as Map<String, dynamic>).map(
+      createdAt: (json['createdAt'] as num?)?.toDouble(),
+      state: $enumDecodeNullable(
+          _$StoredFile_StoredFileStateEnumMap, json['state']),
+      ownerPath: json['ownerPath'] as String?,
+      stateSubscribers:
+          (json['stateSubscribers'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
             k, StoredFileSubscriber.fromJson(e as Map<String, dynamic>)),
       ),
-      metaData: json['metaData'] as Map<String, dynamic>,
+      metaData: json['metaData'] as Map<String, dynamic>?,
       updatedAt: (json['updatedAt'] as num?)?.toDouble(),
       filePath: json['filePath'] as String?,
       fileExtension: json['fileExtension'] as String?,
@@ -46,9 +48,7 @@ StoredFileModel _$StoredFileModelFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$StoredFileModelToJson(StoredFileModel instance) {
-  final val = <String, dynamic>{
-    'createdAt': instance.createdAt,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -56,15 +56,16 @@ Map<String, dynamic> _$StoredFileModelToJson(StoredFileModel instance) {
     }
   }
 
+  writeNotNull('createdAt', instance.createdAt);
   writeNotNull('updatedAt', instance.updatedAt);
-  val['state'] = _$StoredFile_StoredFileStateEnumMap[instance.state]!;
-  val['ownerPath'] = instance.ownerPath;
-  val['stateSubscribers'] =
-      instance.stateSubscribers.map((k, e) => MapEntry(k, e.toJson()));
+  writeNotNull('state', _$StoredFile_StoredFileStateEnumMap[instance.state]);
+  writeNotNull('ownerPath', instance.ownerPath);
+  writeNotNull('stateSubscribers',
+      instance.stateSubscribers?.map((k, e) => MapEntry(k, e.toJson())));
   writeNotNull('filePath', instance.filePath);
   writeNotNull('fileExtension', instance.fileExtension);
   writeNotNull('contentType', instance.contentType);
-  val['metaData'] = instance.metaData;
+  writeNotNull('metaData', instance.metaData);
   return val;
 }
 

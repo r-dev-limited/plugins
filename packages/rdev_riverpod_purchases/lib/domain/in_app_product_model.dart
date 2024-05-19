@@ -16,7 +16,7 @@ class InAppProductModel {
   DocumentSnapshot? snapshot;
 
   @JsonKey()
-  final double createdAt;
+  final double? createdAt;
 
   @JsonKey()
   final double? updatedAt;
@@ -45,7 +45,7 @@ class InAppProductModel {
   InAppProductModel({
     this.uid,
     this.snapshot,
-    required this.createdAt,
+    this.createdAt,
     this.updatedAt,
     required this.type,
     required this.productIdentifier,

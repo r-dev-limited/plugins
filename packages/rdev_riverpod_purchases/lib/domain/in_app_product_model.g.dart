@@ -8,7 +8,7 @@ part of 'in_app_product_model.dart';
 
 InAppProductModel _$InAppProductModelFromJson(Map<String, dynamic> json) =>
     InAppProductModel(
-      createdAt: (json['createdAt'] as num).toDouble(),
+      createdAt: (json['createdAt'] as num?)?.toDouble(),
       updatedAt: (json['updatedAt'] as num?)?.toDouble(),
       type: $enumDecode(_$InAppProductTypeEnumMap, json['type']),
       productIdentifier: json['productIdentifier'] as String?,
@@ -20,9 +20,7 @@ InAppProductModel _$InAppProductModelFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) {
-  final val = <String, dynamic>{
-    'createdAt': instance.createdAt,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -30,6 +28,7 @@ Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) {
     }
   }
 
+  writeNotNull('createdAt', instance.createdAt);
   writeNotNull('updatedAt', instance.updatedAt);
   val['type'] = _$InAppProductTypeEnumMap[instance.type]!;
   writeNotNull('productIdentifier', instance.productIdentifier);

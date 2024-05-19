@@ -27,7 +27,7 @@ class UserModel {
   final UserRole? role;
 
   @JsonKey()
-  final double createdAt;
+  final double? createdAt;
 
   @JsonKey()
   final double? updatedAt;
@@ -48,7 +48,7 @@ class UserModel {
     this.email,
     this.avatarUrl,
     this.role,
-    required this.createdAt,
+    this.createdAt,
     this.updatedAt,
     this.lastUpdatedClaims,
     this.onboardingFinished,

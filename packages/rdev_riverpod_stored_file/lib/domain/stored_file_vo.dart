@@ -10,19 +10,19 @@ class StoredFileVO extends Equatable {
 
   final DateTime? createdAt;
   final DateTime? updatedAt;
-  final StoredFile_StoredFileState state;
-  final String ownerPath;
-  final Map<String, StoredFileSubscriber> stateSubscribers;
+  final StoredFile_StoredFileState? state;
+  final String? ownerPath;
+  final Map<String, StoredFileSubscriber>? stateSubscribers;
   final String? filePath;
   final String? fileExtension;
   final String? contentType;
-  final Map<String, dynamic> metaData;
+  final Map<String, dynamic>? metaData;
 
   StoredFileVO({
-    required this.state,
-    required this.ownerPath,
-    required this.stateSubscribers,
-    required this.metaData,
+    this.state,
+    this.ownerPath,
+    this.stateSubscribers,
+    this.metaData,
     this.uid,
     this.snapshot,
     this.createdAt,
@@ -71,7 +71,9 @@ class StoredFileVO extends Equatable {
     return StoredFileVO(
       uid: model.uid!,
       snapshot: model.snapshot,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(model.createdAt.toInt()),
+      createdAt: model.createdAt is double
+          ? DateTime.fromMillisecondsSinceEpoch(model.createdAt!.toInt())
+          : null,
       updatedAt: model.updatedAt is double
           ? DateTime.fromMillisecondsSinceEpoch(model.updatedAt!.toInt())
           : null,
@@ -89,7 +91,9 @@ class StoredFileVO extends Equatable {
     final model = StoredFileModel(
       uid: uid,
       snapshot: snapshot,
-      createdAt: createdAt!.millisecondsSinceEpoch.toDouble(),
+      createdAt: createdAt is DateTime
+          ? createdAt?.millisecondsSinceEpoch.toDouble()
+          : null,
       updatedAt: updatedAt is DateTime
           ? updatedAt!.millisecondsSinceEpoch.toDouble()
           : null,
