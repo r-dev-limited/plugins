@@ -440,7 +440,10 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2024-02-27T10:53:53.566197Z",
+  "generated": "2024-05-19T00:13:28.375477Z",
   "generator": "pub",
-  "generatorVersion": "3.3.0"
+  "generatorVersion": "3.4.0",
+  "flutterRoot": "file:///Users/tomasradvansky/fvm/versions/stable",
+  "flutterVersion": "3.22.0",
+  "pubCache": "file:///Users/tomasradvansky/.pub-cache"
 }

@@ -28,7 +28,7 @@ command:
       firebase_messaging: 14.9.1 # https://pub.dev/packages/firebase_messaging
       firebase_remote_config: 4.4.4 # https://pub.dev/packages/firebase_remote_config
       collection: ^1.18.0
-      device_info_plus: ^9.0.3
+      device_info_plus: ^10.1.0
       equatable: ^2.0.5
       flutter_facebook_auth: ^6.0.2
       flutter_hooks: ^0.18.0
