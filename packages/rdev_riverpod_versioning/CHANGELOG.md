@@ -1,3 +1,7 @@
+## 0.2.10
+
+ - **FEAT**: update deps.
+
 ## 0.2.9
 
  - **FEAT**: update libs to flutter 3.22.0.

@@ -1,3 +1,7 @@
+## 0.3.8
+
+ - **FEAT**: update deps.
+
 ## 0.3.7
 
  - **FEAT**: add custom handling of firebase exceptions.
