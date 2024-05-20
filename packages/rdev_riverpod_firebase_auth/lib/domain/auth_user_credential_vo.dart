@@ -18,9 +18,9 @@ class AuthUserCredentialVO extends Equatable {
 
   @override
   List<Object?> get props => [
-        userVO,
-        credentialVO,
-        additionalUserInfo,
+        userVO.hashCode,
+        credentialVO.hashCode,
+        additionalUserInfo.hashCode,
       ];
 
   factory AuthUserCredentialVO.fromAuthUserCredential(

@@ -8,7 +8,7 @@ class FeatureToggleVO extends Equatable {
   const FeatureToggleVO({this.toggles, required this.uid, this.parent});
 
   @override
-  List<Object?> get props => [toggles, uid, parent];
+  List<Object?> get props => [toggles.hashCode, uid, parent];
 
   FeatureToggleVO copyWith({
     String? uid,

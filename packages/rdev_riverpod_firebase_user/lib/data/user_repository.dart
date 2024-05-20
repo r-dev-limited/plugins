@@ -39,7 +39,7 @@ class UserRepositoryState extends Equatable {
 
   @override
   List<Object?> get props => [
-        user,
+        user.hashCode,
       ];
 }
 
