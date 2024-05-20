@@ -1,3 +1,7 @@
+## 0.1.12
+
+ - **FEAT**: use hashcodes.
+
 ## 0.1.11
 
  - **FEAT**: update deps.

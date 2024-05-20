@@ -15,6 +15,46 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_feature_toggles` - `v0.1.8`](#rdev_feature_toggles---v018)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.12`](#rdev_riverpod_firebase_auth---v0112)
+ - [`rdev_riverpod_firebase_user` - `v0.4.11`](#rdev_riverpod_firebase_user---v0411)
+ - [`rdev_riverpod_messaging` - `v0.0.9+1`](#rdev_riverpod_messaging---v0091)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.5+1`](#rdev_riverpod_firebase_auth_user---v0651)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_messaging` - `v0.0.9+1`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.5+1`
+
+---
+
+#### `rdev_feature_toggles` - `v0.1.8`
+
+ - **FEAT**: use hashcodes.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.12`
+
+ - **FEAT**: use hashcodes.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.11`
+
+ - **FEAT**: use hashcodes.
+
+
+## 2024-05-20
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_errors_logging` - `v0.1.4`](#rdev_errors_logging---v014)
  - [`rdev_feature_toggles` - `v0.1.7`](#rdev_feature_toggles---v017)
  - [`rdev_riverpod_firebase` - `v0.3.8`](#rdev_riverpod_firebase---v038)
