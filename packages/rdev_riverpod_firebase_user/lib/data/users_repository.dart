@@ -46,19 +46,27 @@ class UsersRepository extends AsyncNotifier<UsersRepositoryState> {
   Future<UsersRepositoryState> _fetchUsers() async {
     try {
       final userVOs = await _usersService.getUsers(startAt: _lastDocument);
+      final oldUsers =
+          _lastDocument == null ? <UserVO>[] : state.value?.users ?? <UserVO>[];
+
       var isLastPage = false;
-      if (_lastDocument != null && _lastDocument!.id == userVOs.last.uid) {
+      if (_lastDocument != null &&
+          _lastDocument!.id == userVOs.lastOrNull?.uid) {
         isLastPage = true;
       }
       _lastDocument = userVOs.lastOrNull?.snapshot;
-      return UsersRepositoryState(isLastPage: isLastPage, users: userVOs);
+      oldUsers.addAll(userVOs);
+
+      /// Remove all duplicate elements based on the uid
+      final newHunts = oldUsers.toSet().toList();
+      return UsersRepositoryState(isLastPage: isLastPage, users: newHunts);
     } catch (err) {
       rethrow;
     }
   }
 
   Future<void> nextPage(bool shouldReload) async {
-    state = const AsyncValue.loading();
+    //state = const AsyncValue.loading();
     state = await AsyncValue.guard(() {
       if (shouldReload) {
         _lastDocument = null;
