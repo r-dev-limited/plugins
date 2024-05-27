@@ -1,3 +1,7 @@
+## 0.4.12
+
+ - **FEAT**: fix users pagination.
+
 ## 0.4.11
 
  - **FEAT**: use hashcodes.
