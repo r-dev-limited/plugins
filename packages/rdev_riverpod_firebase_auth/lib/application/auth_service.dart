@@ -253,6 +253,19 @@ class AuthService {
     }
   }
 
+  Future<void> deleteCurrentUser() async {
+    try {
+      await _authDataService.deleteCurrentUser();
+    } catch (e) {
+      if (e is RdevException) {
+        throw AuthServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
+    }
+  }
+
   /// Provider for the `AuthService` class.
   static Provider<AuthService> provider = Provider<AuthService>((ref) {
     final authService = AuthService(ref.watch(AuthDataService.provider));

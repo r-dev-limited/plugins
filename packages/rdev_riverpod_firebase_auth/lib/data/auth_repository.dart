@@ -120,6 +120,19 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     }
   }
 
+  Future<void> deleteCurrentUser() async {
+    _log.logTyped(AuthRepositoryLog('deleteCurrentUser()'));
+    try {
+      await _authService.deleteCurrentUser();
+    } catch (err) {
+      if (err is AuthServiceException) {
+        _log.logTyped(AuthRepositoryLog(
+            'deleteCurrentUser() - failed', err.message, StackTrace.current));
+        rethrow;
+      }
+    }
+  }
+
   Future<void> logout() async {
     _log.logTyped(AuthRepositoryLog('logout()'));
     // Set the state to loading

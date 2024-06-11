@@ -337,6 +337,26 @@ class AuthDataService {
     }
   }
 
+  Future<void> deleteCurrentUser() async {
+    try {
+      if (_auth.currentUser is User) {
+        await _auth.currentUser!.delete();
+      } else {
+        throw AuthDataServiceException(
+          message: 'No current user',
+          code: RdevCode.NotFound,
+        );
+      }
+    } catch (err) {
+      if (err is AuthDataServiceException) {
+        rethrow;
+      }
+      throw AuthDataServiceException(
+        message: err.toString(),
+      );
+    }
+  }
+
   /// Provider for the `AuthDataService` class.
   static Provider<AuthDataService> provider = Provider<AuthDataService>((ref) {
     final authService = AuthDataService(
