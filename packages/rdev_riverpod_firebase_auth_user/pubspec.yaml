@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   rdev_riverpod_firebase: any
-  rdev_riverpod_firebase_auth: ^0.1.13
+  rdev_riverpod_firebase_auth: any
   rdev_riverpod_firebase_user: any
   rdev_errors_logging: any
   rdev_helpers: any
