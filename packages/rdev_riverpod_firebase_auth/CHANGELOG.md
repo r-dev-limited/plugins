@@ -1,3 +1,7 @@
+## 0.1.13
+
+ - **FEAT**: Add account deletion.
+
 ## 0.1.12
 
  - **FEAT**: use hashcodes.

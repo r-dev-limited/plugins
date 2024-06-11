@@ -1,3 +1,7 @@
+## 0.2.12
+
+ - **FEAT**: Add account deletion.
+
 ## 0.2.10
 
  - **FEAT**: update deps.
