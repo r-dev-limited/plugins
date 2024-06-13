@@ -91,7 +91,7 @@ class AnalyticsDataSource implements EventLogger {
 
   Future<void> logEvent(
     String name, [
-    Map<String, dynamic> parameters = const {'source': 'currentScreenName'},
+    Map<String, Object> parameters = const {'source': 'currentScreenName'},
   ]) async {
     logging.info('logEvent() - name: $name, parameters: $parameters');
     if (name.length > 40) {

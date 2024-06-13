@@ -29,7 +29,7 @@ class Event {
   static const String parameterSourceKey = 'source';
 
   ///
-  final Map<String, dynamic> _parameters = {};
+  final Map<String, Object> _parameters = {};
 
   ///
   final String _name;
@@ -37,7 +37,7 @@ class Event {
   ///
   final EventLogger _eventLogger;
 
-  Event._(this._name, String source, Map<String, dynamic> optionalParameters,
+  Event._(this._name, String source, Map<String, Object> optionalParameters,
       this._eventLogger) {
     if (_name.isEmpty) {
       logging.severe('Event names may not be empty');
@@ -70,14 +70,14 @@ class Event {
   Event.source({
     required String name,
     required String source,
-    Map<String, dynamic> parameters = const {},
+    Map<String, Object> parameters = const {},
     required EventLogger logger,
   }) : this._(name.trim(), source.trim(), parameters, logger);
 
   String get name =>
       _name.substring(0, min(_name.length, eventNameMaximumLength));
 
-  Map<String, dynamic> get parameters => _parameters;
+  Map<String, Object> get parameters => _parameters;
 
   void addParameter({required String name, dynamic value}) {
     final trimmedNamed = name.trim();
@@ -93,13 +93,13 @@ class Event {
     _parameters[trimmedNamed] = value ?? parameterNullValue;
   }
 
-  void addParameters(Map<String, dynamic> parameters) {
+  void addParameters(Map<String, Object> parameters) {
     if (parameters.isNotEmpty) {
       _parameters.addAll(_sanitiseParameters(parameters));
     }
   }
 
-  Map<String, dynamic> _sanitiseParameters(Map<String, dynamic> parameters) {
+  Map<String, Object> _sanitiseParameters(Map<String, Object> parameters) {
     return parameters.map((String key, dynamic value) {
       final trimmedKey = key.trim();
       if (_name.trim().isEmpty) {

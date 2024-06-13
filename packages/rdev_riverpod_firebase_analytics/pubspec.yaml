@@ -15,14 +15,14 @@ dependencies:
   rdev_helpers: any
   ### 3rd party
   equatable: ^2.0.5
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   hooks_riverpod: ^2.5.1
   logging: ^1.2.0
-  firebase_analytics: 10.10.1
+  firebase_analytics: 11.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4
-  json_serializable: ^6.7.1
+  json_serializable: ^6.8.0
   build_runner: ^2.4.7
