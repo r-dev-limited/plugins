@@ -3,6 +3,87 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-06-13
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_errors_logging` - `v0.1.5`](#rdev_errors_logging---v015)
+ - [`rdev_feature_toggles` - `v0.1.9`](#rdev_feature_toggles---v019)
+ - [`rdev_helpers` - `v0.1.4`](#rdev_helpers---v014)
+ - [`rdev_riverpod_firebase` - `v0.3.9`](#rdev_riverpod_firebase---v039)
+ - [`rdev_riverpod_firebase_analytics` - `v0.2.8`](#rdev_riverpod_firebase_analytics---v028)
+ - [`rdev_riverpod_firebase_auth` - `v0.1.14`](#rdev_riverpod_firebase_auth---v0114)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.6`](#rdev_riverpod_firebase_auth_user---v066)
+ - [`rdev_riverpod_firebase_user` - `v0.4.13`](#rdev_riverpod_firebase_user---v0413)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.7`](#rdev_riverpod_firebase_user_notification---v027)
+ - [`rdev_riverpod_messaging` - `v0.0.10`](#rdev_riverpod_messaging---v0010)
+ - [`rdev_riverpod_purchases` - `v0.1.7`](#rdev_riverpod_purchases---v017)
+ - [`rdev_riverpod_stored_file` - `v0.2.8`](#rdev_riverpod_stored_file---v028)
+ - [`rdev_riverpod_versioning` - `v0.2.13`](#rdev_riverpod_versioning---v0213)
+
+---
+
+#### `rdev_errors_logging` - `v0.1.5`
+
+ - **FEAT**: update libs.
+
+#### `rdev_feature_toggles` - `v0.1.9`
+
+ - **FEAT**: update libs.
+
+#### `rdev_helpers` - `v0.1.4`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase` - `v0.3.9`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.2.8`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.14`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.6.6`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase_user` - `v0.4.13`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.7`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_messaging` - `v0.0.10`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_purchases` - `v0.1.7`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_stored_file` - `v0.2.8`
+
+ - **FEAT**: update libs.
+
+#### `rdev_riverpod_versioning` - `v0.2.13`
+
+ - **FEAT**: update libs.
+
+
 ## 2024-06-11
 
 ### Changes

@@ -1,7 +1,7 @@
 name: rdev_riverpod_firebase_auth
 description: This package provides a simple way to use Firebase Auth with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.1.13
+version: 0.1.14
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: any
-  rdev_errors_logging: any
+  rdev_riverpod_firebase: ^0.3.9
+  rdev_errors_logging: ^0.1.5
   ### 3rd party
   cloud_functions: 5.0.1
   equatable: ^2.0.5

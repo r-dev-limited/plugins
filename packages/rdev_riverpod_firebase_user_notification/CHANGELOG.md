@@ -1,3 +1,7 @@
+## 0.2.7
+
+ - **FEAT**: update libs.
+
 ## 0.2.6
 
  - **FEAT**: update deps.

@@ -1,7 +1,7 @@
 name: rdev_riverpod_firebase_analytics
 description: This package provides a simple way to use Firebase User with Riverpod.
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.2.7
+version: 0.2.8
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,9 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: any
-  rdev_errors_logging: any
-  rdev_helpers: any
+  rdev_riverpod_firebase: ^0.3.9
+  rdev_errors_logging: ^0.1.5
+  rdev_helpers: ^0.1.4
   ### 3rd party
   equatable: ^2.0.5
   json_annotation: ^4.9.0
