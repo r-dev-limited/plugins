@@ -1,3 +1,7 @@
+## 0.4.14
+
+ - **FEAT**: better support for loading paginated data.
+
 ## 0.4.13
 
  - **FEAT**: update libs.
