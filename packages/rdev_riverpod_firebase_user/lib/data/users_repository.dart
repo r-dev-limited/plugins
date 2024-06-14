@@ -65,14 +65,13 @@ class UsersRepository extends AsyncNotifier<UsersRepositoryState> {
     }
   }
 
-  Future<void> nextPage(bool shouldReload) async {
-    //state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() {
-      if (shouldReload) {
-        _lastDocument = null;
-      }
-      return _fetchUsers();
-    });
+  Future<UsersRepositoryState> nextPage(bool shouldReload) async {
+    if (shouldReload) {
+      _lastDocument = null;
+    }
+    final tmpState = await _fetchUsers();
+    state = AsyncValue.data(tmpState);
+    return tmpState;
   }
 
   static AsyncNotifierProvider<UsersRepository, UsersRepositoryState> provider =
