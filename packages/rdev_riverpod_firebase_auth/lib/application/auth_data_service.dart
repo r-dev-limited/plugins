@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:math';
+import 'package:crypto/crypto.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -110,6 +113,21 @@ class AuthDataService {
     }
   }
 
+  String generateNonce([int length = 32]) {
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
+        .join();
+  }
+
+  /// Returns the sha256 hash of [input] in hex notation.
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
   /// Signs in the user using Facebook authentication and returns the user credential.
   Future<UserCredential> signInWithFacebook() async {
     try {
@@ -125,15 +143,35 @@ class AuthDataService {
             await FirebaseAuth.instance.signInWithPopup(facebookProvider);
         return credential;
       } else {
+        final rawNonce = generateNonce();
+        final nonce = sha256ofString(rawNonce);
+
         // Trigger the sign-in flow
-        final LoginResult loginResult = await FacebookAuth.instance.login();
+        final LoginResult loginResult = await FacebookAuth.instance
+            .login(loginTracking: LoginTracking.limited, nonce: nonce);
         switch (loginResult.status) {
           case LoginStatus.success:
             {
-              // Create a credential from the access token
-              final OAuthCredential facebookAuthCredential =
-                  FacebookAuthProvider.credential(
-                      loginResult.accessToken!.tokenString);
+              final AuthCredential facebookAuthCredential;
+
+              switch (loginResult.accessToken!.type) {
+                case AccessTokenType.classic:
+                  final token = loginResult.accessToken! as ClassicToken;
+                  facebookAuthCredential = FacebookAuthProvider.credential(
+                    token.authenticationToken!,
+                  );
+                  break;
+                case AccessTokenType.limited:
+                  final token = loginResult.accessToken! as LimitedToken;
+                  facebookAuthCredential = OAuthCredential(
+                    providerId: 'facebook.com',
+                    signInMethod: 'oauth',
+                    idToken: token.tokenString,
+                    rawNonce: rawNonce,
+                  );
+                  break;
+              }
+
               // Once signed in, return the UserCredential
               final credential = await FirebaseAuth.instance
                   .signInWithCredential(facebookAuthCredential);
