@@ -34,6 +34,7 @@ command:
       flutter_hooks: ^0.20.5
       google_sign_in: ^6.2.1
       googleapis_auth: ^1.6.0
+      crypto: ^3.0.3
       googleapis: ^13.1.0
       hooks_riverpod: ^2.5.1
       json_annotation: ^4.9.0
