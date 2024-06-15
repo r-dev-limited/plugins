@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-06-15
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase_auth` - `v0.1.15`](#rdev_riverpod_firebase_auth---v0115)
+ - [`rdev_riverpod_messaging` - `v0.0.10+2`](#rdev_riverpod_messaging---v00102)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.6.6+2`](#rdev_riverpod_firebase_auth_user---v0662)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_messaging` - `v0.0.10+2`
+ - `rdev_riverpod_firebase_auth_user` - `v0.6.6+2`
+
+---
+
+#### `rdev_riverpod_firebase_auth` - `v0.1.15`
+
+ - **FEAT**: fix facebook login on iOS.
+
+
 ## 2024-06-14
 
 ### Changes

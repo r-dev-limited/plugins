@@ -1,3 +1,7 @@
+## 0.1.15
+
+ - **FEAT**: fix facebook login on iOS.
+
 ## 0.1.14
 
  - **FEAT**: update libs.
