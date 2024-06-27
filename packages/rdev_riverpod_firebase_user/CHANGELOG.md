@@ -1,3 +1,7 @@
+## 0.4.15
+
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+
 ## 0.4.14
 
  - **FEAT**: better support for loading paginated data.

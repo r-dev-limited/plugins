@@ -1,3 +1,7 @@
+## 0.1.16
+
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+
 ## 0.1.15
 
  - **FEAT**: fix facebook login on iOS.
