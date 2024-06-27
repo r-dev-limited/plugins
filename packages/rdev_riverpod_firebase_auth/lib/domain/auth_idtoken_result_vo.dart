@@ -18,7 +18,7 @@ class AuthIDTokenResultVO extends Equatable {
   List<Object?> get props => [
         signInProvider,
         token,
-        claims,
+        claims.hashCode,
         expirationTime,
       ];
 

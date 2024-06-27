@@ -76,7 +76,7 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     await _authStateChangesSubscription?.cancel();
 
     /// Give it a bit of time to cancel
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
 
     /// Check current user
     final currentUser = _authService.currentUser;
@@ -92,9 +92,9 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
     }
 
     /// Stream Changes
-    _authStateChangesSubscription = _authService.authStateChanges().listen(
+    _authStateChangesSubscription = _authService.authIdTokenChanges().listen(
       (user) async {
-        _log.logTyped(AuthRepositoryLog('build authStateChanges()', user));
+        _log.logTyped(AuthRepositoryLog('build authIdTokenChanges()', user));
         final tmpState = AuthRepositoryState(authUser: user);
         if (!resultCompleter.isCompleted) {
           resultCompleter.complete(tmpState);

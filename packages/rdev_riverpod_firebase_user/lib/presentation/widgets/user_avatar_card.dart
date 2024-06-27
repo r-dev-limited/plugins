@@ -6,22 +6,29 @@ import 'user_avatar.dart';
 
 class UserAvatarCard extends StatelessWidget {
   final UserVO userVO;
+  final bool isAnonymous;
   final Color? textColor;
+  final String? anonymousTitle;
+  final String? missingName;
 
   const UserAvatarCard({
     super.key,
     required this.userVO,
+    required this.isAnonymous,
     this.textColor,
+    this.anonymousTitle,
+    this.missingName,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        UserAvatar(
-          context: context,
-          userName: userVO.name ?? 'User',
-        ),
+        if (!isAnonymous)
+          UserAvatar(
+            context: context,
+            userName: userVO.name ?? '?',
+          ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(left: Insets.small),
@@ -29,20 +36,29 @@ class UserAvatarCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    userVO.name?.isNotEmpty == true
-                        ? userVO.name!
-                        : '<no name>',
-                    style: context.textTheme.titleMedium?.copyWith(
-                      color: textColor,
+                  if (isAnonymous)
+                    Text(
+                      anonymousTitle ?? 'Guest Account',
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: textColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    userVO.email ?? '',
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: textColor,
+                  if (!isAnonymous)
+                    Text(
+                      userVO.name?.isNotEmpty == true
+                          ? userVO.name!
+                          : missingName ?? '<Display Name>',
+                      style: context.textTheme.titleMedium?.copyWith(
+                        color: textColor,
+                      ),
                     ),
-                  ),
+                  if (!isAnonymous)
+                    Text(
+                      userVO.email ?? '',
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: textColor,
+                      ),
+                    ),
                 ]),
           ),
         )

@@ -36,6 +36,13 @@ class AuthService {
         .map((event) => event is User ? AuthUserVO.fromAuthUser(event) : null);
   }
 
+  /// Returns a stream of `AuthUserVO` objects representing the authenticated user.
+  Stream<AuthUserVO?> authIdTokenChanges() {
+    return _authDataService
+        .authIdTokenChanges()
+        .map((event) => event is User ? AuthUserVO.fromAuthUser(event) : null);
+  }
+
   /// Returns the currently authenticated user as an `AuthUserVO` object.
   AuthUserVO? get currentUser => _authDataService.currentUser is User
       ? AuthUserVO.fromAuthUser(_authDataService.currentUser!)

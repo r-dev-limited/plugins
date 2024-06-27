@@ -10,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
 import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// Exception class for AuthService.
 class AuthDataServiceException extends RdevException {
@@ -57,6 +58,11 @@ class AuthDataService {
     return _auth.authStateChanges();
   }
 
+  /// Returns a stream of the current user's authentication state.
+  Stream<User?> authIdTokenChanges() {
+    return _auth.idTokenChanges();
+  }
+
   /// Returns the currently authenticated user.
   User? get currentUser => _auth.currentUser;
 
@@ -82,6 +88,42 @@ class AuthDataService {
   /// Signs in the user using Google authentication and returns the user credential.
   Future<UserCredential> signInWithGoogle() async {
     try {
+      // Sign out current user if not anonymous
+      if (_auth.currentUser != null && _auth.currentUser!.isAnonymous != true) {
+        await _auth.signOut();
+      }
+
+      if (_auth.currentUser != null && _auth.currentUser!.isAnonymous == true) {
+        // Trigger the authentication flow
+        final googleUser = await _googleSignIn.signIn();
+        // Obtain the auth details from the request
+        final GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
+        if (googleAuth is GoogleSignInAuthentication &&
+            (googleAuth.accessToken is String ||
+                googleAuth.idToken is String)) {
+          // Create a new credential
+          final googleCredential = GoogleAuthProvider.credential(
+            accessToken: googleAuth.accessToken,
+            idToken: googleAuth.idToken,
+          );
+
+          final credential =
+              await _auth.currentUser!.linkWithCredential(googleCredential);
+
+          await _auth.currentUser!.reload();
+          if (_auth.currentUser!.email is String &&
+              _auth.currentUser!.email!.isNotEmpty) {
+            await resendEmailVerification(_auth.currentUser!.email!);
+          }
+          return credential;
+        } else {
+          throw AuthDataServiceException(
+            message: 'Google Sign In Failed',
+          );
+        }
+      }
+
       // Trigger the authentication flow
       final googleUser = await _googleSignIn.signIn();
       // Obtain the auth details from the request
@@ -131,6 +173,9 @@ class AuthDataService {
   /// Signs in the user using Facebook authentication and returns the user credential.
   Future<UserCredential> signInWithFacebook() async {
     try {
+      if (_auth.currentUser != null && _auth.currentUser!.isAnonymous != true) {
+        await _auth.signOut();
+      }
       if (kIsWeb) {
         // Create a new provider
         FacebookAuthProvider facebookProvider = FacebookAuthProvider();
@@ -138,9 +183,9 @@ class AuthDataService {
         facebookProvider.setCustomParameters({
           'display': 'popup',
         });
+
         // Once signed in, return the UserCredential
-        final credential =
-            await FirebaseAuth.instance.signInWithPopup(facebookProvider);
+        final credential = await _auth.signInWithPopup(facebookProvider);
         return credential;
       } else {
         final rawNonce = generateNonce();
@@ -172,9 +217,20 @@ class AuthDataService {
                   break;
               }
 
+              if (_auth.currentUser != null &&
+                  _auth.currentUser!.isAnonymous == true) {
+                final credential = _auth.currentUser!
+                    .linkWithCredential(facebookAuthCredential);
+                await _auth.currentUser!.reload();
+                if (_auth.currentUser!.email is String &&
+                    _auth.currentUser!.email!.isNotEmpty) {
+                  await resendEmailVerification(_auth.currentUser!.email!);
+                }
+                return credential;
+              }
               // Once signed in, return the UserCredential
-              final credential = await FirebaseAuth.instance
-                  .signInWithCredential(facebookAuthCredential);
+              final credential =
+                  await _auth.signInWithCredential(facebookAuthCredential);
               return credential;
             }
           case LoginStatus.cancelled:
@@ -206,6 +262,26 @@ class AuthDataService {
       if (isWeb) {
         return await _auth.signInWithPopup(appleProvider);
       } else {
+        if (_auth.currentUser != null &&
+            _auth.currentUser!.isAnonymous == true) {
+          final appleIdCredential =
+              await SignInWithApple.getAppleIDCredential(scopes: [
+            AppleIDAuthorizationScopes.email,
+            AppleIDAuthorizationScopes.fullName,
+          ]);
+          final credential = _auth.currentUser!.linkWithCredential(
+            OAuthProvider('apple.com').credential(
+              idToken: appleIdCredential.identityToken,
+              accessToken: appleIdCredential.authorizationCode,
+            ),
+          );
+          await _auth.currentUser!.reload();
+          if (_auth.currentUser!.email is String &&
+              _auth.currentUser!.email!.isNotEmpty) {
+            await resendEmailVerification(_auth.currentUser!.email!);
+          }
+          return credential;
+        }
         return await _auth.signInWithProvider(appleProvider);
       }
     } catch (err) {
@@ -263,11 +339,31 @@ class AuthDataService {
     String? displayName,
   }) async {
     try {
+      // Sign out current user if not anonymous
+      if (_auth.currentUser != null && _auth.currentUser!.isAnonymous != true) {
+        await _auth.signOut();
+      } else if (_auth.currentUser != null &&
+          _auth.currentUser!.isAnonymous == true) {
+        /// create email provider
+        final emailProvider =
+            EmailAuthProvider.credential(email: email, password: password);
+        final credential =
+            await _auth.currentUser!.linkWithCredential(emailProvider);
+        if (displayName is String && displayName.isNotEmpty) {
+          await credential.user?.updateDisplayName(displayName);
+        }
+        //This should update claims too
+        await resendEmailVerification(email);
+        await _auth.currentUser!.reload();
+        return credential;
+      }
+
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (displayName is String && displayName.isNotEmpty) {
         await credential.user?.updateDisplayName(displayName);
       }
+
       return credential;
     } catch (err) {
       if (err is FirebaseAuthException) {
