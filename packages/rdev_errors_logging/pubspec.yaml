@@ -12,10 +12,10 @@ dependencies:
     sdk: flutter
   ### 3rd party
   googleapis_auth: ^1.6.0
-  googleapis: ^13.1.0
+  googleapis: ^13.2.0
   flutter_hooks: ^0.20.5
-  hooks_riverpod: ^2.5.1
-  talker: ^4.2.4
+  hooks_riverpod: ^2.5.2
+  talker: ^4.4.1
   logging: ^1.2.0
 
 dev_dependencies:

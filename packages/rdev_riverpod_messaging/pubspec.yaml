@@ -18,11 +18,11 @@ dependencies:
   ### 3rd party
   equatable: ^2.0.5
   json_annotation: ^4.9.0
-  hooks_riverpod: ^2.5.1
-  talker: ^4.2.4
-  cloud_firestore: 5.0.1
-  cloud_functions: 5.0.1
-  firebase_messaging: 15.0.1
+  hooks_riverpod: ^2.5.2
+  talker: ^4.4.1
+  cloud_firestore: 5.4.1
+  cloud_functions: 5.1.1
+  firebase_messaging: 15.1.1
   
 
 dev_dependencies:
@@ -30,4 +30,4 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.4
   json_serializable: ^6.8.0
-  build_runner: ^2.4.7
+  build_runner: ^2.4.12

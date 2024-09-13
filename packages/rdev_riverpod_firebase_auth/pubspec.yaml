@@ -13,19 +13,19 @@ dependencies:
   rdev_riverpod_firebase: any
   rdev_errors_logging: any
   ### 3rd party
-  cloud_functions: 5.0.1
+  cloud_functions: 5.1.1
   equatable: ^2.0.5
-  firebase_auth: 5.1.0
-  flutter_facebook_auth: ^7.0.0
+  firebase_auth: 5.2.1
+  flutter_facebook_auth: ^7.1.1
   flutter_hooks: ^0.20.5
   google_sign_in: ^6.2.1
   sign_in_with_apple: ^6.1.1
-  hooks_riverpod: ^2.5.1
-  talker: ^4.2.4
-  crypto: ^3.0.3
+  hooks_riverpod: ^2.5.2
+  talker: ^4.4.1
+  crypto: ^3.0.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.4
-  build_runner: ^2.4.7
+  build_runner: ^2.4.12

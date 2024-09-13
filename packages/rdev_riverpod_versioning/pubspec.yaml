@@ -14,14 +14,14 @@ dependencies:
   rdev_errors_logging: any
   rdev_helpers: any
   ### 3rd party
-  device_info_plus: ^10.1.0
+  device_info_plus: ^10.1.2
   equatable: ^2.0.5
   json_annotation: ^4.9.0
-  package_info_plus: ^8.0.0
-  hooks_riverpod: ^2.5.1
+  package_info_plus: ^8.0.2
+  hooks_riverpod: ^2.5.2
   logging: ^1.2.0
-  cloud_firestore: 5.0.1
-  firebase_core: 3.1.0
+  cloud_firestore: 5.4.1
+  firebase_core: 3.4.1
   universal_platform: ^1.1.0
 
 dev_dependencies:
@@ -29,4 +29,4 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.4
   json_serializable: ^6.8.0
-  build_runner: ^2.4.7
+  build_runner: ^2.4.12
