@@ -1,3 +1,26 @@
+## 0.2.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+ - **FEAT**: fix facebook login on iOS.
+ - **FEAT**: update libs.
+ - **FEAT**: Add account deletion.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: fix auth exceptions.
+ - **FEAT**: add different names.
+ - **FEAT**: storage work, async improve.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **BREAKING** **FEAT**: improve async loading.
+
 ## 0.1.16
 
  - **FEAT**: Use token idChanges, add better support for anonym users.

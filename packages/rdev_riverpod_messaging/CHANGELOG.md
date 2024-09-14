@@ -1,3 +1,15 @@
+## 0.0.11
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: missing throws.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
 ## 0.0.10+3
 
  - Update a dependency to the latest release.

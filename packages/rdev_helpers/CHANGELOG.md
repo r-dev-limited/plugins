@@ -1,3 +1,13 @@
+## 0.2.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: update libs.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: Add alert dialog to utils.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.1.4
 
  - **FEAT**: update libs.

@@ -1,3 +1,19 @@
+## 0.4.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: remove dynamic links.
+ - **FEAT**: update deps, fix current user again.
+ - **BREAKING** **FIX**: BREAKING CHANGE pin older version.
+ - **BREAKING** **FIX**: BREAKING CHANGE.
+
 ## 0.3.9
 
  - **FEAT**: update libs.

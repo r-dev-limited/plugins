@@ -1,3 +1,22 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: Add account deletion.
+ - **FEAT**: update deps.
+ - **FEAT**: update libs to flutter 3.22.0.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update fireway json.
+ - **FEAT**: add emulators check.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.2.13
 
  - **FEAT**: update libs.

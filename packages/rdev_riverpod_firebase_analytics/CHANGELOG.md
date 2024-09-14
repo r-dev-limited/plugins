@@ -1,3 +1,18 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.2.8
 
  - **FEAT**: update libs.

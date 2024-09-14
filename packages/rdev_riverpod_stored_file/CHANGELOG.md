@@ -1,3 +1,18 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: storage work, async improve.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.2.8
 
  - **FEAT**: update libs.

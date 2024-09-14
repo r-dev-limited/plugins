@@ -1,3 +1,17 @@
+## 0.2.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+
 ## 0.1.7
 
  - **FEAT**: update libs.

@@ -3,6 +3,214 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-09-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rdev_errors_logging` - `v0.2.0`](#rdev_errors_logging---v020)
+ - [`rdev_feature_toggles` - `v0.2.0`](#rdev_feature_toggles---v020)
+ - [`rdev_helpers` - `v0.2.0`](#rdev_helpers---v020)
+ - [`rdev_riverpod_firebase` - `v0.4.0`](#rdev_riverpod_firebase---v040)
+ - [`rdev_riverpod_firebase_analytics` - `v0.3.0`](#rdev_riverpod_firebase_analytics---v030)
+ - [`rdev_riverpod_firebase_auth` - `v0.2.0`](#rdev_riverpod_firebase_auth---v020)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.7.0`](#rdev_riverpod_firebase_auth_user---v070)
+ - [`rdev_riverpod_firebase_user` - `v0.5.0`](#rdev_riverpod_firebase_user---v050)
+ - [`rdev_riverpod_purchases` - `v0.2.0`](#rdev_riverpod_purchases---v020)
+ - [`rdev_riverpod_stored_file` - `v0.3.0`](#rdev_riverpod_stored_file---v030)
+ - [`rdev_riverpod_versioning` - `v0.3.0`](#rdev_riverpod_versioning---v030)
+
+Packages with other changes:
+
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.8`](#rdev_riverpod_firebase_user_notification---v028)
+ - [`rdev_riverpod_messaging` - `v0.0.11`](#rdev_riverpod_messaging---v0011)
+
+---
+
+#### `rdev_errors_logging` - `v0.2.0`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: add toString from rdev exception.
+ - **FEAT**: improving loggers.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FIX**: logging service account.
+
+#### `rdev_feature_toggles` - `v0.2.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_helpers` - `v0.2.0`
+
+ - **FEAT**: update libs.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: Add alert dialog to utils.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase` - `v0.4.0`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: remove dynamic links.
+ - **FEAT**: update deps, fix current user again.
+ - **BREAKING** **FIX**: BREAKING CHANGE pin older version.
+ - **BREAKING** **FIX**: BREAKING CHANGE.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.3.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_auth` - `v0.2.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+ - **FEAT**: fix facebook login on iOS.
+ - **FEAT**: update libs.
+ - **FEAT**: Add account deletion.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: fix auth exceptions.
+ - **FEAT**: add different names.
+ - **FEAT**: storage work, async improve.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **BREAKING** **FEAT**: improve async loading.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.7.0`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FEAT**: improve async loading.
+ - **BREAKING** **FEAT**: error handling in current user.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_user` - `v0.5.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+ - **FEAT**: better support for loading paginated data.
+ - **FEAT**: update libs.
+ - **FEAT**: fix users pagination.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: missing throws.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_purchases` - `v0.2.0`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+
+#### `rdev_riverpod_stored_file` - `v0.3.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: storage work, async improve.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_versioning` - `v0.3.0`
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: update libs.
+ - **FEAT**: Add account deletion.
+ - **FEAT**: update deps.
+ - **FEAT**: update libs to flutter 3.22.0.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update fireway json.
+ - **FEAT**: add emulators check.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.8`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+
+#### `rdev_riverpod_messaging` - `v0.0.11`
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: missing throws.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+
+
 ## 2024-06-27
 
 ### Changes

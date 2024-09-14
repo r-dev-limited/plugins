@@ -1,3 +1,13 @@
+## 0.2.8
+
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+
 ## 0.2.7
 
  - **FEAT**: update libs.
