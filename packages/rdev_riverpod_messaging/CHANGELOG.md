@@ -1,3 +1,7 @@
+## 0.0.12
+
+ - **FEAT**: adding connectivity provider.
+
 ## 0.0.11
 
  - **FEAT**: update libs.

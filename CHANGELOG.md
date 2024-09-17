@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-09-17
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_errors_logging` - `v0.2.1`](#rdev_errors_logging---v021)
+ - [`rdev_feature_toggles` - `v0.2.1`](#rdev_feature_toggles---v021)
+ - [`rdev_riverpod_firebase` - `v0.4.1`](#rdev_riverpod_firebase---v041)
+ - [`rdev_riverpod_firebase_analytics` - `v0.3.1`](#rdev_riverpod_firebase_analytics---v031)
+ - [`rdev_riverpod_firebase_auth` - `v0.2.1`](#rdev_riverpod_firebase_auth---v021)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.7.1`](#rdev_riverpod_firebase_auth_user---v071)
+ - [`rdev_riverpod_firebase_user` - `v0.5.1`](#rdev_riverpod_firebase_user---v051)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.9`](#rdev_riverpod_firebase_user_notification---v029)
+ - [`rdev_riverpod_messaging` - `v0.0.12`](#rdev_riverpod_messaging---v0012)
+ - [`rdev_riverpod_purchases` - `v0.2.1`](#rdev_riverpod_purchases---v021)
+ - [`rdev_riverpod_versioning` - `v0.3.1`](#rdev_riverpod_versioning---v031)
+ - [`rdev_riverpod_stored_file` - `v0.3.0+1`](#rdev_riverpod_stored_file---v0301)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_stored_file` - `v0.3.0+1`
+
+---
+
+#### `rdev_errors_logging` - `v0.2.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_feature_toggles` - `v0.2.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase` - `v0.4.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.3.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase_auth` - `v0.2.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.7.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase_user` - `v0.5.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.9`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_messaging` - `v0.0.12`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_purchases` - `v0.2.1`
+
+ - **FEAT**: adding connectivity provider.
+
+#### `rdev_riverpod_versioning` - `v0.3.1`
+
+ - **FEAT**: adding connectivity provider.
+
+
 ## 2024-09-14
 
 ### Changes

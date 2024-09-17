@@ -1,3 +1,7 @@
+## 0.5.1
+
+ - **FEAT**: adding connectivity provider.
+
 ## 0.5.0
 
 > Note: This release has breaking changes.
