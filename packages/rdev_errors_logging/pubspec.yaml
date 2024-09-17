@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   ### 3rd party
+  connectivity_plus: ^6.0.3
   googleapis_auth: ^1.6.0
   googleapis: ^13.2.0
   flutter_hooks: ^0.20.5
