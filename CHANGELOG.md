@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-09-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_feature_toggles` - `v0.2.2`](#rdev_feature_toggles---v022)
+ - [`rdev_riverpod_firebase` - `v0.4.2`](#rdev_riverpod_firebase---v042)
+ - [`rdev_riverpod_firebase_analytics` - `v0.3.2`](#rdev_riverpod_firebase_analytics---v032)
+ - [`rdev_riverpod_firebase_auth` - `v0.2.2`](#rdev_riverpod_firebase_auth---v022)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.7.2`](#rdev_riverpod_firebase_auth_user---v072)
+ - [`rdev_riverpod_firebase_user` - `v0.5.2`](#rdev_riverpod_firebase_user---v052)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.10`](#rdev_riverpod_firebase_user_notification---v0210)
+ - [`rdev_riverpod_messaging` - `v0.0.13`](#rdev_riverpod_messaging---v0013)
+ - [`rdev_riverpod_purchases` - `v0.2.2`](#rdev_riverpod_purchases---v022)
+ - [`rdev_riverpod_stored_file` - `v0.3.1`](#rdev_riverpod_stored_file---v031)
+ - [`rdev_riverpod_versioning` - `v0.3.2`](#rdev_riverpod_versioning---v032)
+
+---
+
+#### `rdev_feature_toggles` - `v0.2.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase` - `v0.4.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.3.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase_auth` - `v0.2.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.7.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase_user` - `v0.5.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.10`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_messaging` - `v0.0.13`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_purchases` - `v0.2.2`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_stored_file` - `v0.3.1`
+
+ - **FEAT**: bump.
+
+#### `rdev_riverpod_versioning` - `v0.3.2`
+
+ - **FEAT**: bump.
+
+
 ## 2024-09-17
 
 ### Changes

@@ -1,3 +1,7 @@
+## 0.5.2
+
+ - **FEAT**: bump.
+
 ## 0.5.1
 
  - **FEAT**: adding connectivity provider.
