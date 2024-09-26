@@ -17,16 +17,16 @@ command:
       rdev_riverpod_purchases: any
       rdev_riverpod_messaging: any
       # 3rd party
-      cloud_firestore: 5.4.1 # https://pub.dev/packages/cloud_firestore
-      cloud_functions: 5.1.1 # https://pub.dev/packages/cloud_functions
-      firebase_auth: 5.2.1 # https://pub.dev/packages/firebase_auth
-      firebase_core: 3.4.1 # https://pub.dev/packages/firebase_core
-      firebase_crashlytics: 4.1.1 # https://pub.dev/packages/firebase_crashlytics
+      cloud_firestore: 5.4.2 # https://pub.dev/packages/cloud_firestore
+      cloud_functions: 5.1.2 # https://pub.dev/packages/cloud_functions
+      firebase_auth: 5.3.0 # https://pub.dev/packages/firebase_auth
+      firebase_core: 3.5.0 # https://pub.dev/packages/firebase_core
+      firebase_crashlytics: 4.1.2 # https://pub.dev/packages/firebase_crashlytics
       #firebase_dynamic_links: ^5.5.2 # https://pub.dev/packages/firebase_dynamic_links
-      firebase_storage: 12.3.0 # https://pub.dev/packages/firebase_storage
-      firebase_analytics: 11.3.1 # https://pub.dev/packages/firebase_analytics
-      firebase_messaging: 15.1.1 # https://pub.dev/packages/firebase_messaging
-      firebase_remote_config: 5.1.1 # https://pub.dev/packages/firebase_remote_config
+      firebase_storage: 12.3.1 # https://pub.dev/packages/firebase_storage
+      firebase_analytics: 11.3.2 # https://pub.dev/packages/firebase_analytics
+      firebase_messaging: 15.1.2 # https://pub.dev/packages/firebase_messaging
+      firebase_remote_config: 5.1.5 # https://pub.dev/packages/firebase_remote_config
       collection: 1.18.0
       connectivity_plus: ^6.0.3
       device_info_plus: ^10.1.2

@@ -10,16 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: ^0.4.1
-  rdev_errors_logging: ^0.2.1
+  rdev_riverpod_firebase: any
+  rdev_errors_logging: any
   rdev_helpers: any
   ### 3rd party
   equatable: ^2.0.5
   json_annotation: ^4.9.0
   hooks_riverpod: ^2.5.2
   talker: ^4.4.1
-  cloud_firestore: 5.4.1
-  cloud_functions: 5.1.1
+  cloud_firestore: 5.4.2
+  cloud_functions: 5.1.2
 
 dev_dependencies:
   flutter_test:

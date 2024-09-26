@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: ^0.4.1
-  rdev_errors_logging: ^0.2.1
+  rdev_riverpod_firebase: any
+  rdev_errors_logging: any
   ### 3rd party
-  cloud_functions: 5.1.1
+  cloud_functions: 5.1.2
   equatable: ^2.0.5
-  firebase_auth: 5.2.1
+  firebase_auth: 5.3.0
   flutter_facebook_auth: ^7.1.1
   flutter_hooks: ^0.20.5
   google_sign_in: ^6.2.1
