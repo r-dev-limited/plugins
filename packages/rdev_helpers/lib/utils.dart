@@ -126,4 +126,34 @@ class Utils {
       ),
     );
   }
+
+  static showConfirm({
+    required BuildContext context,
+    required String title,
+    required String message,
+    String? positiveButtonTitle,
+    String? negativeButtonTitle,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(negativeButtonTitle ?? "No"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: Text(positiveButtonTitle ?? "Yes"),
+          ),
+        ],
+      ),
+    );
+  }
 }
