@@ -1,3 +1,7 @@
+## 0.2.10+1
+
+ - Update a dependency to the latest release.
+
 ## 0.2.10
 
  - **FEAT**: bump.

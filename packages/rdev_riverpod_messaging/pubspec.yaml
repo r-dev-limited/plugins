@@ -1,7 +1,7 @@
 name: rdev_riverpod_messaging
 description: This package provides a simple way to use Firebase Auth updated via User
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.0.13
+version: 0.0.13+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,11 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: ^0.4.2
-  rdev_riverpod_firebase_auth: ^0.2.2
-  rdev_riverpod_firebase_user: ^0.5.2
+  rdev_riverpod_firebase: any
+  rdev_riverpod_firebase_auth: any
+  rdev_riverpod_firebase_user: ^0.5.2+1
   rdev_errors_logging: any
-  rdev_helpers: any
+  rdev_helpers: ^0.2.1
   ### 3rd party
   equatable: ^2.0.5
   json_annotation: ^4.9.0
