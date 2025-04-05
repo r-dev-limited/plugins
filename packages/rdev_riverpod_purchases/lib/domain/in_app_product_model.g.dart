@@ -19,26 +19,19 @@ InAppProductModel _$InAppProductModelFromJson(Map<String, dynamic> json) =>
       metaData: json['metaData'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('createdAt', instance.createdAt);
-  writeNotNull('updatedAt', instance.updatedAt);
-  val['type'] = _$InAppProductTypeEnumMap[instance.type]!;
-  writeNotNull('productIdentifier', instance.productIdentifier);
-  writeNotNull('referencePrice', instance.referencePrice);
-  writeNotNull('pDollars', instance.pDollars);
-  writeNotNull('name', instance.name);
-  writeNotNull('description', instance.description);
-  val['metaData'] = instance.metaData;
-  return val;
-}
+Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) =>
+    <String, dynamic>{
+      if (instance.createdAt case final value?) 'createdAt': value,
+      if (instance.updatedAt case final value?) 'updatedAt': value,
+      'type': _$InAppProductTypeEnumMap[instance.type]!,
+      if (instance.productIdentifier case final value?)
+        'productIdentifier': value,
+      if (instance.referencePrice case final value?) 'referencePrice': value,
+      if (instance.pDollars case final value?) 'pDollars': value,
+      if (instance.name case final value?) 'name': value,
+      if (instance.description case final value?) 'description': value,
+      'metaData': instance.metaData,
+    };
 
 const _$InAppProductTypeEnumMap = {
   InAppProductType.AppStore: 'AppStore',

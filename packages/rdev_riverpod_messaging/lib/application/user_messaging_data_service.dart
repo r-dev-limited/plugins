@@ -108,7 +108,7 @@ class UserMessagingDataService {
 
         return user;
       } catch (err) {
-        _log.logTyped(UserMessagingDataServiceLog(
+        _log.logCustom(UserMessagingDataServiceLog(
             'streamUserMessagingChanges failed', err, StackTrace.current));
         return null;
       }

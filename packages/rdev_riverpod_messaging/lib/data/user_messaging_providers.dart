@@ -86,7 +86,7 @@ class UserMessagingRepository
   @override
   FutureOr<UserMessagingRepositoryState> build() async {
     _log = ref.watch(appTalkerProvider);
-    _log.logTyped(UserMessagingRepositoryLog('build()'));
+    _log.logCustom(UserMessagingRepositoryLog('build()'));
     _userMessagingService = ref.watch(UserMessagingService.provider);
     _currentUserId = await ref.watch(
         AuthRepository.provider.selectAsync((data) => data.authUser?.uid));
@@ -99,7 +99,7 @@ class UserMessagingRepository
             await _userMessagingService.getMessaging(_currentUserId!);
         fcmTokens = messagingModel.fcmTokens;
       } catch (err) {
-        _log.logTyped(UserMessagingRepositoryLog(
+        _log.logCustom(UserMessagingRepositoryLog(
             'getMessaging', err, StackTrace.current));
       }
     }
@@ -171,7 +171,7 @@ class UserMessagingRepository
         throw err;
       }
     } else {
-      _log.logTyped(UserMessagingRepositoryLog(
+      _log.logCustom(UserMessagingRepositoryLog(
           'updateUserFCMToken() - _currentUserId is not a String'));
     }
   }
@@ -187,7 +187,7 @@ class UserMessagingRepository
         throw err;
       }
     } else {
-      _log.logTyped(UserMessagingRepositoryLog(
+      _log.logCustom(UserMessagingRepositoryLog(
           'removeUserFCMToken() - _currentUserId is not a String'));
     }
   }
@@ -198,7 +198,7 @@ class UserMessagingRepository
       try {
         await removeUserFCMToken(lastToken);
       } catch (err) {
-        _log.logTyped(UserMessagingRepositoryLog(
+        _log.logCustom(UserMessagingRepositoryLog(
             'removeUserFCMToken', err, StackTrace.current));
       }
     }

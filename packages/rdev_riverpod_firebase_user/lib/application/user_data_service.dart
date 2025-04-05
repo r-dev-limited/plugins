@@ -106,7 +106,7 @@ class UserDataService {
 
         return user;
       } catch (err) {
-        _log.logTyped(UserDataServiceLog(
+        _log.logCustom(UserDataServiceLog(
             'streamUserChanges failed', err, StackTrace.current));
         return null;
       }

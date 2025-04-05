@@ -54,7 +54,7 @@ class StorageService {
       if (res != null) {
         return res;
       }
-      _log.logTyped(
+      _log.logCustom(
           StorageServiceLog('getFileData', 'File $gcsPath was not found'));
 
       throw StorageServiceException(
@@ -62,7 +62,7 @@ class StorageService {
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.logTyped(StorageServiceLog('getFileData', err, StackTrace.current));
+      _log.logCustom(StorageServiceLog('getFileData', err, StackTrace.current));
       if (err is StorageServiceException) {
         rethrow;
       }

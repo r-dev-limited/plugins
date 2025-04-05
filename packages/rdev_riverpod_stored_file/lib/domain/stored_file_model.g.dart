@@ -14,20 +14,11 @@ StoredFileSubscriber _$StoredFileSubscriberFromJson(
     );
 
 Map<String, dynamic> _$StoredFileSubscriberToJson(
-    StoredFileSubscriber instance) {
-  final val = <String, dynamic>{
-    'ownerPath': instance.ownerPath,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('fieldPath', instance.fieldPath);
-  return val;
-}
+        StoredFileSubscriber instance) =>
+    <String, dynamic>{
+      'ownerPath': instance.ownerPath,
+      if (instance.fieldPath case final value?) 'fieldPath': value,
+    };
 
 StoredFileModel _$StoredFileModelFromJson(Map<String, dynamic> json) =>
     StoredFileModel(
@@ -47,27 +38,21 @@ StoredFileModel _$StoredFileModelFromJson(Map<String, dynamic> json) =>
       contentType: json['contentType'] as String?,
     );
 
-Map<String, dynamic> _$StoredFileModelToJson(StoredFileModel instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('createdAt', instance.createdAt);
-  writeNotNull('updatedAt', instance.updatedAt);
-  writeNotNull('state', _$StoredFile_StoredFileStateEnumMap[instance.state]);
-  writeNotNull('ownerPath', instance.ownerPath);
-  writeNotNull('stateSubscribers',
-      instance.stateSubscribers?.map((k, e) => MapEntry(k, e.toJson())));
-  writeNotNull('filePath', instance.filePath);
-  writeNotNull('fileExtension', instance.fileExtension);
-  writeNotNull('contentType', instance.contentType);
-  writeNotNull('metaData', instance.metaData);
-  return val;
-}
+Map<String, dynamic> _$StoredFileModelToJson(StoredFileModel instance) =>
+    <String, dynamic>{
+      if (instance.createdAt case final value?) 'createdAt': value,
+      if (instance.updatedAt case final value?) 'updatedAt': value,
+      if (_$StoredFile_StoredFileStateEnumMap[instance.state] case final value?)
+        'state': value,
+      if (instance.ownerPath case final value?) 'ownerPath': value,
+      if (instance.stateSubscribers?.map((k, e) => MapEntry(k, e.toJson()))
+          case final value?)
+        'stateSubscribers': value,
+      if (instance.filePath case final value?) 'filePath': value,
+      if (instance.fileExtension case final value?) 'fileExtension': value,
+      if (instance.contentType case final value?) 'contentType': value,
+      if (instance.metaData case final value?) 'metaData': value,
+    };
 
 const _$StoredFile_StoredFileStateEnumMap = {
   StoredFile_StoredFileState.Uploading: 'Uploading',

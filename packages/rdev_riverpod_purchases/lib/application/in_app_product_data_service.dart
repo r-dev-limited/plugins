@@ -115,7 +115,7 @@ class InAppProductDataService {
         model.uid = snapshot.id;
         return model;
       }
-      _log.logTyped(InAppProductDataServiceLog(
+      _log.logCustom(InAppProductDataServiceLog(
           'getProduct', 'InAppProduct with id:$inAppProductId was not found'));
 
       throw InAppProductDataServicexception(
@@ -123,7 +123,7 @@ class InAppProductDataService {
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.logTyped(
+      _log.logCustom(
           InAppProductDataServiceLog('getProduct', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;
@@ -168,7 +168,7 @@ class InAppProductDataService {
         );
       }
     } catch (err) {
-      _log.logTyped(InAppProductDataServiceLog(
+      _log.logCustom(InAppProductDataServiceLog(
           'purchaseInAppProduct', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;
@@ -216,7 +216,7 @@ class InAppProductDataService {
         }
       }
     } catch (err) {
-      _log.logTyped(InAppProductDataServiceLog(
+      _log.logCustom(InAppProductDataServiceLog(
           'verifyPurchase', err, StackTrace.current));
       if (err is InAppProductDataServicexception) {
         rethrow;

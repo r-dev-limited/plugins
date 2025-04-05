@@ -18,26 +18,19 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       userAffinity: (json['userAffinity'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('name', instance.name);
-  writeNotNull('email', instance.email);
-  writeNotNull('avatarUrl', instance.avatarUrl);
-  writeNotNull('role', _$UserRoleEnumMap[instance.role]);
-  writeNotNull('createdAt', instance.createdAt);
-  writeNotNull('updatedAt', instance.updatedAt);
-  writeNotNull('lastUpdatedClaims', instance.lastUpdatedClaims);
-  writeNotNull('onboardingFinished', instance.onboardingFinished);
-  writeNotNull('userAffinity', instance.userAffinity);
-  return val;
-}
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      if (instance.name case final value?) 'name': value,
+      if (instance.email case final value?) 'email': value,
+      if (instance.avatarUrl case final value?) 'avatarUrl': value,
+      if (_$UserRoleEnumMap[instance.role] case final value?) 'role': value,
+      if (instance.createdAt case final value?) 'createdAt': value,
+      if (instance.updatedAt case final value?) 'updatedAt': value,
+      if (instance.lastUpdatedClaims case final value?)
+        'lastUpdatedClaims': value,
+      if (instance.onboardingFinished case final value?)
+        'onboardingFinished': value,
+      if (instance.userAffinity case final value?) 'userAffinity': value,
+    };
 
 const _$UserRoleEnumMap = {
   UserRole.Admin: 'Admin',

@@ -14,15 +14,15 @@ dependencies:
   rdev_errors_logging: any
   rdev_helpers: any
   ### 3rd party
-  cloud_firestore: 5.4.2
-  equatable: ^2.0.5
+  cloud_firestore: 5.6.6
+  equatable: ^2.0.7
   json_annotation: ^4.9.0
-  hooks_riverpod: ^2.5.2
-  logging: ^1.2.0
+  hooks_riverpod: ^2.6.1
+  logging: ^1.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.4
-  json_serializable: ^6.8.0
-  build_runner: ^2.4.12
+  mockito: ^5.4.5
+  json_serializable: ^6.9.4
+  build_runner: ^2.4.15

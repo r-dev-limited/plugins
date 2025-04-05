@@ -88,7 +88,7 @@ class AuthTokenRepository
   @override
   FutureOr<AuthTokenRepositoryState> build(arg) async {
     _log = ref.watch(appTalkerProvider);
-    _log.logTyped(AuthTokenRepositoryLog('build()'));
+    _log.logCustom(AuthTokenRepositoryLog('build()'));
     _authService = ref.read(AuthService.provider);
     _currentUserId = arg;
 
@@ -111,7 +111,7 @@ class AuthTokenRepository
       await Future.delayed(Duration(seconds: 1));
       final tokenResult =
           await _authService.refreshCurrentUserToken(force: claims != null);
-      _log.logTyped(AuthTokenRepositoryLog('claims', tokenResult?.claims));
+      _log.logCustom(AuthTokenRepositoryLog('claims', tokenResult?.claims));
       return AuthTokenRepositoryState(
         tokenResult: tokenResult,
       );
@@ -130,7 +130,7 @@ class AuthTokenRepository
       result = AuthTokenRepositoryState(tokenResult: tokenResult);
       state = AsyncData(result);
     } catch (e) {
-      _log.logTyped(AuthTokenRepositoryLog(
+      _log.logCustom(AuthTokenRepositoryLog(
           'refreshCurrentUserToken', e, StackTrace.current));
       state = oldState;
     }

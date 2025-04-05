@@ -65,7 +65,7 @@ class StoredFileDataService {
       if (res != null) {
         return res;
       }
-      _log.logTyped(StoredFileDataServiceLog(
+      _log.logCustom(StoredFileDataServiceLog(
           'getFileData', 'File $gcsPath was not found'));
 
       throw StoredFileDataServiceException(
@@ -73,7 +73,7 @@ class StoredFileDataService {
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.logTyped(
+      _log.logCustom(
           StoredFileDataServiceLog('getFileData', err, StackTrace.current));
       if (err is StoredFileDataServiceException) {
         rethrow;
@@ -135,7 +135,7 @@ class StoredFileDataService {
         model.uid = snapshot.id;
         return model;
       }
-      _log.logTyped(StoredFileDataServiceLog(
+      _log.logCustom(StoredFileDataServiceLog(
           'getStoredFile', 'StoredFile with id:$storedFileId was not found'));
 
       throw StoredFileDataServiceException(
@@ -143,7 +143,7 @@ class StoredFileDataService {
         code: RdevCode.NotFound,
       );
     } catch (err) {
-      _log.logTyped(
+      _log.logCustom(
           StoredFileDataServiceLog('getStoredFile', err, StackTrace.current));
       if (err is StoredFileDataServiceException) {
         rethrow;
@@ -196,7 +196,7 @@ class StoredFileDataService {
       model.uid = storedFileRef.id;
       return model;
     } catch (err) {
-      _log.logTyped(StoredFileDataServiceLog(
+      _log.logCustom(StoredFileDataServiceLog(
           'createStoredFile', err, StackTrace.current));
       throw StoredFileDataServiceException(
         message: err.toString(),
@@ -214,11 +214,11 @@ class StoredFileDataService {
       if (res.data is String) {
         return res.data;
       }
-      _log.logTyped(StoredFileDataServiceLog(
+      _log.logCustom(StoredFileDataServiceLog(
           'getPublicVideoUrl', 'Invalid response from getPublicVideoUrl'));
       throw Exception('Invalid response from getPublicVideoUrl');
     } catch (err) {
-      _log.logTyped(StoredFileDataServiceLog(
+      _log.logCustom(StoredFileDataServiceLog(
           'getPublicVideoUrl', err, StackTrace.current));
       throw StoredFileDataServiceException(
         message: err.toString(),

@@ -107,7 +107,7 @@ class StoredFileService {
         );
       }
     } catch (err) {
-      _log.logTyped(
+      _log.logCustom(
           StoredFileServiceLog('uploadFile', err, StackTrace.current));
       if (err is StoredFileServiceException) {
         rethrow;

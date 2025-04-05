@@ -4,6 +4,6 @@ environment:
   sdk: ">=2.18.0 <4.0.0"
 
 dev_dependencies:
-  melos: ^3.4.0
-  build_runner: ^2.4.7
-  json_serializable: ^6.7.1
+  melos: ^6.3.2
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.4

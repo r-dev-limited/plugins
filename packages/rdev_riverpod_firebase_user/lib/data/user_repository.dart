@@ -56,7 +56,7 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
   @override
   FutureOr<UserRepositoryState> build(arg) async {
     _log = ref.watch(appTalkerProvider);
-    _log.logTyped(UserRepositoryLog('build()'));
+    _log.logCustom(UserRepositoryLog('build()'));
     _userId = arg;
     // Get the UserService instance from the provider
     _userService = ref.read(UserService.provider);
@@ -70,14 +70,14 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
   // Fetch user data based on the current user ID
   Future<UserRepositoryState> _fetchUserData() async {
-    _log.logTyped(UserRepositoryLog('_fetchUserData()'));
+    _log.logCustom(UserRepositoryLog('_fetchUserData()'));
 
     if (_userId is String) {
       try {
         _lastUser = await _userService.getUser(_userId!);
         return UserRepositoryState(user: _lastUser!);
       } catch (err) {
-        _log.logTyped(UserRepositoryLog(
+        _log.logCustom(UserRepositoryLog(
             '_fetchUserData() - getUser failed', err, StackTrace.current));
       }
     }

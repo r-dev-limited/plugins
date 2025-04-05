@@ -18,17 +18,10 @@ FeatureToggleModel _$FeatureToggleModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$FeatureToggleModelToJson(FeatureToggleModel instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('uid', instance.uid);
-  writeNotNull('parent', instance.parent);
-  writeNotNull('toggles', instance.toggles?.map((e) => e.toJson()).toList());
-  return val;
-}
+Map<String, dynamic> _$FeatureToggleModelToJson(FeatureToggleModel instance) =>
+    <String, dynamic>{
+      if (instance.uid case final value?) 'uid': value,
+      if (instance.parent case final value?) 'parent': value,
+      if (instance.toggles?.map((e) => e.toJson()).toList() case final value?)
+        'toggles': value,
+    };

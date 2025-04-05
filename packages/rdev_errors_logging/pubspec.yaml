@@ -11,15 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   ### 3rd party
-  connectivity_plus: ^6.0.3
-  googleapis_auth: ^1.6.0
-  googleapis: ^13.2.0
-  flutter_hooks: ^0.20.5
-  hooks_riverpod: ^2.5.2
-  talker: ^4.4.1
-  logging: ^1.2.0
+  connectivity_plus: ^6.1.3
+  googleapis_auth: ^2.0.0
+  googleapis: ^14.0.0
+  flutter_hooks: ^0.21.2
+  hooks_riverpod: ^2.6.1
+  talker: ^4.7.1
+  logging: ^1.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.4
+  mockito: ^5.4.5
