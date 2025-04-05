@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-04-05
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rdev_riverpod_configuration` - `v0.1.0`](#rdev_riverpod_configuration---v010)
+
+Packages with other changes:
+
+ - There are no other changes in this release.
+
+---
+
+#### `rdev_riverpod_configuration` - `v0.1.0`
+
+ - **FEAT**: update libs.
+ - **BREAKING** **FEAT**: dependency improvements.
+
+
 ## 2024-10-08
 
 ### Changes
