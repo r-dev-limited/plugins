@@ -1,7 +1,7 @@
 name: rdev_riverpod_purchases
 description: Manage purchases
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.2.2+1
+version: 0.2.2+2
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_errors_logging: any
-  rdev_riverpod_firebase: any
+  rdev_errors_logging: ^0.2.1+1
+  rdev_riverpod_firebase: ^0.4.2+1
   rdev_helpers: any
   ### 3rd party
   cloud_firestore: 5.6.6
