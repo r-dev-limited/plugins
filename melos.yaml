@@ -2,6 +2,7 @@ name: placebolife
 
 packages:
   - packages/**
+
 command:
   bootstrap:
     dependencies:
@@ -62,3 +63,22 @@ scripts:
   build:
     run: melos exec --depends-on=build_runner -- "dart run build_runner build -d"
     description: Build all generated files for Dart & Flutter packages in this project.
+
+# Adding version configuration
+version:
+  # Defines the versioning scheme to use - graduations are independent versions per package
+  # (other option is "independent")
+  branch-versioning: false
+  
+  # Choose from conventional_commits or manual:
+  mode: conventional_commits
+  
+  # Configuring conventional commits mode:
+  conventional_commits:
+    # Specify which commit types increment version numbers
+    patch: ["fix", "feat", "perf", "chore", "refactor", "docs", "ci", "test"]
+    minor: ["feat", "perf"]
+    major: ["BREAKING CHANGE"]
+    
+  # Set to true if you want Melos to update CHANGELOG.md files
+  include-changelog: true
