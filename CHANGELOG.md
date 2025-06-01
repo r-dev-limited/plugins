@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_adaptive_layout` - `v0.0.4`](#rdev_adaptive_layout---v004)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.4`
+
+ - **FEAT**: remove unsupported dart functions.
+
+
+## 2025-06-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_adaptive_layout` - `v0.0.3`](#rdev_adaptive_layout---v003)
 
 ---

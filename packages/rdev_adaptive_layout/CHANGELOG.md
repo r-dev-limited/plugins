@@ -1,3 +1,7 @@
+## 0.0.4
+
+ - **FEAT**: remove unsupported dart functions.
+
 ## 0.0.3
 
  - **FEAT**: decrease min flutter version.
