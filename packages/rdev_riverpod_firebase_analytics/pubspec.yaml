@@ -10,15 +10,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_riverpod_firebase: ^0.4.2+2
-  rdev_errors_logging: ^0.2.1+1
-  rdev_helpers: ^0.2.1+1
+  rdev_riverpod_firebase: any
+  rdev_errors_logging: any
+  rdev_helpers: any
   ### 3rd party
   equatable: ^2.0.7
   json_annotation: ^4.9.0
   hooks_riverpod: ^2.6.1
   logging: ^1.3.0
-  firebase_analytics: 11.4.5
+  firebase_analytics: 11.4.6
 
 dev_dependencies:
   flutter_test:

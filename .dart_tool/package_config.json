@@ -11,7 +11,7 @@
       "name": "_macros",
       "rootUri": "file:///Users/tomasradvansky/fvm/versions/stable/bin/cache/dart-sdk/pkg/_macros",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "3.5"
     },
     {
       "name": "analyzer",
@@ -452,10 +452,9 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2025-04-05T03:58:01.295662Z",
   "generator": "pub",
-  "generatorVersion": "3.7.2",
+  "generatorVersion": "3.8.0",
   "flutterRoot": "file:///Users/tomasradvansky/fvm/versions/stable",
-  "flutterVersion": "3.29.2",
+  "flutterVersion": "3.32.0",
   "pubCache": "file:///Users/tomasradvansky/.pub-cache"
 }

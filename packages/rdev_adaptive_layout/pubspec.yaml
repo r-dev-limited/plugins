@@ -1,0 +1,17 @@
+name: rdev_adaptive_layout
+description: "A package for building adaptive layouts in Flutter."
+version: 0.0.1
+homepage: https://rdev.co.nz
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
