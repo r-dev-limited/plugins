@@ -1,3 +1,7 @@
+## 0.4.3
+
+ - **FEAT**: Adding adaptive layout.
+
 ## 0.4.2
 
  - **FEAT**: bump.

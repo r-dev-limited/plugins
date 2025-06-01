@@ -1,3 +1,7 @@
+## 0.3.2
+
+ - **FEAT**: Adding adaptive layout.
+
 ## 0.3.1+1
 
  - Update a dependency to the latest release.
