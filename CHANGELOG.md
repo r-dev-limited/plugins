@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_adaptive_layout` - `v0.0.3`](#rdev_adaptive_layout---v003)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.3`
+
+ - **FEAT**: decrease min flutter version.
+
+
+## 2025-06-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_adaptive_layout` - `v0.0.2`](#rdev_adaptive_layout---v002)
  - [`rdev_feature_toggles` - `v0.2.3`](#rdev_feature_toggles---v023)
  - [`rdev_riverpod_firebase` - `v0.4.3`](#rdev_riverpod_firebase---v043)

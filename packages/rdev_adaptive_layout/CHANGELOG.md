@@ -1,3 +1,7 @@
+## 0.0.3
+
+ - **FEAT**: decrease min flutter version.
+
 ## 0.0.2
 
  - **FEAT**: Adding adaptive layout.

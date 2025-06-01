@@ -1,6 +1,6 @@
 name: rdev_adaptive_layout
 description: "A package for building adaptive layouts in Flutter."
-version: 0.0.2
+version: 0.0.3
 homepage: https://rdev.co.nz
 
 environment:
