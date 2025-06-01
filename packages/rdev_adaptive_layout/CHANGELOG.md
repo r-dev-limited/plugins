@@ -1,3 +1,7 @@
+## 0.0.6
+
+ - **FEAT**: broken link.
+
 ## 0.0.5
 
  - **FEAT**: add demo link.
