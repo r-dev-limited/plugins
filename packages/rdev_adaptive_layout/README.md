@@ -16,6 +16,11 @@ A powerful Flutter package for building responsive and adaptive layouts that aut
 - **Master-Detail Layouts**: Built-in support for responsive master-detail patterns
 - **Platform-Native Components**: Automatic selection of Material vs Cupertino components
 
+## Demo
+
+![Demo](https://zapp.run/edit/zyc2063pzc30?theme=dark&lazy=false)
+
+
 ## Installation
 
 Add this to your package's `pubspec.yaml` file:
