@@ -14,6 +14,15 @@ enum BreakpointId {
   xxxxl, // Extra Extra Extra Extra Large (e.g., extra extra extra large desktop)
 }
 
+/// Data class to hold breakpoint information
+@immutable
+class BreakpointData {
+  final BreakpointId id;
+  final BreakpointSettings settings;
+
+  const BreakpointData({required this.id, required this.settings});
+}
+
 extension BreakpointIdComparison on BreakpointId {
   // Helper to get minWidth for a specific BreakpointId
   // This assumes DefaultBreakpoints.commonBreakpoints is the source of truth for widths.
@@ -79,8 +88,8 @@ class BreakpointSettings {
 class PlatformBreakpointConfig {
   /// The platform this configuration applies to.
   final AdaptivePlatform platform; // Changed to AdaptivePlatform
-  // Using a list of records for named breakpoints.
-  final List<({BreakpointId id, BreakpointSettings settings})> breakpoints;
+  // Using a list of BreakpointData for named breakpoints.
+  final List<BreakpointData> breakpoints;
 
   const PlatformBreakpointConfig({
     required this.platform,
@@ -106,50 +115,58 @@ class PlatformBreakpointConfig {
 class DefaultBreakpoints {
   // This was previously _defaultBreakpoints, then renamed to commonBreakpoints.
   // Ensuring consistency.
-  static final List<({BreakpointId id, BreakpointSettings settings})>
-  commonBreakpoints = [
-    (id: BreakpointId.xxs, settings: BreakpointSettings(minWidth: 0)),
-    (id: BreakpointId.xs, settings: BreakpointSettings(minWidth: 360)),
-    (id: BreakpointId.s, settings: BreakpointSettings(minWidth: 600)),
-    (id: BreakpointId.m, settings: BreakpointSettings(minWidth: 800)),
-    (id: BreakpointId.l, settings: BreakpointSettings(minWidth: 1024)),
-    (id: BreakpointId.xl, settings: BreakpointSettings(minWidth: 1280)),
-    (id: BreakpointId.xxl, settings: BreakpointSettings(minWidth: 1440)),
-    (id: BreakpointId.xxxl, settings: BreakpointSettings(minWidth: 1600)),
-    (id: BreakpointId.xxxxl, settings: BreakpointSettings(minWidth: 1920)),
+  static final List<BreakpointData> commonBreakpoints = [
+    BreakpointData(
+        id: BreakpointId.xxs, settings: BreakpointSettings(minWidth: 0)),
+    BreakpointData(
+        id: BreakpointId.xs, settings: BreakpointSettings(minWidth: 360)),
+    BreakpointData(
+        id: BreakpointId.s, settings: BreakpointSettings(minWidth: 600)),
+    BreakpointData(
+        id: BreakpointId.m, settings: BreakpointSettings(minWidth: 800)),
+    BreakpointData(
+        id: BreakpointId.l, settings: BreakpointSettings(minWidth: 1024)),
+    BreakpointData(
+        id: BreakpointId.xl, settings: BreakpointSettings(minWidth: 1280)),
+    BreakpointData(
+        id: BreakpointId.xxl, settings: BreakpointSettings(minWidth: 1440)),
+    BreakpointData(
+        id: BreakpointId.xxxl, settings: BreakpointSettings(minWidth: 1600)),
+    BreakpointData(
+        id: BreakpointId.xxxxl, settings: BreakpointSettings(minWidth: 1920)),
   ];
 
   /// Default configurations for each platform.
   static List<PlatformBreakpointConfig> get defaultConfigs => [
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.ANDROID,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.IOS,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.WEB,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.MACOS,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.WINDOWS,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.LINUX,
-      breakpoints: commonBreakpoints,
-    ),
-    PlatformBreakpointConfig(
-      platform: AdaptivePlatform.FUCHSIA,
-      breakpoints: commonBreakpoints,
-    ),
-  ];
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.ANDROID,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.IOS,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.WEB,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.MACOS,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.WINDOWS,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.LINUX,
+          breakpoints: commonBreakpoints,
+        ),
+        PlatformBreakpointConfig(
+          platform: AdaptivePlatform.FUCHSIA,
+          breakpoints: commonBreakpoints,
+        ),
+      ];
 
   /// Retrieves the [PlatformBreakpointConfig] for the given [platform].
   ///
