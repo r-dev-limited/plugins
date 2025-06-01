@@ -18,7 +18,7 @@ A powerful Flutter package for building responsive and adaptive layouts that aut
 
 ## Demo
 
-![Demo](https://zapp.run/edit/zyc2063pzc30?theme=dark&lazy=false)
+[🚀 **Try the Interactive Demo**](https://zapp.run/edit/zyc2063pzc30?theme=dark&lazy=false)
 
 
 ## Installation
