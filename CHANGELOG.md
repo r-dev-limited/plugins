@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_adaptive_layout` - `v0.0.5`](#rdev_adaptive_layout---v005)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.5`
+
+ - **FEAT**: add demo link.
+
+
+## 2025-06-01
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_adaptive_layout` - `v0.0.4`](#rdev_adaptive_layout---v004)
 
 ---
