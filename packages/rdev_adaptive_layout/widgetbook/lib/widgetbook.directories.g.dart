@@ -51,5 +51,5 @@ final directories = <_i1.WidgetbookNode>[
         builder: _i2.adaptiveLayoutWithSecondaryNavUseCase,
       ),
     ],
-  ),
+  )
 ];
