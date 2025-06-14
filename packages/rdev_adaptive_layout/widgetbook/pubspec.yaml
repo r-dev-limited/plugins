@@ -10,7 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
-  rdev_adaptive_layout: ^0.0.6
+  rdev_adaptive_layout: ^0.0.8
   faker_dart: ^0.2.2
   url_launcher: ^6.3.1
   widgetbook_annotation: ^3.5.0
