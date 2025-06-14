@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rdev_adaptive_layout: ^0.0.6
+  rdev_adaptive_layout:
+    path: ../
   cupertino_icons: ^1.0.6
 
 dev_dependencies:

@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: rdev_adaptive_layout
+dependency_overrides:
+  rdev_adaptive_layout:
+    path: ..

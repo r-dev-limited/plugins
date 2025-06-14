@@ -1,3 +1,7 @@
+## 0.0.7
+
+ - **FEAT**: invalid exports
+
 ## 0.0.6
 
  - **FEAT**: broken link.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './active_layout_info.dart';
 import './adaptive_breakpoint_definitions.dart'; // Required for BreakpointId
-import '../adaptive_platform.dart'; // Import the new enum
+import 'adaptive_platform.dart'; // Import the new enum
 import 'device_form_factor.dart'; // Added import
 
 /// Defines a specific rule for building a slot, consisting of a condition and a builder.
@@ -36,7 +36,7 @@ class LayoutMatchConfig {
   /// A function to match device form factors (e.g., (factor) => factor == DeviceFormFactor.tablet).
   /// If null, the config matches any form factor.
   final bool Function(DeviceFormFactor formFactor)?
-  formFactorMatcher; // Added property
+      formFactorMatcher; // Added property
 
   /// The builder function that constructs the widget when this config matches.
   final Widget? Function(ActiveLayoutInfo layoutInfo) builder;
@@ -61,13 +61,12 @@ class LayoutMatchConfig {
     this.formFactorMatcher, // Added to constructor
     required this.builder,
     this.isPersistent = false, // Default to false
-  }) : _specificity =
-           (platforms?.isNotEmpty == true ? 1 : 0) +
-           (breakpointMatcher != null ? 1 : 0) +
-           (orientationMatcher != null ? 1 : 0) +
-           (formFactorMatcher != null
-               ? 1
-               : 0); // Added to specificity calculation
+  }) : _specificity = (platforms?.isNotEmpty == true ? 1 : 0) +
+            (breakpointMatcher != null ? 1 : 0) +
+            (orientationMatcher != null ? 1 : 0) +
+            (formFactorMatcher != null
+                ? 1
+                : 0); // Added to specificity calculation
 
   /// Returns the specificity of this configuration.
   /// Used to resolve conflicts if multiple configurations match.
@@ -85,8 +84,7 @@ class LayoutMatchConfig {
     required AdaptivePlatform currentPlatform,
     required DeviceFormFactor currentFormFactor, // Added parameter
   }) {
-    bool platformMatch =
-        platforms == null ||
+    bool platformMatch = platforms == null ||
         platforms!.isEmpty ||
         platforms!.contains(currentPlatform);
     bool breakpointMatch =

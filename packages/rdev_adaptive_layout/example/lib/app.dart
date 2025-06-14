@@ -3,12 +3,7 @@ import 'package:example/adaptive_profile_view.dart';
 import 'package:example/detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rdev_adaptive_layout/adaptive_layout_widget.dart';
-import 'package:rdev_adaptive_layout/device_form_factor.dart';
-import 'package:rdev_adaptive_layout/layout_slot.dart';
-import 'package:rdev_adaptive_layout/slot_building_rules.dart';
-import 'package:rdev_adaptive_layout/adaptive_breakpoint_definitions.dart';
-import 'package:rdev_adaptive_layout/adaptive_platform.dart';
+import 'package:rdev_adaptive_layout/rdev_adaptive_layout.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -65,8 +60,8 @@ class _AppWidgetState extends State<AppWidget> {
             platforms: const {AdaptivePlatform.WEB},
             builder: (layoutInfo) {
               // Determine if the left drawer is in standard (non-persistent) mode
-              final bool showDrawerButton =
-                  layoutInfo.activeBreakpointId.isSmallerOrEqualTo(
+              final bool showDrawerButton = layoutInfo.activeBreakpointId
+                      .isSmallerOrEqualTo(
                     BreakpointId.l,
                   ) &&
                   layoutInfo.activeBreakpointId.isLargerThan(BreakpointId.s);
@@ -129,9 +124,8 @@ class _AppWidgetState extends State<AppWidget> {
             platforms: const {AdaptivePlatform.IOS},
             builder: (layoutInfo) {
               // Determine if the hamburger icon for the Cupertino right pane should be shown
-              final rightDrawerBuilder =
-                  slotBuilders[LayoutSlot.rightDrawer]
-                      as DeclarativeSlotBuilder?;
+              final rightDrawerBuilder = slotBuilders[LayoutSlot.rightDrawer]
+                  as DeclarativeSlotBuilder?;
               final bool showHamburger =
                   rightDrawerBuilder?.build(layoutInfo) != null;
 
@@ -516,9 +510,8 @@ class _AppWidgetState extends State<AppWidget> {
             platforms: const {AdaptivePlatform.IOS},
             builder: (layoutInfo) {
               // Determine if the hamburger icon for the Cupertino right pane should be shown
-              final rightDrawerBuilder =
-                  slotBuilders[LayoutSlot.rightDrawer]
-                      as DeclarativeSlotBuilder?;
+              final rightDrawerBuilder = slotBuilders[LayoutSlot.rightDrawer]
+                  as DeclarativeSlotBuilder?;
               final bool showHamburger =
                   rightDrawerBuilder?.build(layoutInfo) != null;
 
@@ -543,9 +536,8 @@ class _AppWidgetState extends State<AppWidget> {
             platforms: const {AdaptivePlatform.ANDROID},
             builder: (layoutInfo) {
               // Example: Show a drawer icon if a left drawer is present
-              final leftDrawerBuilder =
-                  slotBuilders[LayoutSlot.leftDrawer]
-                      as DeclarativeSlotBuilder?;
+              final leftDrawerBuilder = slotBuilders[LayoutSlot.leftDrawer]
+                  as DeclarativeSlotBuilder?;
               final bool hasLeftDrawer =
                   leftDrawerBuilder?.build(layoutInfo) != null;
 
@@ -584,8 +576,7 @@ class _AppWidgetState extends State<AppWidget> {
                     ),
                   ), // Content for the expanded part
                 ),
-                leading:
-                    hasLeftDrawer &&
+                leading: hasLeftDrawer &&
                         layoutInfo.activeBreakpointId.isSmallerOrEqualTo(
                           BreakpointId.s,
                         )
