@@ -1,3 +1,7 @@
+## 0.4.4
+
+ - **FEAT**: bump fb versions.
+
 ## 0.4.3
 
  - **FEAT**: Adding adaptive layout.

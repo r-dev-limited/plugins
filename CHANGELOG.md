@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-06-19
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_adaptive_layout` - `v0.0.9`](#rdev_adaptive_layout---v009)
+ - [`rdev_feature_toggles` - `v0.2.4`](#rdev_feature_toggles---v024)
+ - [`rdev_riverpod_firebase` - `v0.4.4`](#rdev_riverpod_firebase---v044)
+ - [`rdev_riverpod_firebase_analytics` - `v0.3.4`](#rdev_riverpod_firebase_analytics---v034)
+ - [`rdev_riverpod_firebase_auth` - `v0.2.4`](#rdev_riverpod_firebase_auth---v024)
+ - [`rdev_riverpod_firebase_user` - `v0.5.4`](#rdev_riverpod_firebase_user---v054)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.12`](#rdev_riverpod_firebase_user_notification---v0212)
+ - [`rdev_riverpod_messaging` - `v0.0.15`](#rdev_riverpod_messaging---v0015)
+ - [`rdev_riverpod_purchases` - `v0.2.4`](#rdev_riverpod_purchases---v024)
+ - [`rdev_riverpod_stored_file` - `v0.3.3`](#rdev_riverpod_stored_file---v033)
+ - [`rdev_riverpod_versioning` - `v0.3.4`](#rdev_riverpod_versioning---v034)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.7.3+1`](#rdev_riverpod_firebase_auth_user---v0731)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_auth_user` - `v0.7.3+1`
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.9`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_feature_toggles` - `v0.2.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_firebase` - `v0.4.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.3.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_firebase_auth` - `v0.2.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_firebase_user` - `v0.5.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.12`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_messaging` - `v0.0.15`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_purchases` - `v0.2.4`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_stored_file` - `v0.3.3`
+
+ - **FEAT**: bump fb versions.
+
+#### `rdev_riverpod_versioning` - `v0.3.4`
+
+ - **FEAT**: bump fb versions.
+
+
 ## 2025-06-14
 
 ### Changes
