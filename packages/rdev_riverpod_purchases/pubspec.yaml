@@ -14,8 +14,8 @@ dependencies:
   rdev_riverpod_firebase: any
   rdev_helpers: any
   ### 3rd party
-  cloud_firestore: 5.6.8
-  cloud_functions: 5.5.1
+  cloud_firestore: 5.6.9
+  cloud_functions: 5.5.2
   equatable: ^2.0.7
   flutter_inapp_purchase: ^5.6.2
   json_annotation: ^4.9.0
