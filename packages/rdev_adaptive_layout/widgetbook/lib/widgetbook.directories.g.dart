@@ -10,46 +10,54 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:widgetbook/widgetbook.dart' as _i1;
+import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 import 'package:widgetbook_workspace/adaptive_layout_widget.widgetbook.dart'
-    as _i2;
+    as _widgetbook_workspace_adaptive_layout_widget_widgetbook;
 
-final directories = <_i1.WidgetbookNode>[
-  _i1.WidgetbookComponent(
+final directories = <_widgetbook.WidgetbookNode>[
+  _widgetbook.WidgetbookComponent(
     name: 'AdaptiveLayoutWidget',
     useCases: [
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'All Slots Demo',
-        builder: _i2.allSlotsDemoUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .allSlotsDemoUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Basic Layout',
-        builder: _i2.adaptiveLayoutUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .adaptiveLayoutUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Complex Multi-Platform',
-        builder: _i2.complexMultiPlatformUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .complexMultiPlatformUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Form Factor Responsive',
-        builder: _i2.formFactorResponsiveUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .formFactorResponsiveUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Orientation Responsive',
-        builder: _i2.orientationResponsiveUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .orientationResponsiveUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Persistent Panels',
-        builder: _i2.persistentPanelsUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .persistentPanelsUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'Sliver App Bar Demo',
-        builder: _i2.sliverAppBarDemoUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .sliverAppBarDemoUseCase,
       ),
-      _i1.WidgetbookUseCase(
+      _widgetbook.WidgetbookUseCase(
         name: 'With Secondary Navigation',
-        builder: _i2.adaptiveLayoutWithSecondaryNavUseCase,
+        builder: _widgetbook_workspace_adaptive_layout_widget_widgetbook
+            .adaptiveLayoutWithSecondaryNavUseCase,
       ),
     ],
-  )
+  ),
 ];

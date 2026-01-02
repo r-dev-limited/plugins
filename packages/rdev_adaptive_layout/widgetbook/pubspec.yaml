@@ -4,15 +4,15 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: ^2.19.0
+  sdk: '>=3.10.4 <4.0.0'
 
 dependencies:
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
-  rdev_adaptive_layout: ^0.0.9
+  rdev_adaptive_layout: any
   faker_dart: ^0.2.2
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   widgetbook_annotation: ^3.5.0
   mocktail: ^1.0.4
   widgetbook:
@@ -23,10 +23,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.15
+  build_runner: ^2.10.4
   flutter_lints: ^4.0.0
   widgetbook_generator: ^3.13.0
-  mockito: ^5.4.5
+  mockito: ^5.6.1
 
 flutter:
   uses-material-design: true

@@ -44,20 +44,21 @@ class UserRepositoryState extends Equatable {
 }
 
 // CurrentUserRepository class responsible for managing the current user state
-class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
+class UserRepository extends AsyncNotifier<UserRepositoryState> {
+  UserRepository(this._userId);
+
   late Talker _log;
   late UserService _userService;
 
   ///
-  String? _userId;
+  final String? _userId;
   UserVO? _lastUser;
   StreamSubscription? _currentUserSubscription;
 
   @override
-  FutureOr<UserRepositoryState> build(arg) async {
+  FutureOr<UserRepositoryState> build() async {
     _log = ref.watch(appTalkerProvider);
     _log.logCustom(UserRepositoryLog('build()'));
-    _userId = arg;
     // Get the UserService instance from the provider
     _userService = ref.read(UserService.provider);
 
@@ -74,7 +75,8 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
     if (_userId is String) {
       try {
-        _lastUser = await _userService.getUser(_userId!);
+        final userId = _userId;
+        _lastUser = await _userService.getUser(userId);
         return UserRepositoryState(user: _lastUser!);
       } catch (err) {
         _log.logCustom(UserRepositoryLog(
@@ -90,8 +92,9 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
     await _currentUserSubscription?.cancel();
 
     if (_userId is String) {
+      final userId = _userId;
       _currentUserSubscription =
-          _userService.streamUserChanges(_userId!).listen((event) async {
+          _userService.streamUserChanges(userId).listen((event) async {
         if (event is UserVO &&
             (event.updatedAt != _lastUser?.updatedAt || _lastUser == null)) {
           _lastUser = event;
@@ -117,9 +120,10 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
   Future<void> onboardingFinished(Map<String, dynamic> payload) async {
     if (_userId is String) {
+      final userId = _userId;
       state = AsyncValue.loading();
       try {
-        await _userService.onboardingFinished(_userId!, payload);
+        await _userService.onboardingFinished(userId, payload);
       } catch (err) {
         /// Restore data
         state = AsyncValue.data(await _fetchUserData());
@@ -130,9 +134,10 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
 
   Future<void> deleteAccount() async {
     if (_userId is String) {
+      final userId = _userId;
       state = AsyncValue.loading();
       try {
-        await _userService.deleteAccount(_userId!);
+        await _userService.deleteAccount(userId);
       } catch (err) {
         /// Restore data
         state = AsyncValue.data(await _fetchUserData());
@@ -142,10 +147,6 @@ class UserRepository extends FamilyAsyncNotifier<UserRepositoryState, String?> {
   }
 
   // Provider for the CurrentUserRepository class
-  static AsyncNotifierProviderFamily<UserRepository, UserRepositoryState,
-          String?> provider =
-      AsyncNotifierProvider.family<UserRepository, UserRepositoryState,
-          String?>(() {
-    return UserRepository();
-  });
+  static final provider = AsyncNotifierProvider.family<UserRepository,
+      UserRepositoryState, String?>(UserRepository.new);
 }

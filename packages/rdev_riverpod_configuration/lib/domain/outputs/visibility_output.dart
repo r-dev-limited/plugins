@@ -5,7 +5,7 @@ import '../../data/configuration_manager_repository.dart';
 
 abstract class VisibilityOutput {
   final log = Logger('VisibilityOutput');
-  final AsyncNotifierProviderRef<ConfigurationManagerState> ref;
+  final Ref ref;
 
   VisibilityOutput(this.ref);
 

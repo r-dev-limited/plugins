@@ -7,19 +7,20 @@ part of 'fireway_model.dart';
 // **************************************************************************
 
 FirewayModel _$FirewayModelFromJson(Map<String, dynamic> json) => FirewayModel(
-      uid: json['uid'] as String?,
-      description: json['description'] as String,
-      version: json['version'] as String,
-      success: json['success'] as bool,
-      script: json['script'] as String,
-      installedOn: const TimestampConverter()
-          .fromJson(json['installed_on'] as Timestamp),
-      executionTime: (json['execution_time'] as num).toInt(),
-    );
+  uid: json['uid'] as String?,
+  description: json['description'] as String,
+  version: json['version'] as String,
+  success: json['success'] as bool,
+  script: json['script'] as String,
+  installedOn: const TimestampConverter().fromJson(
+    json['installed_on'] as Timestamp,
+  ),
+  executionTime: (json['execution_time'] as num).toInt(),
+);
 
 Map<String, dynamic> _$FirewayModelToJson(FirewayModel instance) =>
     <String, dynamic>{
-      if (instance.uid case final value?) 'uid': value,
+      'uid': ?instance.uid,
       'description': instance.description,
       'version': instance.version,
       'success': instance.success,

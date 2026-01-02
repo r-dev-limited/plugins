@@ -1,9 +1,9 @@
 name: rdev_workspace
 
 environment:
-  sdk: ">=2.18.0 <4.0.0"
+  sdk: '>=3.10.4 <4.0.0'
 
 dev_dependencies:
   melos: ^6.3.2
-  build_runner: ^2.4.15
-  json_serializable: ^6.9.4
+  build_runner: ^2.10.4
+  json_serializable: ^6.11.2

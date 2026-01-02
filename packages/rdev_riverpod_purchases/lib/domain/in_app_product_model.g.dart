@@ -21,15 +21,14 @@ InAppProductModel _$InAppProductModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$InAppProductModelToJson(InAppProductModel instance) =>
     <String, dynamic>{
-      if (instance.createdAt case final value?) 'createdAt': value,
-      if (instance.updatedAt case final value?) 'updatedAt': value,
+      'createdAt': ?instance.createdAt,
+      'updatedAt': ?instance.updatedAt,
       'type': _$InAppProductTypeEnumMap[instance.type]!,
-      if (instance.productIdentifier case final value?)
-        'productIdentifier': value,
-      if (instance.referencePrice case final value?) 'referencePrice': value,
-      if (instance.pDollars case final value?) 'pDollars': value,
-      if (instance.name case final value?) 'name': value,
-      if (instance.description case final value?) 'description': value,
+      'productIdentifier': ?instance.productIdentifier,
+      'referencePrice': ?instance.referencePrice,
+      'pDollars': ?instance.pDollars,
+      'name': ?instance.name,
+      'description': ?instance.description,
       'metaData': instance.metaData,
     };
 

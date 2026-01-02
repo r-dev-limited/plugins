@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter_inapp_purchase/enums.dart' show PurchaseState;
+import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart'
+    hide PurchaseState;
+import 'package:flutter_inapp_purchase/helpers.dart' as iap_helpers;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
 
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_errors_logging/talker_provider.dart';
@@ -46,8 +51,8 @@ class InAppProductDataService {
   final FirebaseFirestore _db;
   final FirebaseFunctions _functions;
   final FlutterInappPurchase _inAppPurchase;
-  final Stream<PurchasedItem?> _purchaseUpdatedStream;
-  final Stream<PurchaseResult?> _purchaseErrorStream;
+  final Stream<Purchase?> _purchaseUpdatedStream;
+  final Stream<iap_helpers.PurchaseResult?> _purchaseErrorStream;
 
   final Talker _log;
 
@@ -61,8 +66,9 @@ class InAppProductDataService {
   );
 
   /// Stream getters
-  Stream<PurchasedItem?> get purchaseUpdatedStream => _purchaseUpdatedStream;
-  Stream<PurchaseResult?> get purchaseErrorStream => _purchaseErrorStream;
+  Stream<Purchase?> get purchaseUpdatedStream => _purchaseUpdatedStream;
+  Stream<iap_helpers.PurchaseResult?> get purchaseErrorStream =>
+      _purchaseErrorStream;
 
   Future<List<InAppProductModel>> getInAppProducts({
     int limit = 50,
@@ -134,36 +140,35 @@ class InAppProductDataService {
     }
   }
 
-  Future<List<IAPItem>> retrieveProductsDetailsFromStore(
+  Future<List<Product>> retrieveProductsDetailsFromStore(
     List<String> productIds,
   ) async {
-    Set<String> _kIds = Set<String>.from(productIds);
-    final products = await _inAppPurchase.getProducts(_kIds.toList());
+    final productSkus = Set<String>.from(productIds).toList();
+    final products = await _inAppPurchase.fetchProducts<Product>(
+      skus: productSkus,
+      type: ProductQueryType.InApp,
+    );
 
     return products;
   }
 
   Future<void> purchaseInAppProduct(
-    IAPItem item,
+    Product item,
     String userId,
   ) async {
     try {
-      final bool available = await _inAppPurchase.isReady();
-      if (available) {
-        if (item.productId is String) {
-          final res = await _inAppPurchase.requestPurchase(
-            item.productId!,
-          );
-          print(res);
-        } else {
-          throw InAppProductDataServicexception(
-            message: 'Product id is not available',
-            code: RdevCode.FailedPrecondition,
-          );
-        }
+      await _inAppPurchase.initConnection();
+      if (item.id.isNotEmpty) {
+        await _inAppPurchase.requestPurchase(
+          RequestPurchaseProps.inApp((
+            apple: RequestPurchaseIosProps(sku: item.id),
+            google: RequestPurchaseAndroidProps(skus: [item.id]),
+            useAlternativeBilling: null,
+          )),
+        );
       } else {
         throw InAppProductDataServicexception(
-          message: 'InAppPurchase instance is not available',
+          message: 'Product id is not available',
           code: RdevCode.FailedPrecondition,
         );
       }
@@ -181,33 +186,36 @@ class InAppProductDataService {
 
   Future<void> restorePurchases() async {
     try {
+      await _inAppPurchase.restorePurchases();
       await _inAppPurchase.getAvailablePurchases();
       await _inAppPurchase.clearTransactionIOS();
-      await _inAppPurchase.consumeAll();
     } catch (err) {
       print(err);
     }
   }
 
-  Future<void> verifyPurchase(PurchasedItem purchasedItem, IAPItem item) async {
+  Future<void> verifyPurchase(Purchase purchasedItem, Product item) async {
     try {
-      if (purchasedItem.transactionStateIOS == TransactionState.purchased ||
-          purchasedItem.transactionStateIOS == TransactionState.restored ||
-          purchasedItem.purchaseStateAndroid == PurchaseState.purchased) {
+      if (purchasedItem.purchaseState == PurchaseState.purchased) {
         final verifyPurchaseCallable =
             _functions.httpsCallable('callables-verifyPurchase');
+        final verificationData =
+            purchasedItem.purchaseToken ?? purchasedItem.id;
         final result = await verifyPurchaseCallable.call({
           'productId': purchasedItem.productId,
-          'verificationData': purchasedItem.transactionReceipt,
-          'source': purchasedItem.purchaseStateAndroid != null
+          'verificationData': verificationData,
+          'source': purchasedItem.platform == IapPlatform.Android
               ? 'play_store'
               : 'app_store',
-          'purchaseId': purchasedItem.transactionId,
+          'purchaseId': purchasedItem.id,
           'price': 1,
         });
         this._log.info('verifyPurchase', result.data);
         if (result.data is Map && result.data["valid"] == true) {
-          _inAppPurchase.finishTransaction(purchasedItem, isConsumable: true);
+          _inAppPurchase.finishTransaction(
+            purchase: purchasedItem,
+            isConsumable: true,
+          );
         } else {
           throw InAppProductDataServicexception(
             message: 'Purchase verification failed',
@@ -231,13 +239,13 @@ class InAppProductDataService {
   static Provider<InAppProductDataService> provider =
       Provider<InAppProductDataService>((ref) {
     final instance = FlutterInappPurchase.instance;
-    instance.initialize();
+    unawaited(instance.initConnection());
     final stored_fileService = InAppProductDataService(
       ref.watch(fbFirestoreProvider),
       ref.watch(fbFunctionsProvider),
       instance,
-      FlutterInappPurchase.purchaseUpdated,
-      FlutterInappPurchase.purchaseError,
+      instance.purchaseUpdated,
+      instance.purchaseError,
       ref.watch(appTalkerProvider),
     );
     return stored_fileService;

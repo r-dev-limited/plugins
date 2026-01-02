@@ -4,28 +4,28 @@ repository: https://github.com/r-dev-limited/placebo-life
 version: 0.2.4
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.10.4 <4.0.0'
   flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   rdev_errors_logging: any
-  rdev_riverpod_firebase: ^0.4.4
+  rdev_riverpod_firebase: any
   rdev_helpers: any
   ### 3rd party
-  cloud_firestore: 5.6.9
-  cloud_functions: 5.5.2
+  cloud_firestore: 6.1.1
+  cloud_functions: 6.0.5
   equatable: ^2.0.7
-  flutter_inapp_purchase: ^5.6.2
+  flutter_inapp_purchase: ^8.2.0
   json_annotation: ^4.9.0
-  talker: ^4.7.1
-  hooks_riverpod: ^2.6.1
+  talker: ^5.1.9
+  hooks_riverpod: ^3.1.0
   universal_platform: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.5
-  json_serializable: ^6.9.4
-  build_runner: ^2.4.15
+  mockito: ^5.6.1
+  json_serializable: ^6.11.2
+  build_runner: ^2.10.4

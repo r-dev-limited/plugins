@@ -19,12 +19,12 @@ class InAppProductVO extends Equatable {
   final String? description;
   final Map<String, dynamic> metaData;
 
-  final IAPItem? productDetails;
+  final Product? productDetails;
 
   /// get price
   String get price {
-    return productDetails?.price ??
-        (referencePrice is String
+    return productDetails?.displayPrice ??
+        (referencePrice is double
             ? '\$${referencePrice!.toStringAsFixed(2)}'
             : 'Free');
   }
@@ -71,7 +71,7 @@ class InAppProductVO extends Equatable {
     String? name,
     String? description,
     Map<String, dynamic>? metaData,
-    IAPItem? productDetails,
+    Product? productDetails,
   }) {
     return InAppProductVO(
       uid: uid ?? this.uid,

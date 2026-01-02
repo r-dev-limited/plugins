@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hooks_riverpod/legacy.dart';
 import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';

@@ -13,15 +13,15 @@ FeatureToggleModel _$FeatureToggleModelFromJson(Map<String, dynamic> json) =>
         (k, e) => MapEntry(k, e as String),
       ),
       toggles: (json['toggles'] as List<dynamic>?)
-          ?.map((e) =>
-              FeatureToggleEntryModel.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) => FeatureToggleEntryModel.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
     );
 
 Map<String, dynamic> _$FeatureToggleModelToJson(FeatureToggleModel instance) =>
     <String, dynamic>{
-      if (instance.uid case final value?) 'uid': value,
-      if (instance.parent case final value?) 'parent': value,
-      if (instance.toggles?.map((e) => e.toJson()).toList() case final value?)
-        'toggles': value,
+      'uid': ?instance.uid,
+      'parent': ?instance.parent,
+      'toggles': ?instance.toggles?.map((e) => e.toJson()).toList(),
     };

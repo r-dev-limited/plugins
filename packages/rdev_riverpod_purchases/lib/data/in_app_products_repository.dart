@@ -37,8 +37,8 @@ class InAppProductsRepository
   DocumentSnapshot<Object?>? _lastDocument;
   StreamSubscription? _streamSubscription;
   StreamSubscription? _errorStreamSubscription;
-  IAPItem? puchaseItem;
-  Completer<PurchasedItem>? completer;
+  Product? puchaseItem;
+  Completer<Purchase>? completer;
 
   /// Build (Init)
   @override
@@ -46,11 +46,15 @@ class InAppProductsRepository
     _inAppProductService = ref.watch(InAppProductService.provider);
     await _streamSubscription?.cancel();
     unawaited(_restorePurchases());
+    ref.onDispose(() {
+      unawaited(_streamSubscription?.cancel());
+      unawaited(_errorStreamSubscription?.cancel());
+    });
     final tmpState = await _fetchStoredFiles();
     _streamSubscription =
         _inAppProductService.purchaseUpdatedStream.listen((event) async {
       print(event);
-      if (event is PurchasedItem && puchaseItem is IAPItem) {
+      if (event is Purchase && puchaseItem is Product) {
         try {
           await _inAppProductService.verifyPurchase(event, puchaseItem!);
           completer?.complete(event);
@@ -123,7 +127,7 @@ class InAppProductsRepository
   }
 
   Future<void> purchaseProduct(
-    IAPItem productDetails,
+    Product productDetails,
     String userId,
   ) async {
     final getOriginalState = state.value!;
@@ -134,7 +138,7 @@ class InAppProductsRepository
       );
     }
     puchaseItem = productDetails;
-    completer = Completer<PurchasedItem>();
+    completer = Completer<Purchase>();
     var future =
         completer!.future.timeout(Duration(seconds: 60), onTimeout: () {
       throw TimeoutException('Operation timed out');

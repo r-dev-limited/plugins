@@ -76,21 +76,21 @@ class AuthTokenRepositoryState extends Equatable {
       ];
 }
 
-class AuthTokenRepository
-    extends FamilyAsyncNotifier<AuthTokenRepositoryState, String?> {
+class AuthTokenRepository extends AsyncNotifier<AuthTokenRepositoryState> {
+  AuthTokenRepository(this._currentUserId);
+
   late Talker _log;
   late AuthService _authService;
-  String? _currentUserId;
+  final String? _currentUserId;
 
   /// Build (Init)
   /// This method will be called every time lastUpdatedClaims changes
   /// Which will hapen on actual claim change OR user switch OR user init
   @override
-  FutureOr<AuthTokenRepositoryState> build(arg) async {
+  FutureOr<AuthTokenRepositoryState> build() async {
     _log = ref.watch(appTalkerProvider);
     _log.logCustom(AuthTokenRepositoryLog('build()'));
     _authService = ref.read(AuthService.provider);
-    _currentUserId = arg;
 
     final claims = ref.watch(UserRepository.provider
         .call(_currentUserId)
@@ -137,10 +137,6 @@ class AuthTokenRepository
     return result;
   }
 
-  static AsyncNotifierProviderFamily<AuthTokenRepository,
-          AuthTokenRepositoryState, String?> provider =
-      AsyncNotifierProvider.family<AuthTokenRepository,
-          AuthTokenRepositoryState, String?>(() {
-    return AuthTokenRepository();
-  });
+  static final provider = AsyncNotifierProvider.family<AuthTokenRepository,
+      AuthTokenRepositoryState, String?>(AuthTokenRepository.new);
 }

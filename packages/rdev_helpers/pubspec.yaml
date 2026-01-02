@@ -4,19 +4,19 @@ repository: https://github.com/r-dev-limited/placebo-life
 version: 0.2.1+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.10.4 <4.0.0'
   flutter: ">=2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  collection: ^1.19.0
+  collection: ^1.19.1
   ### 3rd party
   json_annotation: ^4.9.0
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.4.5
-  json_serializable: ^6.9.4
+  mockito: ^5.6.1
+  json_serializable: ^6.11.2

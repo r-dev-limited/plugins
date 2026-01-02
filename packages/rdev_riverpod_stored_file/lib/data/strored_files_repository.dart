@@ -35,17 +35,17 @@ class StoredFilesRepositoryState {
   }
 }
 
-class StoredFilesRepository
-    extends FamilyAsyncNotifier<StoredFilesRepositoryState, String?> {
-  late String? ownerPath;
+class StoredFilesRepository extends AsyncNotifier<StoredFilesRepositoryState> {
+  StoredFilesRepository(this.ownerPath);
+
+  final String? ownerPath;
   late StoredFileService _storedFileService;
   final List<UploadingFile> _uploadingFiles = [];
   DocumentSnapshot<Object?>? _lastDocument;
 
   /// Build (Init)
   @override
-  FutureOr<StoredFilesRepositoryState> build(arg) async {
-    ownerPath = arg;
+  FutureOr<StoredFilesRepositoryState> build() async {
     _storedFileService = ref.watch(StoredFileService.provider);
 
     final tmpState = await _fetchStoredFiles();
@@ -122,10 +122,6 @@ class StoredFilesRepository
     });
   }
 
-  static AsyncNotifierProviderFamily<StoredFilesRepository,
-          StoredFilesRepositoryState, String?> provider =
-      AsyncNotifierProvider.family<StoredFilesRepository,
-          StoredFilesRepositoryState, String?>(() {
-    return StoredFilesRepository();
-  });
+  static final provider = AsyncNotifierProvider.family<StoredFilesRepository,
+      StoredFilesRepositoryState, String?>(StoredFilesRepository.new);
 }

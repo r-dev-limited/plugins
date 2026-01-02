@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:crypto/crypto.dart';
@@ -11,6 +12,7 @@ import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:rdev_riverpod_firebase/firebase_providers.dart';
 import 'package:rdev_riverpod_firebase/firestore_helpers.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 
 /// Exception class for AuthService.
 class AuthDataServiceException extends RdevException {
@@ -38,20 +40,26 @@ class AuthDataService {
   final FirebaseAuth _auth;
   final FirebaseFunctions _functions;
   final GoogleSignIn _googleSignIn;
+  bool _googleSignInInitialized = false;
 
   /// Constructor for AuthDataService.
   AuthDataService(
     this._auth,
     this._functions, [
     GoogleSignIn? googleSignIn,
-  ]) : _googleSignIn = googleSignIn ??
-            GoogleSignIn(
-              scopes: ['email', 'profile'],
-              signInOption: SignInOption.standard,
-              clientId: kIsWeb
-                  ? const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID')
-                  : null,
-            );
+  ]) : _googleSignIn = googleSignIn ?? GoogleSignIn.instance;
+
+  Future<void> _ensureGoogleSignInInitialized() async {
+    if (_googleSignInInitialized) {
+      return;
+    }
+    await _googleSignIn.initialize(
+      clientId: kIsWeb
+          ? const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID')
+          : null,
+    );
+    _googleSignInInitialized = true;
+  }
 
   /// Returns a stream of the current user's authentication state.
   Stream<User?> authStateChanges() {
@@ -88,6 +96,8 @@ class AuthDataService {
   /// Signs in the user using Google authentication and returns the user credential.
   Future<UserCredential> signInWithGoogle() async {
     try {
+      await _ensureGoogleSignInInitialized();
+      const scopeHint = ['email', 'profile'];
       // Sign out current user if not anonymous
       if (_auth.currentUser != null && _auth.currentUser!.isAnonymous != true) {
         await _auth.signOut();
@@ -95,16 +105,20 @@ class AuthDataService {
 
       if (_auth.currentUser != null && _auth.currentUser!.isAnonymous == true) {
         // Trigger the authentication flow
-        final googleUser = await _googleSignIn.signIn();
+        final googleUser = await _googleSignIn.authenticate(
+          scopeHint: scopeHint,
+        );
         // Obtain the auth details from the request
-        final GoogleSignInAuthentication? googleAuth =
-            await googleUser?.authentication;
-        if (googleAuth is GoogleSignInAuthentication &&
-            (googleAuth.accessToken is String ||
-                googleAuth.idToken is String)) {
+        final googleAuth = googleUser.authentication;
+        final authz = await googleUser.authorizationClient
+            .authorizationForScopes(scopeHint);
+        final accessToken = authz?.accessToken ??
+            (await googleUser.authorizationClient.authorizeScopes(scopeHint))
+                .accessToken;
+        if (googleAuth.idToken is String || accessToken.isNotEmpty) {
           // Create a new credential
           final googleCredential = GoogleAuthProvider.credential(
-            accessToken: googleAuth.accessToken,
+            accessToken: accessToken,
             idToken: googleAuth.idToken,
           );
 
@@ -125,15 +139,22 @@ class AuthDataService {
       }
 
       // Trigger the authentication flow
-      final googleUser = await _googleSignIn.signIn();
+      final googleUser = await _googleSignIn.authenticate(
+        scopeHint: scopeHint,
+      );
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-      if (googleAuth is GoogleSignInAuthentication &&
-          (googleAuth.accessToken is String || googleAuth.idToken is String)) {
+      final googleAuth = googleUser.authentication;
+      final authz =
+          await googleUser.authorizationClient.authorizationForScopes(
+        scopeHint,
+      );
+      final accessToken = authz?.accessToken ??
+          (await googleUser.authorizationClient.authorizeScopes(scopeHint))
+              .accessToken;
+      if (googleAuth.idToken is String || accessToken.isNotEmpty) {
         // Create a new credential
         final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
+          accessToken: accessToken,
           idToken: googleAuth.idToken,
         );
         return await _auth.signInWithCredential(credential);
@@ -407,7 +428,11 @@ class AuthDataService {
   /// Fetches the sign-in methods available for the provided email.
   Future<List<String>> fetchSignInMethodsForEmail(String email) async {
     try {
-      final providers = await _auth.fetchSignInMethodsForEmail(email);
+      final authPlatform = FirebaseAuthPlatform.instanceFor(
+        app: _auth.app,
+        pluginConstants: _auth.pluginConstants,
+      );
+      final providers = await authPlatform.fetchSignInMethodsForEmail(email);
       return providers;
     } catch (err) {
       if (err is FirebaseAuthException) {

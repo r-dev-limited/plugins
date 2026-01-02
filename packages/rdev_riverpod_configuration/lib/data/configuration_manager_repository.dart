@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:rdev_feature_toggles/application/feature_toggles_data_service.dart';
+import 'package:rdev_feature_toggles/domain/feature_toggle_entry_model.dart';
+import 'package:rdev_feature_toggles/domain/feature_toggle_model.dart';
+import 'package:rdev_riverpod_firebase_auth/data/auth_repository.dart';
 
 import '../application/source_shared_preferences_service.dart';
 import '../domain/inputs/configuration_inputs.dart';
@@ -51,16 +56,16 @@ class ConfigurationManagerRepository
   final log = Logger('ConfigurationManagerNotifier');
 
   /// Dependencies
-  //late FeatureToggleDataSource _featureToggleService;
+  late FeatureTogglesDataService _featureToggleService;
   late SourceSharedPreferencesService _sharedPreferences;
   // late SourceRemoteConfigService _sourceRemoteConfigService;
-  //late AuthUserRepositoryState _authUserRepositoryState;
+  late AuthRepositoryState _authRepositoryState;
   late String _version;
 
   /// Variables
   final Map<ConfigurationEnvInputEnum, dynamic> _intputEnvVariables = {};
-  // Map<String, FeatureToggleEntry>? _rootFeatureToggleMap = {};
-  // Map<String, FeatureToggleEntry>? _userFeatureToggleMap = {};
+  Map<String, FeatureToggleEntryModel> _rootFeatureToggleMap = {};
+  Map<String, FeatureToggleEntryModel> _userFeatureToggleMap = {};
   StreamSubscription? _firestoreRootConfigUpdateSubscription;
   StreamSubscription? _firestoreUserConfigUpdateSubscription;
 
@@ -73,38 +78,44 @@ class ConfigurationManagerRepository
   /// Build (initialize)
   @override
   Future<ConfigurationManagerState> build() async {
-    _authUserRepositoryState = ref.watch(AuthUserRepository.provider).value ??
-        const AuthUserRepositoryState();
-    //_featureToggleService = ref.watch(FeatureToggleDataSource.provider);
+    _authRepositoryState = ref.watch(AuthRepository.provider).value ??
+        const AuthRepositoryState();
+    _featureToggleService = ref.watch(FeatureTogglesDataService.provider);
     _sharedPreferences = ref.watch(SourceSharedPreferencesService.provider);
     // _sourceRemoteConfigService = ref.watch(SourceRemoteConfigService.provider);
-    //_version =
-    //  'v${ref.watch(packageInfoProvider.select((value) => value.value?.version)) ?? '1.0.0'}';
+    final envVersion = const String.fromEnvironment(
+      ConfigurationEnvInputKeys.sentryRelease,
+      defaultValue: '1.0.0',
+    );
+    _version = envVersion.startsWith('v') ? envVersion : 'v$envVersion';
 
     /// Init all sources
     await _initEnv();
     await _sharedPreferences.initialize();
     // await _sourceRemoteConfigService.initialize();
 
-    final userId = _authUserRepositoryState.authRepositoryState?.authUser?.uid;
+    final userId = _authRepositoryState.authUser?.uid;
 
     if (userId is String) {
       try {
-        final userFeatureToggle = await _featureToggleService
-            .getUserFeatureToggle(version: _version, userId: userId);
-        _userFeatureToggleMap = userFeatureToggle.data.toggles;
+        final userFeatureToggle = await _featureToggleService.getFeatureToggle(
+          version: _version,
+          parent: {'Users': userId},
+        );
+        _userFeatureToggleMap =
+            _toggleListToMap(userFeatureToggle.toggles);
 
         /// Start streaming
         await _firestoreUserConfigUpdateSubscription?.cancel();
-        _firestoreUserConfigUpdateSubscription = _featureToggleService
-            .streamUserFeatureToggles(
-          userId: userId,
-        )
-            .listen((event) {
+        _firestoreUserConfigUpdateSubscription =
+            _featureToggleService.streamUserFeatureToggles(
+          parent: {'Users': userId},
+        ).listen((event) {
           final currentVersionToggle =
               event.firstWhereOrNull((element) => element.uid == _version);
           if (currentVersionToggle is FeatureToggleModel) {
-            _userFeatureToggleMap = currentVersionToggle.data.toggles;
+            _userFeatureToggleMap =
+                _toggleListToMap(currentVersionToggle.toggles);
 
             state = AsyncValue.data(_yieldState());
           }
@@ -116,18 +127,20 @@ class ConfigurationManagerRepository
 
     try {
       final rootFeatureToggle =
-          await _featureToggleService.getFeatureRootToggle(version: _version);
-      _rootFeatureToggleMap = rootFeatureToggle.data.toggles;
+          await _featureToggleService.getFeatureToggle(version: _version);
+      _rootFeatureToggleMap =
+          _toggleListToMap(rootFeatureToggle.toggles);
 
       /// Start streaming
       await _firestoreRootConfigUpdateSubscription?.cancel();
       _firestoreRootConfigUpdateSubscription =
-          _featureToggleService.streamRootFeatureToggles().listen((event) {
+          _featureToggleService.streamUserFeatureToggles().listen((event) {
         final currentVersionToggle =
             event.firstWhereOrNull((element) => element.uid == _version);
         if (currentVersionToggle is FeatureToggleModel) {
-          _rootFeatureToggleMap?.clear();
-          _rootFeatureToggleMap = currentVersionToggle.data.toggles;
+          _rootFeatureToggleMap.clear();
+          _rootFeatureToggleMap =
+              _toggleListToMap(currentVersionToggle.toggles);
           final newState = _yieldState();
           state = AsyncValue.data(newState);
         }
@@ -164,14 +177,12 @@ class ConfigurationManagerRepository
   bool? _firestoreHasFeature(
     ConfigurationFirestoreConfigInputEnum configurationInputEnum,
   ) {
-    if (_userFeatureToggleMap?.containsKey(configurationInputEnum.key) ==
-        true) {
-      return _userFeatureToggleMap![configurationInputEnum.key]?.value;
+    if (_userFeatureToggleMap.containsKey(configurationInputEnum.key)) {
+      return _userFeatureToggleMap[configurationInputEnum.key]?.value;
     }
 
-    if (_rootFeatureToggleMap?.containsKey(configurationInputEnum.key) ==
-        true) {
-      return _rootFeatureToggleMap![configurationInputEnum.key]?.value;
+    if (_rootFeatureToggleMap.containsKey(configurationInputEnum.key)) {
+      return _rootFeatureToggleMap[configurationInputEnum.key]?.value;
     }
     return null;
   }
@@ -231,28 +242,30 @@ class ConfigurationManagerRepository
 
     ///
     else if (configurationInputEnum is ConfigurationAuthStateInputEnum) {
-      final map = _authUserRepositoryState.authRepositoryState?.toMap();
-      return map?[configurationInputEnum.key] ?? false;
+      return _authStateValue(configurationInputEnum) ?? false;
     }
     return false;
   }
 
-  Future<void> _setValue(
-      dynamic configurationInputEnum, String newValue) async {
-    if (configurationInputEnum is ConfigurationEnvInputEnum) {
-      throw ErrorDescription('It is not possible to set environment values');
+  bool? _authStateValue(ConfigurationAuthStateInputEnum input) {
+    switch (input) {
+      case ConfigurationAuthStateInputEnum.isDeveloper:
+        return _authRepositoryState.authUser != null &&
+            _authRepositoryState.authUser!.isAnonymous == false;
+      case ConfigurationAuthStateInputEnum.isPrivateWorkspace:
+        return false;
     }
+  }
 
-    ///
-    else if (configurationInputEnum is ConfigurationRemoteConfigInputEnum) {
-      throw ErrorDescription('It is not possible to set remote config values');
+  Map<String, FeatureToggleEntryModel> _toggleListToMap(
+    List<FeatureToggleEntryModel>? toggles,
+  ) {
+    if (toggles == null) {
+      return {};
     }
-
-    ///
-    else if (configurationInputEnum
-        is ConfigurationSharedPreferencesInputEnum) {
-      _sharedPreferences.setString(configurationInputEnum.key, newValue);
-    }
+    return {
+      for (final toggle in toggles) toggle.name: toggle,
+    };
   }
 
   bool checkVisiblity(

@@ -1,34 +1,13 @@
 import 'package:flutter_inapp_purchase/flutter_inapp_purchase.dart';
+import 'package:flutter_inapp_purchase/helpers.dart' as iap_helpers;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:rdev_errors_logging/rdev_exception.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rdev_errors_logging/talker_provider.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_model.dart';
 import 'package:rdev_riverpod_purchases/domain/in_app_product_vo.dart';
-import 'package:talker/talker.dart';
 
 import 'in_app_product_data_service.dart';
-
-class InAppProductServiceLog extends TalkerLog {
-  InAppProductServiceLog(
-    String message, [
-    dynamic args,
-    StackTrace? stackTrace,
-  ]) : super(
-          message,
-          exception: args,
-          stackTrace: stackTrace,
-        );
-
-  /// Your custom log title
-  @override
-  String get title => 'InAppProductService';
-
-  /// Your custom log color
-  @override
-  AnsiPen get pen => AnsiPen()..cyan();
-}
 
 class InAppProductServiceException extends RdevException {
   InAppProductServiceException({
@@ -44,11 +23,9 @@ class InAppProductServiceException extends RdevException {
 
 class InAppProductService {
   final InAppProductDataService _InAppProductDataService;
-  final Talker _log;
 
   InAppProductService(
     this._InAppProductDataService,
-    this._log,
   );
 
   Future<List<InAppProductVO>> getInAppProducts({
@@ -77,7 +54,7 @@ class InAppProductService {
         /// Try to find product detail for VO
         try {
           final productDetail = productDetails.firstWhere((element) {
-            return element.productId == vo.productIdentifier;
+            return element.id == vo.productIdentifier;
           });
 
           return vo.copyWith(
@@ -100,7 +77,7 @@ class InAppProductService {
   }
 
   Future<void> purchaseInAppProduct(
-    IAPItem item,
+    Product item,
     String userId,
   ) async {
     try {
@@ -117,10 +94,10 @@ class InAppProductService {
     }
   }
 
-  Stream<PurchasedItem?> get purchaseUpdatedStream =>
+  Stream<Purchase?> get purchaseUpdatedStream =>
       _InAppProductDataService.purchaseUpdatedStream;
 
-  Stream<PurchaseResult?> get purchaseErrorStream =>
+  Stream<iap_helpers.PurchaseResult?> get purchaseErrorStream =>
       _InAppProductDataService.purchaseErrorStream;
 
   Future<void> restorePurchases() async {
@@ -135,7 +112,7 @@ class InAppProductService {
     }
   }
 
-  Future<void> verifyPurchase(PurchasedItem purchasedItem, IAPItem item) async {
+  Future<void> verifyPurchase(Purchase purchasedItem, Product item) async {
     try {
       return _InAppProductDataService.verifyPurchase(purchasedItem, item);
     } catch (e) {
@@ -152,7 +129,6 @@ class InAppProductService {
       Provider<InAppProductService>((ref) {
     final stored_fileService = InAppProductService(
       ref.watch(InAppProductDataService.provider),
-      ref.watch(appTalkerProvider),
     );
     return stored_fileService;
   });

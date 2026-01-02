@@ -29,15 +29,16 @@ class UserNotificationsRepositoryState {
 }
 
 class UserNotificationsRepository
-    extends FamilyAsyncNotifier<UserNotificationsRepositoryState, String> {
+    extends AsyncNotifier<UserNotificationsRepositoryState> {
+  UserNotificationsRepository(this._userId);
+
   late UserNotificationsService _userNotificationsService;
   DocumentSnapshot<Object?>? _lastDocument;
-  String? _userId;
+  final String _userId;
 
   /// Build (Init)
   @override
-  FutureOr<UserNotificationsRepositoryState> build(arg) async {
-    _userId = arg;
+  FutureOr<UserNotificationsRepositoryState> build() async {
     _userNotificationsService = ref.watch(UserNotificationsService.provider);
     _lastDocument = null;
     final tmpState = await _fetchNotifications();
@@ -50,7 +51,7 @@ class UserNotificationsRepository
     try {
       final notificationVOs = await _userNotificationsService.getNotifications(
         startAt: _lastDocument,
-        userId: _userId!,
+        userId: _userId,
         orderBy: 'createdAt',
         descending: true,
       );
@@ -77,10 +78,6 @@ class UserNotificationsRepository
     });
   }
 
-  static AsyncNotifierProviderFamily<UserNotificationsRepository,
-          UserNotificationsRepositoryState, String> provider =
-      AsyncNotifierProvider.family<UserNotificationsRepository,
-          UserNotificationsRepositoryState, String>(() {
-    return UserNotificationsRepository();
-  });
+  static final provider = AsyncNotifierProvider.family<UserNotificationsRepository,
+      UserNotificationsRepositoryState, String>(UserNotificationsRepository.new);
 }
