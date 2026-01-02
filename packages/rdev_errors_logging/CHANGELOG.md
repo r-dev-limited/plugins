@@ -1,3 +1,17 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: add toString from rdev exception.
+ - **FEAT**: improving loggers.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FIX**: logging service account.
+
 ## 0.2.1
 
  - **FEAT**: adding connectivity provider.

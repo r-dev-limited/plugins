@@ -1,3 +1,14 @@
+## 0.0.10
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: bump fb versions.
+ - **FEAT**: invalid exports.
+ - **FEAT**: broken link.
+ - **FEAT**: add demo link.
+ - **FEAT**: remove unsupported dart functions.
+ - **FEAT**: decrease min flutter version.
+ - **FEAT**: Adding adaptive layout.
+
 ## 0.0.9
 
  - **FEAT**: bump fb versions.

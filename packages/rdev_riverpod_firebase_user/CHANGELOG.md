@@ -1,3 +1,32 @@
+## 0.6.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: bump fb versions.
+ - **FEAT**: Adding adaptive layout.
+ - **FEAT**: bump.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: Use token idChanges, add better support for anonym users.
+ - **FEAT**: better support for loading paginated data.
+ - **FEAT**: update libs.
+ - **FEAT**: fix users pagination.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: missing throws.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.5.4
 
  - **FEAT**: bump fb versions.

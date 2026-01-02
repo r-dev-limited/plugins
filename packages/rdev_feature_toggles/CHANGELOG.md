@@ -1,3 +1,24 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: remove related dependencies.
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: bump fb versions.
+ - **FEAT**: Adding adaptive layout.
+ - **FEAT**: bump.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: update libs.
+ - **FEAT**: use hashcodes.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: update structure around current user providers, adding messaging in place.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.2.4
 
  - **FEAT**: bump fb versions.

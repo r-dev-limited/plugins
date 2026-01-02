@@ -1,3 +1,18 @@
+## 0.2.13
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: bump fb versions.
+ - **FEAT**: Adding adaptive layout.
+ - **FEAT**: bump.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+
 ## 0.2.12
 
  - **FEAT**: bump fb versions.

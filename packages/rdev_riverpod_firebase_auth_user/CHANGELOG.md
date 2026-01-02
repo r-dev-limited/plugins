@@ -1,3 +1,23 @@
+## 0.8.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: Adding adaptive layout.
+ - **FEAT**: bump.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: add different names.
+ - **FEAT**: update deps, fix current user again.
+ - **FEAT**: remove authstate from current repo, use completer in authRepo.
+ - **FEAT**: android fixes.
+ - **BREAKING** **FIX**: add retry to rdev error, throw errors instead of error states, fix inapp repo.
+ - **BREAKING** **FEAT**: improve async loading.
+ - **BREAKING** **FEAT**: error handling in current user.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.7.3+1
 
  - Update a dependency to the latest release.

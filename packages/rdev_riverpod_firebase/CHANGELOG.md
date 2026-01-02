@@ -1,3 +1,24 @@
+## 0.5.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: bump fb versions.
+ - **FEAT**: Adding adaptive layout.
+ - **FEAT**: bump.
+ - **FEAT**: adding connectivity provider.
+ - **FEAT**: update libs.
+ - **FEAT**: update deps.
+ - **FEAT**: add custom handling of firebase exceptions.
+ - **FEAT**: update deps.
+ - **FEAT**: improving loggers.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: remove dynamic links.
+ - **FEAT**: update deps, fix current user again.
+ - **BREAKING** **FIX**: BREAKING CHANGE pin older version.
+ - **BREAKING** **FIX**: BREAKING CHANGE.
+
 ## 0.4.4
 
  - **FEAT**: bump fb versions.

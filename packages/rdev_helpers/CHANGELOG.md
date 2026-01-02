@@ -1,3 +1,15 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: upgrade riverpod and libraries.
+ - **FEAT**: add show confirm.
+ - **FEAT**: update libs.
+ - **FEAT**: pin versions.
+ - **FEAT**: update fireway json.
+ - **FEAT**: Add alert dialog to utils.
+ - **BREAKING** **FEAT**: dependency improvements.
+
 ## 0.2.1
 
  - **FEAT**: add show confirm.
