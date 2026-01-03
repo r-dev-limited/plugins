@@ -396,6 +396,36 @@ class AuthDataService {
     }
   }
 
+  /// Links an email/password credential to the current user.
+  Future<UserCredential> linkEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = _auth.currentUser;
+      if (user == null) {
+        throw AuthDataServiceException(message: 'No current user');
+      }
+      final emailProvider =
+          EmailAuthProvider.credential(email: email, password: password);
+      final credential = await user.linkWithCredential(emailProvider);
+      await user.getIdToken(true);
+      await resendEmailVerification(email);
+      await user.reload();
+      return credential;
+    } catch (err) {
+      if (err is FirebaseAuthException) {
+        throw AuthDataServiceException.fromRdevException(err.toRdevException());
+      }
+      if (err is AuthDataServiceException) {
+        throw err;
+      }
+      throw AuthDataServiceException(
+        message: err.toString(),
+      );
+    }
+  }
+
   /// Logs out the currently authenticated user.
   Future<void> logout() async {
     try {

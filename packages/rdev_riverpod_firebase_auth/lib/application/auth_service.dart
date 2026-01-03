@@ -170,6 +170,28 @@ class AuthService {
     }
   }
 
+  /// Links an email/password credential to the current user.
+  Future<AuthUserCredentialVO> linkEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final authCredential = await _authDataService.linkEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      return vo;
+    } catch (e) {
+      if (e is RdevException) {
+        throw AuthServiceException(
+            code: e.code, message: e.message, stackTrace: e.stackTrace);
+      }
+      throw AuthServiceException(
+          stackTrace: StackTrace.current, message: e.toString());
+    }
+  }
+
   /// Logs out the currently authenticated user.
   Future<void> logout() async {
     try {
