@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-01-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_adaptive_layout` - `v0.0.11`](#rdev_adaptive_layout---v0011)
+ - [`rdev_helpers` - `v0.3.1`](#rdev_helpers---v031)
+ - [`rdev_riverpod_firebase_auth` - `v0.3.1`](#rdev_riverpod_firebase_auth---v031)
+ - [`rdev_riverpod_firebase_user` - `v0.6.0+1`](#rdev_riverpod_firebase_user---v0601)
+ - [`rdev_riverpod_stored_file` - `v0.4.0+1`](#rdev_riverpod_stored_file---v0401)
+ - [`rdev_riverpod_messaging` - `v0.0.16+1`](#rdev_riverpod_messaging---v00161)
+ - [`rdev_riverpod_firebase_analytics` - `v0.4.0+1`](#rdev_riverpod_firebase_analytics---v0401)
+ - [`rdev_feature_toggles` - `v0.3.0+1`](#rdev_feature_toggles---v0301)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.13+1`](#rdev_riverpod_firebase_user_notification---v02131)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.8.0+1`](#rdev_riverpod_firebase_auth_user---v0801)
+ - [`rdev_riverpod_purchases` - `v0.3.0+1`](#rdev_riverpod_purchases---v0301)
+ - [`rdev_riverpod_versioning` - `v0.4.0+1`](#rdev_riverpod_versioning---v0401)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_user` - `v0.6.0+1`
+ - `rdev_riverpod_stored_file` - `v0.4.0+1`
+ - `rdev_riverpod_messaging` - `v0.0.16+1`
+ - `rdev_riverpod_firebase_analytics` - `v0.4.0+1`
+ - `rdev_feature_toggles` - `v0.3.0+1`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.13+1`
+ - `rdev_riverpod_firebase_auth_user` - `v0.8.0+1`
+ - `rdev_riverpod_purchases` - `v0.3.0+1`
+ - `rdev_riverpod_versioning` - `v0.4.0+1`
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.11`
+
+ - **FEAT**: add overlay support to utils.
+
+#### `rdev_helpers` - `v0.3.1`
+
+ - **FEAT**: add overlay support to utils.
+
+#### `rdev_riverpod_firebase_auth` - `v0.3.1`
+
+ - **FEAT**: fixing deps.
+
+
 ## 2026-01-02
 
 ### Changes

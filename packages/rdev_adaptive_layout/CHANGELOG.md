@@ -1,3 +1,7 @@
+## 0.0.11
+
+ - **FEAT**: add overlay support to utils.
+
 ## 0.0.10
 
  - **FEAT**: upgrade riverpod and libraries.

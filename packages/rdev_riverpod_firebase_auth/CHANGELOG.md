@@ -1,3 +1,7 @@
+## 0.3.1
+
+ - **FEAT**: fixing deps.
+
 ## 0.3.0
 
 > Note: This release has breaking changes.

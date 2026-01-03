@@ -1,7 +1,7 @@
 name: rdev_helpers
 description: This package provides different utils.
 repository: https://github.com/r-dev-limited/placebo-life
-version: 0.3.0
+version: 0.3.1
 
 environment:
   sdk: '>=3.10.4 <4.0.0'
