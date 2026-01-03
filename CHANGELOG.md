@@ -15,6 +15,55 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_riverpod_firebase` - `v0.5.1`](#rdev_riverpod_firebase---v051)
+ - [`rdev_riverpod_firebase_auth` - `v0.3.2`](#rdev_riverpod_firebase_auth---v032)
+ - [`rdev_riverpod_firebase_user` - `v0.6.0+2`](#rdev_riverpod_firebase_user---v0602)
+ - [`rdev_riverpod_stored_file` - `v0.4.0+2`](#rdev_riverpod_stored_file---v0402)
+ - [`rdev_riverpod_messaging` - `v0.0.16+2`](#rdev_riverpod_messaging---v00162)
+ - [`rdev_riverpod_firebase_analytics` - `v0.4.0+2`](#rdev_riverpod_firebase_analytics---v0402)
+ - [`rdev_feature_toggles` - `v0.3.0+2`](#rdev_feature_toggles---v0302)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.13+2`](#rdev_riverpod_firebase_user_notification---v02132)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.8.0+2`](#rdev_riverpod_firebase_auth_user---v0802)
+ - [`rdev_riverpod_purchases` - `v0.3.0+2`](#rdev_riverpod_purchases---v0302)
+ - [`rdev_riverpod_versioning` - `v0.4.0+2`](#rdev_riverpod_versioning---v0402)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_user` - `v0.6.0+2`
+ - `rdev_riverpod_stored_file` - `v0.4.0+2`
+ - `rdev_riverpod_messaging` - `v0.0.16+2`
+ - `rdev_riverpod_firebase_analytics` - `v0.4.0+2`
+ - `rdev_feature_toggles` - `v0.3.0+2`
+ - `rdev_riverpod_firebase_user_notification` - `v0.2.13+2`
+ - `rdev_riverpod_firebase_auth_user` - `v0.8.0+2`
+ - `rdev_riverpod_purchases` - `v0.3.0+2`
+ - `rdev_riverpod_versioning` - `v0.4.0+2`
+
+---
+
+#### `rdev_riverpod_firebase` - `v0.5.1`
+
+ - **FEAT**: add link email feature.
+
+#### `rdev_riverpod_firebase_auth` - `v0.3.2`
+
+ - **FEAT**: add link email feature.
+
+
+## 2026-01-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_adaptive_layout` - `v0.0.11`](#rdev_adaptive_layout---v0011)
  - [`rdev_helpers` - `v0.3.1`](#rdev_helpers---v031)
  - [`rdev_riverpod_firebase_auth` - `v0.3.1`](#rdev_riverpod_firebase_auth---v031)

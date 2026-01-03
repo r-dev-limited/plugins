@@ -1,3 +1,7 @@
+## 0.5.1
+
+ - **FEAT**: add link email feature.
+
 ## 0.5.0
 
 > Note: This release has breaking changes.

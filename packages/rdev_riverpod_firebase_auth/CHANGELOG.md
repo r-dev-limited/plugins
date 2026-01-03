@@ -1,3 +1,7 @@
+## 0.3.2
+
+ - **FEAT**: add link email feature.
+
 ## 0.3.1
 
  - **FEAT**: fixing deps.
