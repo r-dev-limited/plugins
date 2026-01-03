@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:math';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class Utils {
@@ -104,56 +106,156 @@ class Utils {
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 
-  static showAlert({
+  static Future<void> showAlert({
     required BuildContext context,
     required String title,
     required String message,
     String? buttonTitle,
   }) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(buttonTitle ?? "Ok"),
-          ),
-        ],
-      ),
+    if (context.mounted) {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(buttonTitle ?? "Ok"),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final completer = Completer<void>();
+    final entry = showOverlay(
+      (overlayContext, progress) {
+        void dismiss() {
+          if (!completer.isCompleted) {
+            completer.complete();
+          }
+          OverlaySupportEntry.of(overlayContext)?.dismiss();
+        }
+
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: dismiss,
+                behavior: HitTestBehavior.opaque,
+                child: Container(color: Colors.black54),
+              ),
+            ),
+            Center(
+              child: Material(
+                color: Colors.transparent,
+                child: AlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: dismiss,
+                      child: Text(buttonTitle ?? "Ok"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+      duration: Duration.zero,
     );
+    entry.dismissed.then((_) {
+      if (!completer.isCompleted) {
+        completer.complete();
+      }
+    });
+    return completer.future;
   }
 
-  static showConfirm({
+  static Future<bool?> showConfirm({
     required BuildContext context,
     required String title,
     required String message,
     String? positiveButtonTitle,
     String? negativeButtonTitle,
   }) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: Text(negativeButtonTitle ?? "No"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: Text(positiveButtonTitle ?? "Yes"),
-          ),
-        ],
-      ),
+    if (context.mounted) {
+      return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text(negativeButtonTitle ?? "No"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text(positiveButtonTitle ?? "Yes"),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final completer = Completer<bool?>();
+    final entry = showOverlay(
+      (overlayContext, progress) {
+        void dismiss([bool? value]) {
+          if (!completer.isCompleted) {
+            completer.complete(value);
+          }
+          OverlaySupportEntry.of(overlayContext)?.dismiss();
+        }
+
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: () => dismiss(null),
+                behavior: HitTestBehavior.opaque,
+                child: Container(color: Colors.black54),
+              ),
+            ),
+            Center(
+              child: Material(
+                color: Colors.transparent,
+                child: AlertDialog(
+                  title: Text(title),
+                  content: Text(message),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => dismiss(false),
+                      child: Text(negativeButtonTitle ?? "No"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => dismiss(true),
+                      child: Text(positiveButtonTitle ?? "Yes"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+      duration: Duration.zero,
     );
+    entry.dismissed.then((_) {
+      if (!completer.isCompleted) {
+        completer.complete(null);
+      }
+    });
+    return completer.future;
   }
 }
