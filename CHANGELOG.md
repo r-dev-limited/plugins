@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_adaptive_layout` - `v0.0.12`](#rdev_adaptive_layout---v0012)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.12`
+
+ - **FEAT**: adaptive fix.
+
+
+## 2026-01-04
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_riverpod_firebase` - `v0.5.1`](#rdev_riverpod_firebase---v051)
  - [`rdev_riverpod_firebase_auth` - `v0.3.2`](#rdev_riverpod_firebase_auth---v032)
  - [`rdev_riverpod_firebase_user` - `v0.6.0+2`](#rdev_riverpod_firebase_user---v0602)

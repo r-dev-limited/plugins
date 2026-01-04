@@ -1,3 +1,7 @@
+## 0.0.12
+
+ - **FEAT**: adaptive fix.
+
 ## 0.0.11
 
  - **FEAT**: add overlay support to utils.
