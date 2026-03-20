@@ -15,6 +15,72 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`rdev_adaptive_layout` - `v0.0.14`](#rdev_adaptive_layout---v0014)
+ - [`rdev_feature_toggles` - `v0.3.2`](#rdev_feature_toggles---v032)
+ - [`rdev_riverpod_firebase_analytics` - `v0.4.2`](#rdev_riverpod_firebase_analytics---v042)
+ - [`rdev_riverpod_firebase_auth` - `v0.3.4`](#rdev_riverpod_firebase_auth---v034)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.8.2`](#rdev_riverpod_firebase_auth_user---v082)
+ - [`rdev_riverpod_firebase_user` - `v0.6.2`](#rdev_riverpod_firebase_user---v062)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.15`](#rdev_riverpod_firebase_user_notification---v0215)
+ - [`rdev_riverpod_messaging` - `v0.0.18`](#rdev_riverpod_messaging---v0018)
+ - [`rdev_riverpod_purchases` - `v0.3.2`](#rdev_riverpod_purchases---v032)
+ - [`rdev_riverpod_versioning` - `v0.4.2`](#rdev_riverpod_versioning---v042)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.14`
+
+ - **FEAT**: web auth.
+
+#### `rdev_feature_toggles` - `v0.3.2`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.4.2`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_firebase_auth` - `v0.3.4`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.8.2`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_firebase_user` - `v0.6.2`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.15`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_messaging` - `v0.0.18`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_purchases` - `v0.3.2`
+
+ - **FEAT**: web auth.
+
+#### `rdev_riverpod_versioning` - `v0.4.2`
+
+ - **FEAT**: web auth.
+
+
+## 2026-03-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`rdev_adaptive_layout` - `v0.0.13`](#rdev_adaptive_layout---v0013)
  - [`rdev_feature_toggles` - `v0.3.1`](#rdev_feature_toggles---v031)
  - [`rdev_riverpod_firebase` - `v0.5.2`](#rdev_riverpod_firebase---v052)

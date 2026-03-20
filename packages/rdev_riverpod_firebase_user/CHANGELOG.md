@@ -1,3 +1,7 @@
+## 0.6.2
+
+ - **FEAT**: web auth.
+
 ## 0.6.1
 
  - **FEAT**: bump packages.
