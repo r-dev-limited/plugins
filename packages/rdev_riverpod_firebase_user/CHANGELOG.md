@@ -1,3 +1,7 @@
+## 0.6.1
+
+ - **FEAT**: bump packages.
+
 ## 0.6.0+2
 
  - Update a dependency to the latest release.

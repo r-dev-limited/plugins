@@ -3,6 +3,82 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-03-21
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_adaptive_layout` - `v0.0.13`](#rdev_adaptive_layout---v0013)
+ - [`rdev_feature_toggles` - `v0.3.1`](#rdev_feature_toggles---v031)
+ - [`rdev_riverpod_firebase` - `v0.5.2`](#rdev_riverpod_firebase---v052)
+ - [`rdev_riverpod_firebase_analytics` - `v0.4.1`](#rdev_riverpod_firebase_analytics---v041)
+ - [`rdev_riverpod_firebase_auth` - `v0.3.3`](#rdev_riverpod_firebase_auth---v033)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.8.1`](#rdev_riverpod_firebase_auth_user---v081)
+ - [`rdev_riverpod_firebase_user` - `v0.6.1`](#rdev_riverpod_firebase_user---v061)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.14`](#rdev_riverpod_firebase_user_notification---v0214)
+ - [`rdev_riverpod_messaging` - `v0.0.17`](#rdev_riverpod_messaging---v0017)
+ - [`rdev_riverpod_purchases` - `v0.3.1`](#rdev_riverpod_purchases---v031)
+ - [`rdev_riverpod_stored_file` - `v0.4.1`](#rdev_riverpod_stored_file---v041)
+ - [`rdev_riverpod_versioning` - `v0.4.1`](#rdev_riverpod_versioning---v041)
+
+---
+
+#### `rdev_adaptive_layout` - `v0.0.13`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_feature_toggles` - `v0.3.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase` - `v0.5.2`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.4.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase_auth` - `v0.3.3`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase_auth_user` - `v0.8.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase_user` - `v0.6.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.14`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_messaging` - `v0.0.17`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_purchases` - `v0.3.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_stored_file` - `v0.4.1`
+
+ - **FEAT**: bump packages.
+
+#### `rdev_riverpod_versioning` - `v0.4.1`
+
+ - **FEAT**: bump packages.
+
+
 ## 2026-01-04
 
 ### Changes

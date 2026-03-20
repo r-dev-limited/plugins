@@ -1,3 +1,7 @@
+## 0.5.2
+
+ - **FEAT**: bump packages.
+
 ## 0.5.1
 
  - **FEAT**: add link email feature.
