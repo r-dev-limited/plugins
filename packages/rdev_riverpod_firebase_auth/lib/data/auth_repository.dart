@@ -9,15 +9,8 @@ import '../application/auth_service.dart';
 import '../domain/auth_user_vo.dart';
 
 class AuthRepositoryLog extends TalkerLog {
-  AuthRepositoryLog(
-    String message, [
-    dynamic args,
-    StackTrace? stackTrace,
-  ]) : super(
-          message,
-          exception: args,
-          stackTrace: stackTrace,
-        );
+  AuthRepositoryLog(String message, [dynamic args, StackTrace? stackTrace])
+    : super(message, exception: args, stackTrace: stackTrace);
 
   /// Your custom log title
   @override
@@ -36,23 +29,17 @@ class AuthRepositoryState extends Equatable {
     return authUser?.isEmailVerified ?? false;
   }
 
-  const AuthRepositoryState({
-    this.authUser,
-  });
+  const AuthRepositoryState({this.authUser});
 
   AuthRepositoryState copyWith({
     AuthUserVO? authUser,
     DateTime? lastUpdatedClaims,
   }) {
-    return AuthRepositoryState(
-      authUser: authUser ?? this.authUser,
-    );
+    return AuthRepositoryState(authUser: authUser ?? this.authUser);
   }
 
   @override
-  List<Object?> get props => [
-        authUser.hashCode,
-      ];
+  List<Object?> get props => [authUser.hashCode];
 }
 
 class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
@@ -60,7 +47,8 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
   late AuthService _authService;
 
   ///
-  StreamSubscription? _authStateChangesSubscription;
+  StreamSubscription<AuthUserVO?>? _authStateChangesSubscription;
+  StreamSubscription<AuthUserVO?>? _serviceStateSubscription;
 
   /// Build (Init)
   @override
@@ -74,6 +62,12 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
 
     /// Cancel all subscriptions
     await _authStateChangesSubscription?.cancel();
+    await _serviceStateSubscription?.cancel();
+
+    ref.onDispose(() {
+      _authStateChangesSubscription?.cancel();
+      _serviceStateSubscription?.cancel();
+    });
 
     /// Give it a bit of time to cancel
     // await Future.delayed(const Duration(seconds: 1));
@@ -84,25 +78,42 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
       try {
         resultCompleter.complete(AuthRepositoryState(authUser: currentUser));
       } catch (err) {
-        _log.logTyped(AuthRepositoryLog(
-            'build() _fetchUserData()', err, StackTrace.current));
+        _log.logTyped(
+          AuthRepositoryLog(
+            'build() _fetchUserData()',
+            err,
+            StackTrace.current,
+          ),
+        );
         await _authService.logout();
         resultCompleter.complete(const AuthRepositoryState());
       }
     }
 
     /// Stream Changes
-    _authStateChangesSubscription = _authService.authIdTokenChanges().listen(
-      (user) async {
-        _log.logTyped(AuthRepositoryLog('build authIdTokenChanges()', user));
-        final tmpState = AuthRepositoryState(authUser: user);
-        if (!resultCompleter.isCompleted) {
-          resultCompleter.complete(tmpState);
-        } else {
-          state = AsyncValue.data(tmpState);
-        }
-      },
-    );
+    _authStateChangesSubscription = _authService.authIdTokenChanges().listen((
+      user,
+    ) async {
+      _log.logTyped(AuthRepositoryLog('build authIdTokenChanges()', user));
+      final tmpState = AuthRepositoryState(authUser: user);
+      if (!resultCompleter.isCompleted) {
+        resultCompleter.complete(tmpState);
+      } else {
+        state = AsyncValue.data(tmpState);
+      }
+    });
+
+    _serviceStateSubscription = _authService.onAuthStateChanged.listen((
+      user,
+    ) async {
+      _log.logTyped(AuthRepositoryLog('build onAuthStateChanged()', user));
+      final tmpState = AuthRepositoryState(authUser: user);
+      if (!resultCompleter.isCompleted) {
+        resultCompleter.complete(tmpState);
+      } else {
+        state = AsyncValue.data(tmpState);
+      }
+    });
 
     return resultCompleter.future;
   }
@@ -113,8 +124,13 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
       await _authService.signInAnonymously();
     } catch (err) {
       if (err is AuthServiceException) {
-        _log.logTyped(AuthRepositoryLog(
-            'signInAnonymously() - failed', err.message, StackTrace.current));
+        _log.logTyped(
+          AuthRepositoryLog(
+            'signInAnonymously() - failed',
+            err.message,
+            StackTrace.current,
+          ),
+        );
         rethrow;
       }
     }
@@ -126,8 +142,13 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
       await _authService.deleteCurrentUser();
     } catch (err) {
       if (err is AuthServiceException) {
-        _log.logTyped(AuthRepositoryLog(
-            'deleteCurrentUser() - failed', err.message, StackTrace.current));
+        _log.logTyped(
+          AuthRepositoryLog(
+            'deleteCurrentUser() - failed',
+            err.message,
+            StackTrace.current,
+          ),
+        );
         rethrow;
       }
     }
@@ -147,6 +168,6 @@ class AuthRepository extends AsyncNotifier<AuthRepositoryState> {
 
   static AsyncNotifierProvider<AuthRepository, AuthRepositoryState> provider =
       AsyncNotifierProvider<AuthRepository, AuthRepositoryState>(() {
-    return AuthRepository();
-  });
+        return AuthRepository();
+      });
 }

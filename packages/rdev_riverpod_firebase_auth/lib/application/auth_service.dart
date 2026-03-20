@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rdev_errors_logging/rdev_exception.dart';
@@ -13,11 +15,7 @@ class AuthServiceException extends RdevException {
     String? message,
     RdevCode? code,
     StackTrace? stackTrace,
-  }) : super(
-          message: message,
-          code: code,
-          stackTrace: stackTrace,
-        );
+  }) : super(message: message, code: code, stackTrace: stackTrace);
 }
 
 /// This file contains the implementation of the `AuthService` class.
@@ -26,21 +24,28 @@ class AuthServiceException extends RdevException {
 /// It interacts with the `AuthDataService` to perform authentication operations.
 class AuthService {
   final AuthDataService _authDataService;
+  final _authStateController = StreamController<AuthUserVO?>.broadcast();
 
   AuthService(this._authDataService);
 
+  Stream<AuthUserVO?> get onAuthStateChanged => _authStateController.stream;
+
+  void dispose() {
+    _authStateController.close();
+  }
+
   /// Returns a stream of `AuthUserVO` objects representing the authenticated user.
   Stream<AuthUserVO?> authStateChanges() {
-    return _authDataService
-        .authStateChanges()
-        .map((event) => event is User ? AuthUserVO.fromAuthUser(event) : null);
+    return _authDataService.authStateChanges().map(
+      (event) => event is User ? AuthUserVO.fromAuthUser(event) : null,
+    );
   }
 
   /// Returns a stream of `AuthUserVO` objects representing the authenticated user.
   Stream<AuthUserVO?> authIdTokenChanges() {
-    return _authDataService
-        .authIdTokenChanges()
-        .map((event) => event is User ? AuthUserVO.fromAuthUser(event) : null);
+    return _authDataService.authIdTokenChanges().map(
+      (event) => event is User ? AuthUserVO.fromAuthUser(event) : null,
+    );
   }
 
   /// Returns the currently authenticated user as an `AuthUserVO` object.
@@ -53,14 +58,20 @@ class AuthService {
     try {
       final authCredential = await _authDataService.signInAnonymously();
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -69,14 +80,20 @@ class AuthService {
     try {
       final authCredential = await _authDataService.signInWithGoogle();
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -85,32 +102,48 @@ class AuthService {
     try {
       final authCredential = await _authDataService.signInWithFacebook();
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
   /// Signs in the user with the provided email and password, and returns an `AuthUserCredentialVO` object.
   Future<AuthUserCredentialVO> signInWithEmailAndPassword(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     try {
-      final authCredential =
-          await _authDataService.signInWithEmailAndPassword(email, password);
+      final authCredential = await _authDataService.signInWithEmailAndPassword(
+        email,
+        password,
+      );
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -119,14 +152,20 @@ class AuthService {
     try {
       final authCredential = await _authDataService.signInWithApple();
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -135,14 +174,20 @@ class AuthService {
     try {
       final authCredential = await _authDataService.signInWithMicrosoft();
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -153,20 +198,23 @@ class AuthService {
     String? displayName,
   }) async {
     try {
-      final authCredential =
-          await _authDataService.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      final authCredential = await _authDataService
+          .createUserWithEmailAndPassword(email: email, password: password);
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -181,14 +229,20 @@ class AuthService {
         password: password,
       );
       final vo = AuthUserCredentialVO.fromAuthUserCredential(authCredential);
+      _authStateController.add(currentUser);
       return vo;
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -196,13 +250,19 @@ class AuthService {
   Future<void> logout() async {
     try {
       await _authDataService.logout();
+      _authStateController.add(null);
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -213,10 +273,15 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -227,10 +292,15 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -241,18 +311,25 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
-  Future<AuthIDTokenResultVO?> refreshCurrentUserToken(
-      {bool force = false}) async {
+  Future<AuthIDTokenResultVO?> refreshCurrentUserToken({
+    bool force = false,
+  }) async {
     try {
-      final idTokenResult =
-          await _authDataService.refreshCurrentUserToken(force: force);
+      final idTokenResult = await _authDataService.refreshCurrentUserToken(
+        force: force,
+      );
       final vo = idTokenResult is IdTokenResult
           ? AuthIDTokenResultVO.fromIDTokenResult(idTokenResult)
           : null;
@@ -260,10 +337,15 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -275,10 +357,15 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -288,16 +375,22 @@ class AuthService {
     } catch (e) {
       if (e is RdevException) {
         throw AuthServiceException(
-            code: e.code, message: e.message, stackTrace: e.stackTrace);
+          code: e.code,
+          message: e.message,
+          stackTrace: e.stackTrace,
+        );
       }
       throw AuthServiceException(
-          stackTrace: StackTrace.current, message: e.toString());
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
   /// Provider for the `AuthService` class.
   static Provider<AuthService> provider = Provider<AuthService>((ref) {
     final authService = AuthService(ref.watch(AuthDataService.provider));
+    ref.onDispose(authService.dispose);
     return authService;
   });
 }
