@@ -1,3 +1,7 @@
+## 0.5.3
+
+ - **FEAT**: bump firebase.
+
 ## 0.5.2
 
  - **FEAT**: bump packages.

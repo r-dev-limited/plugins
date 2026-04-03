@@ -1,3 +1,7 @@
+## 0.2.16
+
+ - **FEAT**: bump firebase.
+
 ## 0.2.15
 
  - **FEAT**: web auth.

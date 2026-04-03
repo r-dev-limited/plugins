@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2026-04-03
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`rdev_feature_toggles` - `v0.3.3`](#rdev_feature_toggles---v033)
+ - [`rdev_riverpod_firebase` - `v0.5.3`](#rdev_riverpod_firebase---v053)
+ - [`rdev_riverpod_firebase_analytics` - `v0.4.3`](#rdev_riverpod_firebase_analytics---v043)
+ - [`rdev_riverpod_firebase_auth` - `v0.3.5`](#rdev_riverpod_firebase_auth---v035)
+ - [`rdev_riverpod_firebase_user` - `v0.6.3`](#rdev_riverpod_firebase_user---v063)
+ - [`rdev_riverpod_firebase_user_notification` - `v0.2.16`](#rdev_riverpod_firebase_user_notification---v0216)
+ - [`rdev_riverpod_messaging` - `v0.0.19`](#rdev_riverpod_messaging---v0019)
+ - [`rdev_riverpod_purchases` - `v0.3.3`](#rdev_riverpod_purchases---v033)
+ - [`rdev_riverpod_stored_file` - `v0.4.2`](#rdev_riverpod_stored_file---v042)
+ - [`rdev_riverpod_versioning` - `v0.4.3`](#rdev_riverpod_versioning---v043)
+ - [`rdev_riverpod_firebase_auth_user` - `v0.8.2+1`](#rdev_riverpod_firebase_auth_user---v0821)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `rdev_riverpod_firebase_auth_user` - `v0.8.2+1`
+
+---
+
+#### `rdev_feature_toggles` - `v0.3.3`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_firebase` - `v0.5.3`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_firebase_analytics` - `v0.4.3`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_firebase_auth` - `v0.3.5`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_firebase_user` - `v0.6.3`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_firebase_user_notification` - `v0.2.16`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_messaging` - `v0.0.19`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_purchases` - `v0.3.3`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_stored_file` - `v0.4.2`
+
+ - **FEAT**: bump firebase.
+
+#### `rdev_riverpod_versioning` - `v0.4.3`
+
+ - **FEAT**: bump firebase.
+
+
 ## 2026-03-21
 
 ### Changes
